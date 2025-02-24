@@ -5,42 +5,42 @@ export default function WaysToTravel() {
     {
       id: 1,
       href: "javascript:void(0)",
-      imageSrc: "https://example.com/walking-trekking.jpg",
+      imageSrc: "https://www.intrepidtravel.com/v3/assets/blt0de87ff52d9c34a8/blte825aa50135ff401/66f26155f9cb26477843cb1b/Pakistan-nangma-valley-hiking-campsite-PANO_IMG_9086-720.jpg?branch=prd&width=480&quality=75&format=pjpg&auto=webp",
       altText: "Panorama of Nangma Valley campsite with river flowing by backed by huge craggy mountains with snow",
       label: "Walking & trekking",
     },
     {
       id: 2,
       href: "javascript:void(0)",
-      imageSrc: "https://example.com/cycling.jpg",
+      imageSrc: "https://www.intrepidtravel.com/v3/assets/blt0de87ff52d9c34a8/blt7d21300317b14536/661e044236f462242844f551/Intrepid-Travel-Canada_Jasper_Athabasca-River_Cycling_01-720.jpg?branch=prd&width=480&quality=75&format=pjpg&auto=webp",
       altText: "Intrepid travellers cycling the Athabasca River near Jasper in Canada",
       label: "Cycling",
     },
     {
       id: 3,
       href: "javascript:void(0)",
-      imageSrc: "https://example.com/family.jpg",
+      imageSrc: "https://www.intrepidtravel.com/v3/assets/blt0de87ff52d9c34a8/blt7236919cd24d71e7/665d53aea3c3fe5d6e4d1081/Intrepid-Travel-morocco-family_marrakech-8599(1)-720.jpg?branch=prd&width=480&quality=75&format=pjpg&auto=webp",
       altText: "Family of Intrepid travellers group shot in Marrakech",
       label: "Family",
     },
     {
       id: 4,
       href: "javascript:void(0)",
-      imageSrc: "https://example.com/polar.jpg",
+      imageSrc: "https://www.intrepidtravel.com/v3/assets/blt0de87ff52d9c34a8/bltb649acaf91240f60/660ce96dc8592e87646f325e/Intrepid_Travel-Antarctica_2020-21_group_walk_049A3524-adjustments_2-720.jpg?branch=prd&width=480&quality=75&format=pjpg&auto=webp",
       altText: "Travellers on shore in Antarctica with penguins in background",
       label: "Polar",
     },
     {
       id: 5,
       href: "javascript:void(0)",
-      imageSrc: "https://example.com/food.jpg",
+      imageSrc: "https://www.intrepidtravel.com/v3/assets/blt0de87ff52d9c34a8/blt67539caf0cc48ea2/661dee18b1717a7a3f104524/Intrepid-Travel-Turkey_Kas_July2019-8124-720.jpg?branch=prd&width=480&quality=75&format=pjpg&auto=webp",
       altText: "Travellers with fresh ice cream in Kas, Turkey",
       label: "Food",
     },
     {
       id: 6,
       href: "javascript:void(0)",
-      imageSrc: "https://www.intrepidtravel.com/v3/assets/blt0de87ff52d9c34a8/blte825aa50135ff401/66f26155f9cb26477843cb1b/Pakistan-nangma-valley-hiking-campsite-PANO_IMG_9086-720.jpg",
+      imageSrc: "https://www.intrepidtravel.com/v3/assets/blt0de87ff52d9c34a8/blt2c70ae01849dfad9/664acc970b508a406cdcff01/Intrepid-Travel-Ecquador-Galapagos-Bartolome-Island-Queen-B-sunrise-01-720.jpg?branch=prd&width=480&quality=75&format=pjpg&auto=webp",
       altText: "Intrepid cruise ship Grand Queen Beatriz at sunrise in off the coast of Isla Bartolome in Galapagos",
       label: "Cruises",
     },
@@ -59,11 +59,6 @@ export default function WaysToTravel() {
                     <a href={travel.href} className="card__content card__content--link">
                       <div className="card__image" data-cy="card-image">
                         <img
-                          style={{
-                            backgroundColor: "#E9E9E9",
-                            height: 0,
-                            paddingTop: "66.66666666666666%",
-                          }}
                           className="imagery imagery--fluid imagery--cover-center"
                           width="720"
                           height="480"
