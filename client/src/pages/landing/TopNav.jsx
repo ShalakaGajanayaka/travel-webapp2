@@ -106,7 +106,7 @@ export default function TopNav() {
                         </svg>
                       </div>
                       <div className="header-bar-utility__title" data-cy="title">
-                        +1 510-379-4907 <span></span>
+                         <span></span>
                       </div>
                     </a>
                     <button
