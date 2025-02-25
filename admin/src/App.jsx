@@ -9,6 +9,7 @@ import UserList from "./pages/admin/pages/UserList";
 import TieUser from "./pages/admin/pages/TieUser";
 import AddUser from "./pages/admin/pages/AddUser";
 import Withdrawels from "./pages/admin/pages/Withdrawels";
+import SignUpPage from "./pages/auth/SignUpPage";
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
           <Route path="/" element={<LoginPage />} />
           <Route path="*" element={<NotFound />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<SignUpPage />} />
           <Route path="/admin" element={<AdminLayout />}>
             <Route path="/admin" element={<UserList />} />
             <Route path="/admin/add-user" element={<AddUser />} />
