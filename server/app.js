@@ -12,11 +12,9 @@ const app = express();
 // Environment Variables
 const PORT = parseInt(process.env.PORT, 10) || 3000;
 const FRONTEND_URL = [
-    // process.env.FRONTEND_URL || "http://localhost:5173",
-    // process.env.FRONTEND_URL_ALT || "http://localhost:5174",
+    process.env.FRONTEND_URL || "http://localhost:5173",
+    process.env.FRONTEND_URL_ALT || "http://localhost:5174",
 
-    process.env.FRONTEND_URL || "http://46.202.140.212:5173",
-    process.env.FRONTEND_URL_ALT || "http://46.202.140.212:5174",
   ];
   
 
