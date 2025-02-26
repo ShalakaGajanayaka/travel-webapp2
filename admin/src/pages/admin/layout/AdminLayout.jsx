@@ -4,7 +4,6 @@ import { useEffect } from "react";
 import Sidebar from "./Sidebar";
 import { checkAuth } from "../../../utils/auth";
 
-
 const AdminLayout = () => {
     const { user, setUser } = useAuth();
     const navigate = useNavigate();
@@ -13,10 +12,9 @@ const AdminLayout = () => {
             const authenticatedUser = await checkAuth();
             if (!authenticatedUser) {
                 navigate("/login");
-            } else if (authenticatedUser.role != "admin") {
+            } else if (authenticatedUser.role !== "admin" && authenticatedUser.role !== "superadmin") {
                 navigate("/dashboard");
-            }
-             else {
+            } else {
                 setUser(authenticatedUser);
             }
         };

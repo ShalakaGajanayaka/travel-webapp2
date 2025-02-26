@@ -45,7 +45,7 @@ const LoginPage = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await axiosInstance.post("/api/auth/login", {
+      const response = await axiosInstance.post("/api/auth/admin-login", {
         userName,
         password,
       });

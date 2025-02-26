@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axiosInstance from '../../../utils/axiosInstance';
 import SettingsMenu from './Modals/SettingsMenu';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../../context/AuthContext';
 
 export default function AdminList() {
     const [users, setUsers] = useState([]);
@@ -9,7 +10,9 @@ export default function AdminList() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [searchTerm, setSearchTerm] = useState("");
+    const [showPopup, setShowPopup] = useState(false);
     const navigate = useNavigate();
+    const { user } = useAuth();
 
     const fetchUsers = async () => {
         try {
@@ -37,6 +40,18 @@ export default function AdminList() {
         setFilteredUsers(filtered);
     }, [searchTerm, users]);
 
+    const handleAddAdminClick = () => {
+        if (user.role !== 'superadmin') {
+            setShowPopup(true);
+        } else {
+            navigate('/admin/add-admin');
+        }
+    };
+
+    const closePopup = () => {
+        setShowPopup(false);
+    };
+
     return (
         <>
             <div className="px-4 py-4 border-b border-gray-200 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8">
@@ -53,7 +68,7 @@ export default function AdminList() {
                         <div className="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
                             <button
                                 type="button"
-                                onClick={() => {navigate('/admin/add-admin')}}
+                                onClick={handleAddAdminClick}
                                 className="block px-3 py-2 text-sm font-semibold text-center text-white bg-indigo-600 rounded-md shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                             >
                                 Add Admin
@@ -145,6 +160,19 @@ export default function AdminList() {
                     </div>
                 </div>
             </div>
+            {showPopup && (
+                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+                    <div className="bg-white p-6 rounded shadow-lg max-w-sm w-full">
+                        <p className="text-red-600 text-center">You are not a superadmin.</p>
+                        <button
+                            onClick={closePopup}
+                            className="mt-4 w-full px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-500"
+                        >
+                            Close
+                        </button>
+                    </div>
+                </div>
+            )}
         </>
     );
 }

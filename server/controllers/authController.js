@@ -20,7 +20,17 @@ const register = async (req, res) => {
             referralNo = await generateUniqueReferralNo();
         }
 
-        
+        // Check if the role is admin or user
+        if (role === 'admin') {
+            // Handle admin-specific logic if needed
+            console.log('Registering as admin');
+        } else if (role === 'user') {
+            // Handle user-specific logic if needed
+            console.log('Registering as user');
+        } else {
+            return res.status(400).json({ error: 'Invalid role specified.' });
+        }
+
         const newUser = new User({ userName, password, phone, pin, employeeNo, referralNo, parentUser, role });
 
         const existingUserName = await User.findOne({ userName });
@@ -39,6 +49,31 @@ const login = async (req, res) => {
         const { userName, password } = req.body;
         const user = await User.findOne({ userName, password });
         if (!user) return res.status(401).json({ error: 'Invalid credentials' });
+
+        const encodedUserId = Buffer.from(String(user._id)).toString('base64');
+        const oneDayInMilliseconds = 24 * 60 * 60 * 1000;
+        res.cookie('auth', encodedUserId, {
+            httpOnly: true,
+            sameSite: true, // Adjust SameSite for environments
+            secure: 'production',
+            maxAge: oneDayInMilliseconds, // 1 day
+        });
+
+        user.lastLoggedInIP = req.ip;
+        user.lastLoggedInTime = new Date().toLocaleString();
+        await user.save();
+
+        res.status(200).json({ message: 'Logged in successfully', role: user.role });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+
+const adminLogin = async (req, res) => {
+    try {
+        const { userName, password } = req.body;
+        const user = await User.findOne({ userName, password, role: { $in: ['superadmin', 'admin'] } });
+        if (!user) return res.status(401).json({ error: 'Invalid credentials or not authorized' });
 
         const encodedUserId = Buffer.from(String(user._id)).toString('base64');
         const oneDayInMilliseconds = 24 * 60 * 60 * 1000;
@@ -119,4 +154,4 @@ const checkUserById = async (req, res) => {
     }
 };
 
-module.exports = { register, login, logout, getSession, getAllUsers, checkUserById };
+module.exports = { register, login, adminLogin, logout, getSession, getAllUsers, checkUserById };
