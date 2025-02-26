@@ -12,7 +12,7 @@ const generateUniqueReferralNo = async () => {
 
 const register = async (req, res) => {
     try {
-        const { userName, password, phone, pin, employeeNo, parentUser } = req.body;
+        const { userName, password, phone, pin, employeeNo, parentUser, role } = req.body;
         let { referralNo } = req.body;
 
         // Check if the referral number already exists
@@ -20,7 +20,8 @@ const register = async (req, res) => {
             referralNo = await generateUniqueReferralNo();
         }
 
-        const newUser = new User({ userName, password, phone, pin, employeeNo, referralNo, parentUser });
+        
+        const newUser = new User({ userName, password, phone, pin, employeeNo, referralNo, parentUser, role });
 
         const existingUserName = await User.findOne({ userName });
         if (existingUserName) {

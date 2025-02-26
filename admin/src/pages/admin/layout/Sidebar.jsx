@@ -7,13 +7,14 @@ import {
   DialogPanel,
   TransitionChild,
 } from '@headlessui/react'
-import { HomeIcon, XMarkIcon , Bars3CenterLeftIcon  } from '@heroicons/react/24/outline'
+import { HomeIcon, XMarkIcon, Bars3CenterLeftIcon, UserIcon } from '@heroicons/react/24/outline'
 import { useNavigate, useLocation } from 'react-router-dom'
 import UserMenu from './UserMenu'
 import UserMenuMobile from './UserMenuMobile'
 
 const navigation = [
-  { name: 'Users', href: '/admin/user-list', icon: HomeIcon }
+  { name: 'Users', href: '/admin/user-list', icon: HomeIcon },
+  { name: 'Admin', href: '/admin/admin-list', icon: UserIcon } // Add the Admin button here
 ]
 
 function classNames(...classes) {
@@ -139,20 +140,21 @@ export default function Sidebar() {
           </nav>
         </div>
       </div>
-      
+
       <div className="sticky top-0 z-10 flex h-16 bg-white border-b border-gray-200 shrink-0 lg:hidden">
-            <button
-                type="button"
-                onClick={() => setSidebarOpen(true)}
-                className="px-4 text-gray-500 border-r border-gray-200 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-[#ff2828] lg:hidden"
-            >
-                <span className="sr-only">Open sidebar</span>
-                <Bars3CenterLeftIcon aria-hidden="true" className="size-6" />
-            </button>
-            <div className="flex justify-between flex-1 px-4 sm:px-6 lg:px-8">
-                <UserMenuMobile />
-            </div>
+        <button
+          type="button"
+          onClick={() => setSidebarOpen(true)}
+          className="px-4 text-gray-500 border-r border-gray-200 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-[#ff2828] lg:hidden"
+        >
+          <span className="sr-only">Open sidebar</span>
+          <Bars3CenterLeftIcon aria-hidden="true" className="size-6" />
+        </button>
+        <div className="flex justify-between flex-1 px-4 sm:px-6 lg:px-8">
+          <UserMenuMobile />
         </div>
+      </div>
+
     </>
   )
 }

@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../../../utils/axiosInstance';
 
-export default function AddUser() {
+export default function AddAdmin() {
     const [formData, setFormData] = useState({
         userName: '',
         password: '',
         phone: '',
         pin: '',
         employeeNo: '',
-        role: 'user', // Default role
+        role: 'admin', // Default role
     });
     const [loading, setLoading] = useState(false);
     const [alert, setAlert] = useState({ open: false, message: '', severity: '' });
@@ -26,11 +26,10 @@ export default function AddUser() {
         e.preventDefault();
         setLoading(true);
         try {
-           const response  = await axiosInstance.post('/api/auth/register', formData);
-            console.log(formData);
+            const response  = await axiosInstance.post('/api/auth/register', formData);
             if (response.status === 201) {
-                setAlert({ open: true, message: 'User registered successfully!', severity: 'success' });
-                setTimeout(() => navigate('/admin/user-list'), 1500);
+                setAlert({ open: true, message: 'Admin registered successfully!', severity: 'success' });
+                setTimeout(() => navigate('/admin/admin-list'), 1500);
             } else {
                 setAlert({ open: true, message: 'Registration failed. Please try again.', severity: 'error' });
             }
@@ -49,13 +48,13 @@ export default function AddUser() {
         <>
             <div className="px-4 py-4 border-b border-gray-200 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8">
                 <div className="flex-1 min-w-0">
-                    <h1 className="font-medium text-gray-900 text-lg/6 sm:truncate">Add User</h1>
+                    <h1 className="font-medium text-gray-900 text-lg/6 sm:truncate">Add Admin</h1>
                 </div>
             </div>
             <div className="px-4 mt-6 sm:px-6 lg:px-8">
                 <div className="px-4 sm:px-6 lg:px-8">
                     <div className="max-w-screen-sm p-8 bg-white rounded-lg shadow-md">
-                        <h2 className="mb-6 text-2xl font-semibold text-center text-gray-900">Add User</h2>
+                        <h2 className="mb-6 text-2xl font-semibold text-center text-gray-900">Add Admin</h2>
                         <form onSubmit={handleSubmit}>
                             <div className="mb-4">
                                 <input
@@ -111,7 +110,6 @@ export default function AddUser() {
                                     required
                                     disabled // Disable the select element
                                 >
-                                    <option value="user">User</option>
                                     <option value="admin">Admin</option>
                                 </select>
                             </div>
@@ -125,7 +123,7 @@ export default function AddUser() {
                                     {loading ? (
                                         <div className="w-5 h-5 mx-auto border-4 border-t-4 border-blue-500 border-solid rounded-full animate-spin"></div>
                                     ) : (
-                                        'Add User'
+                                        'Add Admin'
                                     )}
                                 </button>
                             </div>
