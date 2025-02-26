@@ -5,14 +5,14 @@ export default function Blog() {
     {
       title: '25 totally new trips for 2025',
       date: '10 Dec 2024',
-      imageUrl: 'https://www.intrepidtravel.com/adventures/wp-content/uploads/2024/12/Intrepid-Travel-Greenland-Qeqertarsuaq-town-ocean-view-iceberg-giant-GettyImages-1430295217-1080.jpg',
-      link: 'https://www.intrepidtravel.com/adventures/the-goods-2025-new-trips-experiences/'
+      imageUrl: 'https://www.intrepidtravel.com/adventures/wp-content/uploads/2023/11/Intrepid-Travel-Intrepid_Vietnam23_Ninh-BInh-walking-group-leader_agp_0896.jpg',
+      link: 'javascript:void(0)'
     },
     {
       title: 'Another Blog Post Title',
       date: '12 Dec 2024',
-      imageUrl: 'https://www.intrepidtravel.com/adventures/wp-content/uploads/2024/12/another-image.jpg',
-      link: 'https://www.intrepidtravel.com/adventures/another-post-link'
+      imageUrl: 'https://www.intrepidtravel.com/adventures/wp-content/uploads/2025/01/Intrepid-Travel-Peru-Aguas-Calientes-Machu-Picchu-lookout-group-perspective-569019.jpg',
+      link: 'javascript:void(0)'
     },
   ];
 

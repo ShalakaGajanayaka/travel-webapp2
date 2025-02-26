@@ -3,9 +3,9 @@ import React from 'react'
 const trips = [
     {
         id: 1,
-        href: "/en/japan/premium-highlights-japan-160295",
-        imageSrc: "https://example.com/japan-image.jpg",
-        altText: "Map of Premium Highlights Of Japan including Japan",
+        href: "javascript:void(0)",
+        imageSrc: "https://www.intrepidtravel.com/v3/assets/blt0de87ff52d9c34a8/blte6b6c155077638d9/64eff2a2a9c2c320799c5530/CJPH_2024.gif?branch=prd&width=480&quality=75&format=pjpg&auto=webp",
+        altText: "Mount Fuji with cherry blossoms in Japan",
         label: "9 Days · Premium",
         title: "Premium Highlights of Japan",
         oldPrice: "$5,550",
@@ -13,56 +13,56 @@ const trips = [
     },
     {
         id: 2,
-        href: "/en/italy/taste-of-italy-160296",
-        imageSrc: "https://example.com/italy-image.jpg",
-        altText: "Map of Taste of Italy tour including Italy",
+        href: "javascript:void(0)",
+        imageSrc: "https://www.intrepidtravel.com/v3/assets/blt0de87ff52d9c34a8/blt73c89b1a6a2645be/67610ac1485851692641eb1e/gmda_2022-stylefix.gif?branch=prd&width=480&quality=75&format=pjpg&auto=webp",
+        altText: "Scenic view of the Colosseum in Rome, Italy",
         label: "7 Days · Culinary",
         title: "Taste of Italy",
         oldPrice: "$3,200",
         newPrice: "$2,895",
     },
     {
-        id: 2,
-        href: "/en/italy/taste-of-italy-160296",
-        imageSrc: "https://example.com/italy-image.jpg",
-        altText: "Map of Taste of Italy tour including Italy",
-        label: "7 Days · Culinary",
-        title: "Taste of Italy",
-        oldPrice: "$3,200",
-        newPrice: "$2,895",
+        id: 3,
+        href: "javascript:void(0)",
+        imageSrc: "https://www.intrepidtravel.com/v3/assets/blt0de87ff52d9c34a8/bltf6145b948906e3ef/65fcb91459c51080d8dc958d/xmkc-2024.gif?branch=prd&width=480&quality=75&format=pjpg&auto=webp",
+        altText: "Eiffel Tower in Paris, France at sunset",
+        label: "5 Days · Romantic",
+        title: "Parisian Romance",
+        oldPrice: "$2,800",
+        newPrice: "$2,495",
     },
     {
-        id: 2,
-        href: "/en/italy/taste-of-italy-160296",
-        imageSrc: "https://example.com/italy-image.jpg",
-        altText: "Map of Taste of Italy tour including Italy",
-        label: "7 Days · Culinary",
-        title: "Taste of Italy",
-        oldPrice: "$3,200",
-        newPrice: "$2,895",
+        id: 4,
+        href: "javascript:void(0)",
+        imageSrc: "https://www.intrepidtravel.com/v3/assets/blt0de87ff52d9c34a8/blta04d62f030bb56fc/66971a15201b8a34bf6dd1a6/GGTA_2025.gif?branch=prd&width=480&quality=75&format=pjpg&auto=webp",
+        altText: "Great Wall of China during sunset",
+        label: "10 Days · Adventure",
+        title: "China Explorer",
+        oldPrice: "$4,000",
+        newPrice: "$3,750",
     },
     {
-        id: 2,
-        href: "/en/italy/taste-of-italy-160296",
-        imageSrc: "https://example.com/italy-image.jpg",
-        altText: "Map of Taste of Italy tour including Italy",
-        label: "7 Days · Culinary",
-        title: "Taste of Italy",
-        oldPrice: "$3,200",
-        newPrice: "$2,895",
+        id: 5,
+        href: "javascript:void(0)",
+        imageSrc: "https://www.intrepidtravel.com/v3/assets/blt0de87ff52d9c34a8/bltab593005e5033ff8/64f6e435c980d86cdaff53a5/zmrr_2020.gif?branch=prd&width=480&quality=75&format=pjpg&auto=webp",
+        altText: "Santorini, Greece with white houses and blue domes",
+        label: "6 Days · Luxury",
+        title: "Santorini Getaway",
+        oldPrice: "$3,500",
+        newPrice: "$3,150",
     },
     {
-        id: 2,
-        href: "/en/italy/taste-of-italy-160296",
-        imageSrc: "https://example.com/italy-image.jpg",
-        altText: "Map of Taste of Italy tour including Italy",
-        label: "7 Days · Culinary",
-        title: "Taste of Italy",
-        oldPrice: "$3,200",
-        newPrice: "$2,895",
-    },
-    // Add more trips as needed
+        id: 6,
+        href: "javascript:void(0)",
+        imageSrc: "https://www.intrepidtravel.com/v3/assets/blt0de87ff52d9c34a8/bltabc034e1ef88e055/66a184fedd0c312a0d910002/uboo_2024.gif?branch=prd&width=480&quality=75&format=pjpg&auto=webp",
+        altText: "Machu Picchu, Peru with misty mountains",
+        label: "8 Days · Cultural",
+        title: "Machu Picchu Adventure",
+        oldPrice: "$4,500",
+        newPrice: "$4,100",
+    }
 ];
+
 
 export default function Trips() {
     return (
@@ -78,16 +78,12 @@ export default function Trips() {
                                         <a href={trip.href} className="card__content card__content--link">
                                             <div className="card__image" data-cy="card-image">
                                                 <img
-                                                    style={{
-                                                        backgroundColor: "#b4d6f4",
-                                                        height: 0,
-                                                        paddingTop: "66.81818181818183%",
-                                                    }}
                                                     className="imagery imagery--fluid imagery--cover-center"
                                                     width="1100"
                                                     height="735"
                                                     alt={trip.altText}
                                                     loading="lazy"
+                                                    src={trip.imageSrc}
                                                 />
                                             </div>
                                             <div className="card__text">
