@@ -1,90 +1,69 @@
-import * as React from 'react';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext';
-import axiosInstance from '../../utils/axiosInstance';
-import Loading from '../loadingscreen/Loading';
-import ErrorPage from '../errorpage/ErrorPage';
+import React, { useEffect, useState } from "react";
+import axiosInstance from "../../utils/axiosInstance";
+import { useAuth } from "../../context/AuthContext";
+import { useNavigate } from "react-router-dom";
+import Loading from "../loadingscreen/Loading";
+import ErrorPage from "../errorpage/ErrorPage";
+import { EyeIcon } from "@heroicons/react/24/outline";
 
 export default function EarningsTable() {
-    const [history, setHistory] = useState([]);
+    const [completedTasks, setCompletedTasks] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const navigate = useNavigate();
     const { user } = useAuth();
-    const userId = user._id;
-
-    React.useEffect(() => {
-        const fetchTasks = async () => {
+    
+    useEffect(() => {
+        const fetchCompletedTasks = async () => {
             try {
-                const earnHistory = await axiosInstance.get(`/api/transactions/user/${userId}`);
-                setHistory(earnHistory.data.transactions);
-                setLoading(false);
+                const response = await axiosInstance.get(`/api/tasks/all-for-user/${user._id}`);
+                if (response.data.tasks) {
+                    const completed = response.data.tasks.filter(task => task.status === "completed" || task.completed === true);
+                    setCompletedTasks(completed);
+                }
             } catch (err) {
-                setError("Failed to fetch tasks");
+                setError("Failed to fetch completed tasks. Please try again later.");
+            } finally {
                 setLoading(false);
             }
         };
-        fetchTasks();
-    }, [userId]);
+        console.log(completedTasks);
+        fetchCompletedTasks();
+    }, [user._id]);
 
-    if (loading) {
-        return <Loading />;
+    if (loading) return <Loading />;
+    if (error || completedTasks.length === 0) {
+        return <ErrorPage errorMessage={"No data available."} errorDesc="You have not completed any tasks yet." />;
     }
 
     return (
-        <>
-            {history.length > 0 ? (
-                < div className="px-4 sm:px-6 lg:px-8">
-                    <div className="sm:flex sm:items-center">
-                        <div className="sm:flex-auto">
-                            <p className="mt-2 text-sm text-gray-700">
-                                All of your earnings will display here.
-                            </p>
-                        </div>
-                    </div>
-                    <div className="flow-root mt-8">
-                        <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                            <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-                                <div className="overflow-hidden shadow ring-1 ring-black/5 sm:rounded-lg">
-                                    <table className="min-w-full divide-y divide-gray-300">
-                                        <thead className="bg-gray-50">
-                                            <tr>
-                                                <th scope="col" className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">
-                                                    No
-                                                </th>
-                                                <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                                    Title
-                                                </th>
-                                                <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                                    Earn
-                                                </th>
-                                                <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                                    Date
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody className="bg-white divide-y divide-gray-200">
-                                            {history.map((task, i) => (
-                                                <tr key={task._id}>
-                                                    <td className="py-4 pl-4 pr-3 text-sm font-medium text-gray-900 whitespace-nowrap sm:pl-6">
-                                                        {i + 1}
-                                                    </td>
-                                                    <td onClick={() => navigate(`/task-overview/${task.taskId?._id}`)} className="px-3 py-4 text-sm text-gray-500 underline cursor-pointer whitespace-nowrap">{task.taskId.title}</td>
-                                                    <td className="px-3 py-4 text-sm text-gray-500 whitespace-nowrap">{task.pointsEarned}</td>
-                                                    <td className="px-3 py-4 text-sm text-gray-500 whitespace-nowrap">{new Date(task.updatedAt).toLocaleDateString()}</td>
-                                                </tr>
-                                            ))}
-                                        </tbody>
-                                    </table>
+        <div className="px-4 sm:px-6 lg:px-8">
+            <div className="sm:flex sm:items-center">
+                <div className="sm:flex-auto">
+                    <p className="mt-2 text-sm text-gray-700">All of your earnings will display here.</p>
+                </div>
+            </div>
+            <div className="grid grid-cols-1 gap-6 mt-8 sm:grid-cols-2 lg:grid-cols-3">
+                {completedTasks.map((task) => (
+                    <div key={task.taskId._id} className="col-span-1 bg-[#F9F7F7] divide-y divide-gray-200 rounded-lg shadow-lg hover:shadow-2xl transition duration-300">
+                        <div className="flex flex-col items-center w-full p-6 space-y-4">
+                            <div className="w-full text-center">
+                                <h3 className="text-lg font-semibold text-[#112D4E] truncate">{task.taskId.name}</h3>
+                                <div className="flex justify-center mt-2 space-x-3">
+                                    <span className="inline-flex items-center px-2 py-1 text-xs font-medium text-[#3F72AF] rounded-full bg-[#DBE2EF] ring-1 ring-inset ring-[#3F72AF]/20">
+                                        ${task.taskId.value}
+                                    </span>
+                                    <span className="inline-flex items-center px-2 py-1 text-xs font-medium text-[#3F72AF] rounded-full bg-[#DBE2EF] ring-1 ring-inset ring-[#3F72AF]/20">
+                                        ${task.taskId.profit}
+                                    </span>
                                 </div>
+                            </div>
+                            <div className="w-full">
+                                <img alt="Task Preview" src={task.taskId.link} className="object-cover w-full h-48 rounded-md shadow-md" />
                             </div>
                         </div>
                     </div>
-                </div >
-            ) : (
-                <ErrorPage errorMessage={'No data available.'} errorDesc='You do not completed any task up to now.' />
-            )}
-        </>
+                ))}
+            </div>
+        </div>
     );
 }

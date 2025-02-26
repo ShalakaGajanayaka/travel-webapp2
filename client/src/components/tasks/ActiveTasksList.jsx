@@ -13,7 +13,7 @@ const ActiveTasksList = () => {
     if( user.tasks.length > 0 ) {
       const response = await axiosInstance.get(`/api/tasks/${user._id}`);
     if (response.data.tasks.status ?? response.data.tasks.status === 'pending') {
-      setAlert({ open: true, message: 'You have pending task and complete it in assign histoty.' });
+      setAlert({ open: true, message: 'You have pending journey and complete it in assign histoty.' });
       return;
     }
     if (user.totalEarnings < 50) {
@@ -61,7 +61,7 @@ const ActiveTasksList = () => {
           <span className="text-lg font-medium text-[#3F72AF]">${user.totalEarnings}</span>
         </div>
         <div className="flex items-center justify-between bg-[#DBE2EF] p-4 rounded-lg shadow-lg hover:shadow-xl transition duration-300">
-          <span className="font-semibold text-[#112D4E]">Current Post:</span>
+          <span className="font-semibold text-[#112D4E]">Current Journey:</span>
           <span className="text-lg font-medium text-[#3F72AF]">{user.currentTaskIndex}</span>
         </div>
         <div className="flex items-center justify-between bg-[#DBE2EF] p-4 rounded-lg shadow-lg hover:shadow-xl transition duration-300">
@@ -69,7 +69,7 @@ const ActiveTasksList = () => {
           <span className="text-lg font-medium text-[#3F72AF]">${user.totalProfit}</span>
         </div>
         <div className="flex items-center justify-between bg-[#DBE2EF] p-4 rounded-lg shadow-lg hover:shadow-xl transition duration-300">
-          <span className="font-semibold text-[#112D4E]">Total Posts:</span>
+          <span className="font-semibold text-[#112D4E]">Total Journeys:</span>
           <span className="text-lg font-medium text-[#3F72AF]">{user.tasks?.length || 0}</span>
         </div>
       </div>

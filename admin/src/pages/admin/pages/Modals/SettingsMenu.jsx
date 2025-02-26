@@ -141,10 +141,36 @@ export default function SettingsMenu({ user }) {
                             )}
                         </MenuItem>
                     </div>
+                    <div className="py-1">
+                        <MenuItem>
+                            {({ active }) => (
+                                <a
+                                    onClick={() => navigate(`/admin/user-tasks/${user._id}`)}
+                                    className={`block px-4 py-2 text-sm text-gray-700 ${active ? 'bg-gray-100' : ''}`}
+                                    href="#"
+                                >
+                                    User Tasks
+                                </a>
+                            )}
+                        </MenuItem>
+                    </div>
+                    <div className="py-1">
+                        <MenuItem>
+                            {({ active }) => (
+                                <a
+                                    onClick={() => navigate(`/admin/transactions/${user._id}`)}
+                                    className={`block px-4 py-2 text-sm text-gray-700 ${active ? 'bg-gray-100' : ''}`}
+                                    href="#"
+                                >
+                                    Transactions
+                                </a>
+                            )}
+                        </MenuItem>
+                    </div>
                 </MenuItems>
             </Transition>
             <CreateDemoUser open={isDemoCreateModalOpen} setOpen={setIsDemoCreateModalOpen} user={user} />
-            <AdditionalDeductions open={isTieModalOpen} setOpen={setIsTieModalOpen} user={user} />
+            <AdditionalDeductions open={isTieModalOpen} setOpen={setIsTieModalOpen} user2={user} />
             <EditUser open={isEditUserModalOpen} setOpen={setIsEditUserModalOpen} user={user} />
             <EditPermitions open={isEditPermitionModalOpen} setOpen={setIsEditPermitionModalOpen} user={user} />
         </Menu>

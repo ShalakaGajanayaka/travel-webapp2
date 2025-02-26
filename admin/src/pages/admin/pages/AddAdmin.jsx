@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../../../utils/axiosInstance';
 
-export default function AddUser() {
+export default function AddAdmin() {
     const [formData, setFormData] = useState({
         userName: '',
         password: '',
-        phone: '',
-        pin: '',
-        employeeNo: '',
+        phone: null,
+        pin: 'null',
+        employeeNo: 'null',
+        role: 'admin',
     });
     const [loading, setLoading] = useState(false);
     const [alert, setAlert] = useState({ open: false, message: '', severity: '' });
@@ -47,13 +48,13 @@ export default function AddUser() {
         <>
             <div className="px-4 py-4 border-b border-gray-200 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8">
                 <div className="flex-1 min-w-0">
-                    <h1 className="font-medium text-gray-900 text-lg/6 sm:truncate">Add User</h1>
+                    <h1 className="font-medium text-gray-900 text-lg/6 sm:truncate">Add Admin</h1>
                 </div>
             </div>
             <div className="px-4 mt-6 sm:px-6 lg:px-8">
                 <div className="px-4 sm:px-6 lg:px-8">
                     <div className="max-w-screen-sm p-8 bg-white rounded-lg shadow-md">
-                        <h2 className="mb-6 text-2xl font-semibold text-center text-gray-900">Add User</h2>
+                        <h2 className="mb-6 text-2xl font-semibold text-center text-gray-900">Add Admin</h2>
                         <form onSubmit={handleSubmit}>
                             <div className="mb-4">
                                 <input
@@ -74,33 +75,6 @@ export default function AddUser() {
                                     className="w-full px-4 py-2 mb-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                                     required
                                 />
-                                <input
-                                    type="text"
-                                    name="phone"
-                                    value={formData.phone}
-                                    onChange={handleChange}
-                                    placeholder="Phone"
-                                    className="w-full px-4 py-2 mb-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                    required
-                                />
-                                <input
-                                    type="text"
-                                    name="pin"
-                                    value={formData.pin}
-                                    onChange={handleChange}
-                                    placeholder="PIN"
-                                    className="w-full px-4 py-2 mb-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                    required
-                                />
-                                <input
-                                    type="text"
-                                    name="employeeNo"
-                                    value={formData.employeeNo}
-                                    onChange={handleChange}
-                                    placeholder="Employee No"
-                                    className="w-full px-4 py-2 mb-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                    required
-                                />
                             </div>
 
                             <div className="flex justify-center">
@@ -112,7 +86,7 @@ export default function AddUser() {
                                     {loading ? (
                                         <div className="w-5 h-5 mx-auto border-4 border-t-4 border-blue-500 border-solid rounded-full animate-spin"></div>
                                     ) : (
-                                        'Add User'
+                                        'Add Admin'
                                     )}
                                 </button>
                             </div>

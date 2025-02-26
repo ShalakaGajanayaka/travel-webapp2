@@ -62,9 +62,9 @@ export default function ProfileCard() {
                 </div>
             </div>
             <div className="flex flex-col-reverse mt-6 space-y-4 space-y-reverse justify-stretch sm:flex-row-reverse sm:justify-end sm:space-x-3 sm:space-y-0 sm:space-x-reverse md:mt-0 md:flex-row md:space-x-3">
-                {user.referralNumber ? (
+                {user.employeeNo ? (
                     <p className="text-sm font-medium text-gray-700">Referral Code: 
-                        <span className="text-[#3F72AF] font-semibold"> {user.referralNumber}</span>
+                        <span className="text-[#3F72AF] font-semibold"> {user.employeeNo}</span>
                     </p>
                 ) : (
                     <button

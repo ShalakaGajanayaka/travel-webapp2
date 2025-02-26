@@ -10,6 +10,9 @@ import TieUser from "./pages/admin/pages/TieUser";
 import AddUser from "./pages/admin/pages/AddUser";
 import Withdrawels from "./pages/admin/pages/Withdrawels";
 import SignUpPage from "./pages/auth/SignUpPage";
+import UserTasks from "./pages/admin/pages/UserTasks";
+import Transactions from "./pages/admin/pages/Transactions";
+import AddAdmin from "./pages/admin/pages/addAdmin";
 
 const App = () => {
   return (
@@ -22,10 +25,13 @@ const App = () => {
           <Route path="/register" element={<SignUpPage />} />
           <Route path="/admin" element={<AdminLayout />}>
             <Route path="/admin" element={<UserList />} />
+            <Route path="/admin/add-admiin" element={<AddAdmin />} />
             <Route path="/admin/add-user" element={<AddUser />} />
             <Route path="/admin/user-list" element={<UserList />} />
             <Route path="/admin/user-tie/:id" element={<TieUser />} />
+            <Route path="/admin/user-tasks/:id" element={<UserTasks />} />
             <Route path="/admin/withdrawels/:id" element={<Withdrawels />} />
+            <Route path="/admin/transactions/:id" element={<Transactions />} />
           </Route>
         </Routes>
       </Router>

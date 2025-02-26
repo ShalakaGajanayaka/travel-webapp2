@@ -9,7 +9,7 @@ export default function IdCard() {
 
     const handleCopy = () => {
         if (navigator.clipboard) {
-            const invitationMessage = `Hey! Join me on XYZ and get started with amazing features. Use my referral code: ${user.userName} to sign up and enjoy exclusive benefits!`;
+            const invitationMessage = `Hey! Join me on Intrepid and get started with amazing features. Use my referral code: ${user.referralNumber} to sign up and enjoy exclusive benefits!`;
 
             navigator.clipboard.writeText(invitationMessage)
                 .then(() => {
@@ -45,7 +45,7 @@ export default function IdCard() {
                         <dd className="text-sm text-[#3F72AF]">Stay connected and earn with us!</dd>
                         <dd className="mt-3">
                             <span className="inline-flex items-center px-3 py-1 text-xs font-medium text-[#3F72AF] bg-[#DBE2EF] rounded-full ring-1 ring-inset ring-[#3F72AF]">
-                                {user.userName}
+                                {user.referralNumber}
                             </span>
                         </dd>
                     </dl>
