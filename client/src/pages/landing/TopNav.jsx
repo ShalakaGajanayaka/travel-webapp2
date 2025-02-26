@@ -87,7 +87,7 @@ export default function TopNav() {
                         My Booking <span></span>
                       </div>
                     </a>
-<<<<<<< HEAD
+
                     <a
                       className="header-bar-utility u-hidden-xs"
                       aria-label="My Booking"
@@ -107,11 +107,10 @@ export default function TopNav() {
                         </svg>
                       </div>
                       <div className="header-bar-utility__title" data-cy="title">
-                         <span></span>
+                        <span></span>
                       </div>
                     </a>
-=======
->>>>>>> dev
+
                     <button
                       aria-label="menu"
                       className="header-bar__toggle-menu"
@@ -125,10 +124,10 @@ export default function TopNav() {
                         fontWeight: "normal",
                         color: "white",
                         marginBottom: "15px",
-                        hoverBackgroundColor:"#c80000"
-                        
+                        hoverBackgroundColor: "#c80000"
+
                       }}
-                      onClick={()=>{navigate('/login')}} 
+                      onClick={() => { navigate('/login') }}
                     >
                       Login
                     </button>
@@ -213,7 +212,7 @@ export default function TopNav() {
                     <div className="header-bar__bottom-right" data-cy="header-bar__bottom-right">
                       <div className="find-trip find-trip--compact" data-cy="find-trip--compact">
                         <button
-                        onClick={()=>{navigate('/login')}} router-link="false" className="button find-trip__button button--special" data-cy="autocomplete-button" aria-label="search">
+                          onClick={() => { navigate('/login') }} router-link="false" className="button find-trip__button button--special" data-cy="autocomplete-button" aria-label="search">
                           Login
                         </button>
                       </div>
