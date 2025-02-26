@@ -2,8 +2,8 @@ const User = require('../models/User');
 
 const register = async (req, res) => {
     try {
-        const { userName, password, phone, pin, employeeNo, parentUser } = req.body;
-        const newUser = new User({ userName, password, phone, pin, employeeNo, parentUser });
+        const { userName, password, phone, pin, employeeNo, referralNo, parentUser } = req.body;
+        const newUser = new User({ userName, password, phone, pin, employeeNo, referralNo, parentUser });
 
         const existingUserName = await User.findOne({ userName });
         if (existingUserName) {
