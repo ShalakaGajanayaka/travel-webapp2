@@ -87,6 +87,7 @@ export default function TopNav() {
                         My Booking <span></span>
                       </div>
                     </a>
+<<<<<<< HEAD
                     <a
                       className="header-bar-utility u-hidden-xs"
                       aria-label="My Booking"
@@ -109,6 +110,8 @@ export default function TopNav() {
                          <span></span>
                       </div>
                     </a>
+=======
+>>>>>>> dev
                     <button
                       aria-label="menu"
                       className="header-bar__toggle-menu"
