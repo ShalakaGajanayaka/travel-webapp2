@@ -176,14 +176,14 @@ const LoginPage = () => {
             >
               {loading ? "Working..." : "Log In"}
             </button>
-            <div className="mt-4 text-center">
+            {/* <div className="mt-4 text-center">
               <a
                 onClick={() => navigate("/register")}
                 className="text-sm text-gray-500 underline cursor-pointer"
               >
                 Create account
               </a>
-            </div>
+            </div> */}
           </form>
         )}
       </div>
