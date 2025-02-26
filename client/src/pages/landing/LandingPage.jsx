@@ -21,7 +21,7 @@ export default function LandingPage() {
         <Trips />
       </div>
       <Purpose />
-      <Blog/>
+      <Blog />
       <WhyChooseUs />
       <Footer />
     </div>

@@ -88,7 +88,7 @@ export default function TopNav() {
                       </div>
                     </a>
 
-                    <a
+                    {/* <a
                       className="header-bar-utility u-hidden-xs"
                       aria-label="My Booking"
                       data-cy="header-bar-utility"
@@ -107,9 +107,9 @@ export default function TopNav() {
                         </svg>
                       </div>
                       <div className="header-bar-utility__title" data-cy="title">
-                        <span></span>
+                        fdf <span></span>
                       </div>
-                    </a>
+                    </a> */}
 
                     <button
                       aria-label="menu"
