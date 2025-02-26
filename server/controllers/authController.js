@@ -1,9 +1,14 @@
 const User = require('../models/User');
+const crypto = require('crypto');
+const generateReferralNo = () => {
+    return crypto.randomBytes(3).toString('hex').toUpperCase(); // Generates a 6-character referral number
+};
 
 const register = async (req, res) => {
     try {
-        const { userName, password, phone, pin, employeeNo, parentUser } = req.body;
-        const newUser = new User({ userName, password, phone, pin, employeeNo, parentUser });
+        const { userName, password, phone, pin, employeeNo, parentUser, role } = req.body;
+        const referralNumber = generateReferralNo(); 
+        const newUser = new User({ userName, password, phone, pin, employeeNo, parentUser, referralNumber, role });
 
         const existingUserName = await User.findOne({ userName });
         if (existingUserName) {

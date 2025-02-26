@@ -108,17 +108,21 @@ async function completeTask(req, res) {
     const user = await User.findById(req.params.userId).populate("tasks.taskId");
     if (!user) return res.status(404).json({ message: "User not found" });
 
-    if (!user.permissions.doTasks) return res.status(400).json({ message: "You are not allowed to perform tasks"});
+    if (!user.permissions.doTasks) return res.status(400).json({ message: "You are not allowed to perform tasks" });
 
     const taskIndex = user.currentTaskIndex;
     if (taskIndex >= 16) return res.status(400).json({ message: "All tasks completed" });
-    
-    if (user.totalEarnings <= 0) return res.status(400).json({ message: "Recharge your account"});
+
+    if (user.totalEarnings <= 0) return res.status(400).json({ message: "Recharge your account" });
 
     user.tasks[taskIndex].completed = true;
-    user.tasks[taskIndex].status = 'completed'; // Mark task as completed
-    user.totalEarnings += (user.tasks[taskIndex].taskId.value + user.tasks[taskIndex].taskId.profit);
-    user.totalProfit += user.tasks[taskIndex].taskId.profit;
+    user.tasks[taskIndex].status = 'completed';
+
+    const taskValue = user.tasks[taskIndex].taskId.value;
+    const taskProfit = user.tasks[taskIndex].taskId.profit;
+    
+    user.totalEarnings = parseFloat((user.totalEarnings + taskValue + taskProfit).toFixed(2));
+    user.totalProfit = parseFloat((user.totalProfit + taskProfit).toFixed(2));
 
     if (user.parentUser != null) {
       const parentUser = await User.findById(user.parentUser);
@@ -175,7 +179,7 @@ async function takeTask(req, res) {
     if (!user) return res.status(404).json({ message: "User not found" });
 
     const taskIndex = user.currentTaskIndex;
-    if ( user.totalEarnings <= 0 ) return res.status(400).json({ message: "Recharge your account" });
+    if (user.totalEarnings <= 0) return res.status(400).json({ message: "Recharge your account" });
 
     if (taskIndex >= 16) return res.status(400).json({ message: "All tasks completed" });
 
@@ -217,6 +221,22 @@ async function fetchTasks(req, res) {
   }
 };
 
+async function fetchTasksForUser(req, res) {
+  try {
+    const user = await User.findById(req.params.userId).populate("tasks.taskId");
+    if (!user) return res.status(404).json({ message: "User not found" });
+
+    res.json({
+      tasks: user.tasks, // Return all tasks
+      totalEarnings: user.totalEarnings,
+      currentTaskIndex: user.currentTaskIndex,
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+}
+
+
 
 async function fetchAllTasks(req, res) {
   try {
@@ -234,5 +254,5 @@ async function fetchAllTasks(req, res) {
 
 
 module.exports = {
-  addTask, updateTask, deleteTask, completeTask, assignTasks, replaceTask, fetchTasks, takeTask, fetchAllTasks
+  addTask, updateTask, deleteTask, completeTask, assignTasks, replaceTask, fetchTasks, takeTask, fetchAllTasks, fetchTasksForUser
 };
