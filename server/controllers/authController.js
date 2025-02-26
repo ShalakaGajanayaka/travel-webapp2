@@ -1,8 +1,25 @@
 const User = require('../models/User');
 
+const generateUniqueReferralNo = async () => {
+    let referralNo;
+    let existingReferralNo;
+    do {
+        referralNo = 'REF' + Math.random().toString(36).substr(2, 9).toUpperCase();
+        existingReferralNo = await User.findOne({ referralNo });
+    } while (existingReferralNo);
+    return referralNo;
+};
+
 const register = async (req, res) => {
     try {
-        const { userName, password, phone, pin, employeeNo, referralNo, parentUser } = req.body;
+        const { userName, password, phone, pin, employeeNo, parentUser } = req.body;
+        let { referralNo } = req.body;
+
+        // Check if the referral number already exists
+        if (await User.findOne({ referralNo })) {
+            referralNo = await generateUniqueReferralNo();
+        }
+
         const newUser = new User({ userName, password, phone, pin, employeeNo, referralNo, parentUser });
 
         const existingUserName = await User.findOne({ userName });
