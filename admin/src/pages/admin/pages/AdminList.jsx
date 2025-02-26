@@ -15,6 +15,8 @@ export default function AdminList() {
         try {
             const response = await axiosInstance.get(`/api/admin/users`);
             const admins = response.data.filter(user => user.role === 'admin');
+            // Sort admins by registration date in descending order
+            admins.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
             setUsers(admins);
             setFilteredUsers(admins);
             setLoading(false);

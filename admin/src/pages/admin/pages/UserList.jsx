@@ -9,14 +9,15 @@ export default function UserList() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [searchTerm, setSearchTerm] = useState("");
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     const fetchUsers = async () => {
         try {
             const response = await axiosInstance.get(`/api/admin/users`);
             const onlyUsers = response.data.filter(user => user.role !== 'admin');
+            // Sort users by registration date in descending order
+            onlyUsers.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
             setUsers(onlyUsers);
-            console.log(onlyUsers);
             setFilteredUsers(onlyUsers);
             setLoading(false);
         } catch (err) {
