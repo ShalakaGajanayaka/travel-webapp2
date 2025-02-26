@@ -132,7 +132,7 @@ export default function AdminList() {
                                                 <td className="px-3 py-4 text-sm text-gray-500 whitespace-nowrap">{person.lastLoggedInIP}</td>
                                                 <td className="px-3 py-4 text-sm text-gray-500 whitespace-nowrap">{person.currentTaskIndex}</td>
                                                 <td className="relative py-4 pl-3 pr-4 text-sm font-medium text-right whitespace-nowrap sm:pr-0">
-                                                    <SettingsMenu user={person} />
+                                                    {person.userName === 'superadmin' ? 'admin' : <SettingsMenu user={person} />}
                                                 </td>
                                             </tr>
                                         ))}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import { Menu, MenuButton, MenuItem, MenuItems, Transition } from '@headlessui/react';
 import CreateDemoUser from './CreateDemoUser';
 import AdditionalDeductions from './AdditionalDeductions';
@@ -20,14 +20,27 @@ export default function SettingsMenu({ user }) {
         try {
             const response = await axiosInstance.post(`/api/tasks/assign/${user._id}`);
             if (response.status === 200) {
-                setSuccess('User registered successfully!');
+                setSuccess('Tasks reassigned successfully!');
             } else {
                 throw new Error(response.data.error || 'Something went wrong');
             }
         } catch (err) {
             setError(err.message);
-        } finally {
-            setLoading(false);
+        }
+    };
+
+    const handleRemove = async () => {
+        try {
+            const response = await axiosInstance.delete(`/api/users/${user._id}`);
+            if (response.status === 200) {
+                setSuccess('User removed successfully!');
+                // Optionally, you can refresh the page or update the state to reflect the removal
+                window.location.reload();
+            } else {
+                throw new Error(response.data.error || 'Something went wrong');
+            }
+        } catch (err) {
+            setError(err.message);
         }
     };
 
@@ -37,7 +50,6 @@ export default function SettingsMenu({ user }) {
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM12.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM18.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
                 </svg>
-
             </MenuButton>
             <Transition
                 enter="transition ease-out duration-100"
@@ -136,7 +148,20 @@ export default function SettingsMenu({ user }) {
                                     className={`block px-4 py-2 text-sm text-gray-700 ${active ? 'bg-gray-100' : ''}`}
                                     href="#"
                                 >
-                                    Withdrawels
+                                    Withdrawals
+                                </a>
+                            )}
+                        </MenuItem>
+                    </div>
+                    <div className="py-1">
+                        <MenuItem>
+                            {({ active }) => (
+                                <a
+                                    onClick={handleRemove}
+                                    className={`block px-4 py-2 text-sm text-gray-700 ${active ? 'bg-gray-100' : ''}`}
+                                    href="#"
+                                >
+                                    Remove
                                 </a>
                             )}
                         </MenuItem>
@@ -148,5 +173,5 @@ export default function SettingsMenu({ user }) {
             <EditUser open={isEditUserModalOpen} setOpen={setIsEditUserModalOpen} user={user} />
             <EditPermitions open={isEditPermitionModalOpen} setOpen={setIsEditPermitionModalOpen} user={user} />
         </Menu>
-    )
+    );
 }
