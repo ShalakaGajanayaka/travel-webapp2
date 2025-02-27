@@ -32,9 +32,7 @@ export default function UserList() {
 
     useEffect(() => {
         const filtered = users.filter(user =>
-            user.userName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            user.employeeNo.toLowerCase().includes(searchTerm.toLowerCase())
-    
+            user.userName.toLowerCase().includes(searchTerm.toLowerCase())
         );
         setFilteredUsers(filtered);
     }, [searchTerm, users]);
@@ -46,7 +44,7 @@ export default function UserList() {
                     <h1 className="font-medium text-gray-900 text-lg/6 sm:truncate">Users</h1>
                 </div>
             </div>
-            <div className="px-4 mt-36 sm:px-6 lg:px-8">
+            <div className="px-4 mt-6 sm:px-6 lg:px-8">
                 <div className="px-4 sm:px-6 lg:px-8">
                     <div className="sm:flex sm:items-center">
                         <div className="sm:flex-auto">
@@ -59,15 +57,6 @@ export default function UserList() {
                                 className="block px-3 py-2 text-sm font-semibold text-center text-white bg-indigo-600 rounded-md shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                             >
                                 Add user
-                            </button>
-                        </div>
-                        <div className="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
-                            <button
-                                type="button"
-                                onClick={() => {navigate('/admin/add-admiin')}}
-                                className="block px-3 py-2 text-sm font-semibold text-center text-white bg-red-600 rounded-md shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                            >
-                                Add Admin
                             </button>
                         </div>
                     </div>
@@ -139,7 +128,7 @@ export default function UserList() {
                                                 </td>                                     
                                                 <td className="px-3 py-4 text-sm text-gray-500 whitespace-nowrap">{person.parentUserName || 'N/A'}</td>       
                                                 <td className="px-3 py-4 text-sm text-gray-500 whitespace-nowrap">
-                                                    {person.employeeNo}
+                                                    {person.referralNumber}
                                                 </td>    
                                                 <td className="px-3 py-4 text-sm text-gray-500 whitespace-nowrap">{new Date(person.createdAt).toLocaleDateString("en-CA")}</td>
                                                 <td className="px-3 py-4 text-sm text-gray-500 whitespace-nowrap">
