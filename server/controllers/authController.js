@@ -14,6 +14,7 @@ const register = async (req, res) => {
     try {
         const { userName, password, phone, pin, employeeNo, parentUser, role } = req.body;
         let { referralNo } = req.body;
+        console.log(req.body);
 
         // Check if the referral number already exists
         if (await User.findOne({ referralNo })) {

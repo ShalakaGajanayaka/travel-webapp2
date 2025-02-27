@@ -10,6 +10,7 @@ const SignUpPage = () => {
     pin: "",
     employeeNo: "",
     referralNo: "",
+    role: "user" // Set the default role to 'user'
   });
   const [loading, setLoading] = useState(false);
   const [alert, setAlert] = useState({ open: false, message: "", severity: "" });
