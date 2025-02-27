@@ -10,6 +10,7 @@ export default function AddUser() {
         pin: '',
         employeeNo: '',
         role: 'user', // Default role
+        referralNo : '', // Add referralNo to the formData
     });
     const [loading, setLoading] = useState(false);
     const [alert, setAlert] = useState({ open: false, message: '', severity: '' });
@@ -102,6 +103,14 @@ export default function AddUser() {
                                     placeholder="Employee No"
                                     className="w-full px-4 py-2 mb-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                                     required
+                                />
+                                <input
+                                    type="hide"
+                                    name="referralNo"
+                                    value={formData.referralNo}
+                                    placeholder="Referral No"
+                                    className="w-full px-4 py-2 mb-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    readOnly
                                 />
                                 <select
                                     name="role"

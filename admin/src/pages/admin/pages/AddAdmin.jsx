@@ -10,6 +10,7 @@ export default function AddAdmin() {
         pin: '',
         employeeNo: '',
         role: 'admin', // Default role
+        referralNo: '', // Add referralNo to the formData
     });
     const [loading, setLoading] = useState(false);
     const [alert, setAlert] = useState({ open: false, message: '', severity: '' });
@@ -21,12 +22,23 @@ export default function AddAdmin() {
         setFormData((prevData) => ({ ...prevData, [name]: value }));
     };
 
+    // Generate a unique referral number
+    const generateReferralNo = () => {
+        return 'REF' + Math.random().toString(36).substr(2, 9).toUpperCase();
+    };
+
     // Handle form submission
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
+
+        // Add the generated referral number to the formData
+        const referralNo = generateReferralNo();
+        const updatedFormData = { ...formData, referralNo };
+
         try {
-            const response  = await axiosInstance.post('/api/auth/register', formData);
+            console.log(updatedFormData);
+            const response = await axiosInstance.post('/api/auth/register', updatedFormData);
             if (response.status === 201) {
                 setAlert({ open: true, message: 'Admin registered successfully!', severity: 'success' });
                 setTimeout(() => navigate('/admin/admin-list'), 1500);
@@ -101,6 +113,12 @@ export default function AddAdmin() {
                                     placeholder="Employee No"
                                     className="w-full px-4 py-2 mb-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                                     required
+                                />
+                                <input
+                                    type="hidden"
+                                    name="referralNo"
+                                    value={formData.referralNo}
+                                    readOnly
                                 />
                                 <select
                                     name="role"
