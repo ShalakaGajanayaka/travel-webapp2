@@ -140,7 +140,7 @@ export default function AdminList() {
                                                 </td>                                     
                                                 <td className="px-3 py-4 text-sm text-gray-500 whitespace-nowrap">{person.parentUserName || 'N/A'}</td>       
                                                 <td className="px-3 py-4 text-sm text-gray-500 whitespace-nowrap">
-                                                    {person.referralNumber}
+                                                    {person.referralNo}
                                                 </td>    
                                                 <td className="px-3 py-4 text-sm text-gray-500 whitespace-nowrap">{new Date(person.createdAt).toLocaleDateString("en-CA")}</td>
                                                 <td className="px-3 py-4 text-sm text-gray-500 whitespace-nowrap">
