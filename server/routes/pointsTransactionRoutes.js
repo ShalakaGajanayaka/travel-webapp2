@@ -1,12 +1,10 @@
 // server/routes/pointsTransactionRoutes.js
 const express = require('express');
+const { getTransactionsByUser, createTransaction } = require('../controllers/transactionController');
 const transactionRouter = express.Router();
-const { viewTransactionById, viewTransactionsByUser} = require('../controllers/pointsTransactionController');
 
 // View all transactions for a user
-transactionRouter.get('/user/:userId', viewTransactionsByUser);
-
-// View a specific transaction by ID
-transactionRouter.get('/:transactionId', viewTransactionById);
+transactionRouter.get('/:userId', getTransactionsByUser);
+transactionRouter.post('/', createTransaction);
 
 module.exports = transactionRouter;

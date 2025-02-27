@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Dialog, DialogBackdrop, DialogPanel } from '@headlessui/react';
 import axiosInstance from '../../../../utils/axiosInstance';
+import { useAuth } from '../../../../context/AuthContext';
 
-export default function AdditionalDeductions({ open, setOpen, user }) {
+export default function AdditionalDeductions({ open, setOpen, user2 }) {
     const [formData, setFormData] = useState({
         deduction: 0,
     });
@@ -10,6 +11,7 @@ export default function AdditionalDeductions({ open, setOpen, user }) {
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
     const [loading, setLoading] = useState(false);
+    const { user } = useAuth();
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -24,20 +26,36 @@ export default function AdditionalDeductions({ open, setOpen, user }) {
         setError('');
         setSuccess('');
         setLoading(true);
-
-        // Calculate the new totalEarnings based on addOrSubtract
+    
+        // Determine the new totalEarnings based on addOrSubtract
         const newTotalEarnings = addOrSubtract === 'add'
-            ? user.totalEarnings + parseFloat(formData.deduction)
-            : user.totalEarnings - parseFloat(formData.deduction);
-
+            ? user2.totalEarnings + parseFloat(formData.deduction)
+            : user2.totalEarnings - parseFloat(formData.deduction);
+    
         try {
-            const response = await axiosInstance.put(`/api/users/${user._id}`, { totalEarnings: newTotalEarnings });
+            // Update the user's total earnings
+            const response = await axiosInstance.put(`/api/users/${user2._id}`, { totalEarnings: newTotalEarnings });
+    
             if (response.status === 200) {
-                setSuccess('User updated successfully!');
-                setFormData({ deduction: 0 });
-                setTimeout(() => {
-                    setOpen(false); // Close modal after success
-                }, 1500);
+                const transaction = {
+                    userId: user2._id,
+                    createdBy: user._id,
+                    transaction: parseFloat(formData.deduction),
+                    type: addOrSubtract === 'add' ? '+' : '-' 
+                };
+    
+                
+                const response2 = await axiosInstance.post(`/api/transactions`, transaction);
+    
+                if (response2.status === 201) {
+                    setSuccess('User updated successfully!');
+                    setFormData({ deduction: 0 });
+                    setTimeout(() => {
+                        setOpen(false); // Close modal after success
+                    }, 1500);
+                } else {
+                    throw new Error(response2.data.error || 'Something went wrong');
+                }
             } else {
                 throw new Error(response.data.error || 'Something went wrong');
             }
@@ -47,6 +65,7 @@ export default function AdditionalDeductions({ open, setOpen, user }) {
             setLoading(false);
         }
     };
+    
 
     return (
         <Dialog open={open} onClose={() => setOpen(false)} className="relative z-50">
@@ -67,7 +86,7 @@ export default function AdditionalDeductions({ open, setOpen, user }) {
                                 id="parentUser"
                                 name="parentUser"
                                 disabled
-                                value={user.userName}
+                                value={user2.userName}
                                 className="w-full p-2 bg-gray-200 border rounded"
                             />
                         </div>
