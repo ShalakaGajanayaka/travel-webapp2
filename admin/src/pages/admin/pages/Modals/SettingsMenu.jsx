@@ -6,12 +6,15 @@ import EditUser from './EditUser';
 import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../../../../utils/axiosInstance';
 import EditPermitions from './EditPermitions';
+import { useAuth } from '../../../../context/AuthContext';
 
 export default function SettingsMenu({ user }) {
     const [isDemoCreateModalOpen, setIsDemoCreateModalOpen] = useState(false);
     const [isTieModalOpen, setIsTieModalOpen] = useState(false);
     const [isEditUserModalOpen, setIsEditUserModalOpen] = useState(false);
     const [isEditPermitionModalOpen, setIsEditPermitionModalOpen] = useState(false);
+
+    const { user: loggedInUser } = useAuth();
     const navigate = useNavigate();
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
@@ -30,18 +33,27 @@ export default function SettingsMenu({ user }) {
     };
 
     const handleRemove = async () => {
-        try {
-            const response = await axiosInstance.delete(`/api/users/${user._id}`);
-            if (response.status === 200) {
-                setSuccess('User removed successfully!');
-                // Optionally, you can refresh the page or update the state to reflect the removal
-                window.location.reload();
-            } else {
-                throw new Error(response.data.error || 'Something went wrong');
-            }
-        } catch (err) {
-            setError(err.message);
+        if (loggedInUser.role !== 'superadmin') {
+            
+            setError('You do not have permission to remove this user.');
+            return;
         }
+        else {
+            try {
+                const response = await axiosInstance.delete(`/api/users/${user._id}`);
+                if (response.status === 200) {
+                    setSuccess('User removed successfully!');
+                    // Optionally, you can refresh the page or update the state to reflect the removal
+                    window.location.reload();
+                } else {
+                    throw new Error(response.data.error || 'Something went wrong');
+                }
+            } catch (err) {
+                setError(err.message);
+            }
+        }
+
+
     };
 
     return (
