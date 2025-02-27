@@ -122,7 +122,7 @@ export default function SettingsMenu({ user }) {
                                     className={`block px-4 py-2 text-sm text-gray-700 ${active ? 'bg-gray-100' : ''}`}
                                     href="#"
                                 >
-                                    Edit Permitions
+                                    Edit
                                 </a>
                             )}
                         </MenuItem>
