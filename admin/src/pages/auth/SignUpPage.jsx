@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../../utils/axiosInstance";
 
@@ -9,10 +9,19 @@ const SignUpPage = () => {
     phone: "",
     pin: "",
     employeeNo: "",
+    role: "admin"
   });
   const [loading, setLoading] = useState(false);
   const [alert, setAlert] = useState({ open: false, message: "", severity: "" });
   const navigate = useNavigate();
+
+  // auto generate employee number
+  useEffect(() => {
+    const generateEmployeeNo = () => { 
+      return 'EMPA' + Math.floor(1000 + Math.random() * 9000);
+    };
+    setFormData((prevData) => ({ ...prevData, employeeNo: generateEmployeeNo() }));
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -22,8 +31,9 @@ const SignUpPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+    console.log(formData);
     try {
-      const response = await axiosInstance.post("/api/auth/register", formData);
+      const response = await axiosInstance.post("/api/auth/admin-register", formData);
       if (response.status === 201) {
         setAlert({ open: true, message: "User registered successfully!", severity: "success" });
         setTimeout(() => navigate("/login"), 1500);
@@ -63,7 +73,6 @@ const SignUpPage = () => {
         <input name="password" type="password" placeholder="Password" value={formData.password} onChange={handleChange} required className="w-full px-3 py-2 border rounded-md" />
         <input name="phone" type="text" placeholder="Phone" value={formData.phone} onChange={handleChange} required className="w-full px-3 py-2 border rounded-md" />
         <input name="pin" type="text" placeholder="PIN" value={formData.pin} onChange={handleChange} required className="w-full px-3 py-2 border rounded-md" />
-        <input name="employeeNo" type="text" placeholder="Employee No" value={formData.employeeNo} onChange={handleChange} required className="w-full px-3 py-2 border rounded-md" />
 
         <button type="submit" disabled={loading} className={`w-full py-2 text-white rounded-md ${loading ? "bg-gray-400" : "bg-black hover:bg-gray-800"}`}>
           {loading ? "Working..." : "Register"}

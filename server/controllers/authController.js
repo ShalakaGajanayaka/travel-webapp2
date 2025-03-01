@@ -1,32 +1,13 @@
 const User = require('../models/User');
 
-// const generateUniqueReferralNo = async () => {
-//     let referralNo;
-//     let existingReferralNo;
-//     do {
-//         referralNo = 'REF' + Math.random().toString(36).substr(2, 9).toUpperCase();
-//         existingReferralNo = await User.findOne({ referralNo });
-//     } while (existingReferralNo);
-//     return referralNo;
-// };
-
 const register = async (req, res) => {
     try {
         const { userName, password, phone, pin, employeeNo, parentUser, role } = req.body;
-        // let { referralNo } = req.body;
         console.log(req.body);
 
-        // Check if the referral number already exists
-        // if (await User.findOne({ referralNo })) {
-        //     referralNo = await generateUniqueReferralNo();
-        // }
-
-        // Check if the role is admin or user
         if (role === 'admin') {
-            // Handle admin-specific logic if needed
             console.log('Registering as admin');
         } else if (role === 'user') {
-            // Handle user-specific logic if needed
             console.log('Registering as user');
         } else {
             return res.status(400).json({ error: 'Invalid role specified.' });
@@ -40,6 +21,30 @@ const register = async (req, res) => {
         }
         await newUser.save();
         res.status(201).json({ message: 'User registered successfully' });
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+};
+
+const adminRegister = async (req, res) => {
+    try {
+        const { userName, password, phone, pin, employeeNo, parentUser, role } = req.body;
+
+        console.log(req.body);
+
+        // Ensure the role is admin or superadmin
+        if (role !== 'admin' && role !== 'superadmin') {
+            return res.status(400).json({ error: 'Invalid role specified for admin registration.' });
+        }
+
+        const newUser = new User({ userName, password, phone, pin, employeeNo, parentUser, role });
+
+        const existingUserName = await User.findOne({ userName });
+        if (existingUserName) {
+            return res.status(400).json({ error: 'Username is already registered.' });
+        }
+        await newUser.save();
+        res.status(201).json({ message: 'Admin registered successfully' });
     } catch (error) {
         res.status(400).json({ error: error.message });
     }
@@ -122,11 +127,10 @@ const getSession = async (req, res) => {
 
 const getAllUsers = async (req, res) => {
     try {
-        // Fetch all users from the database
         const users = await User.find().populate('parentUser', 'userName');
 
         const populatedUsers = users.map(user => ({
-            ...user._doc,  // Spread original user data
+            ...user._doc,
             parentUserName: user.parentUser ? user.parentUser.userName : null
         }));
 
@@ -138,21 +142,18 @@ const getAllUsers = async (req, res) => {
 
 const checkUserById = async (req, res) => {
     try {
-        const { userId } = req.params; // Assuming the user ID is passed in the request parameters
+        const { userId } = req.params;
 
-        // Find the user by ID
         const user = await User.findById(userId);
 
         if (!user) {
-            // If no user is found, return false
             return res.status(404).json({ success: false, message: 'User not found' });
         }
 
-        // If user is found, return true
         return res.status(200).json({ success: true, message: 'User found' });
     } catch (error) {
         return res.status(500).json({ success: false, message: error.message });
     }
 };
 
-module.exports = { register, login, adminLogin, logout, getSession, getAllUsers, checkUserById };
+module.exports = { register, login, adminLogin, logout, getSession, getAllUsers, checkUserById, adminRegister };
