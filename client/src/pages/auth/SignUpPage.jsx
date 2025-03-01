@@ -9,19 +9,27 @@ const SignUpPage = () => {
     phone: "",
     pin: "",
     employeeNo: "",
-    referralNo: "",
+    // referralNo: "",
     role: "user" // Set the default role to 'user'
   });
   const [loading, setLoading] = useState(false);
   const [alert, setAlert] = useState({ open: false, message: "", severity: "" });
   const navigate = useNavigate();
 
+  // useEffect(() => {
+  //   // Generate a unique referral number
+  //   const generateReferralNo = () => {
+  //     return 'REF' + Math.random().toString(36).substr(2, 9).toUpperCase();
+  //   };
+  //   setFormData((prevData) => ({ ...prevData, referralNo: generateReferralNo() }));
+  // }, []);
+
+  // auto generate employee number
   useEffect(() => {
-    // Generate a unique referral number
-    const generateReferralNo = () => {
-      return 'REF' + Math.random().toString(36).substr(2, 9).toUpperCase();
+    const generateEmployeeNo = () => { 
+      return 'EMP' + Math.random().toString(36).substr(2, 9).toUpperCase();
     };
-    setFormData((prevData) => ({ ...prevData, referralNo: generateReferralNo() }));
+    setFormData((prevData) => ({ ...prevData, employeeNo: generateEmployeeNo() }));
   }, []);
 
   const handleChange = (e) => {
@@ -155,19 +163,7 @@ const SignUpPage = () => {
             />
           </div>
 
-          <div style={{ display: 'none' }}>
-            <label htmlFor="referralNo" className="block text-sm font-medium text-gray-700">
-              Referral Number
-            </label>
-            <input
-              id="referralNo"
-              name="referralNo"
-              type="text"
-              value={formData.referralNo}
-              readOnly
-              className="block w-full px-3 py-2 mt-1 border border-gray-300 rounded-md bg-gray-100"
-            />
-          </div>
+          
 
           <button
             type="submit"

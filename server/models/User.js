@@ -22,11 +22,11 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    referralNo: {
-        type: String,
-        required: true,
-        unique: true
-    },
+    // referralNo: {
+    //     type: String,
+    //     required: true,
+    //     unique: true
+    // },
     parentUser: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
