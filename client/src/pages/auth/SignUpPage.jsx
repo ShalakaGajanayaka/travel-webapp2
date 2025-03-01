@@ -9,25 +9,16 @@ const SignUpPage = () => {
     phone: "",
     pin: "",
     employeeNo: "",
-    // referralNo: "",
     role: "user" // Set the default role to 'user'
   });
   const [loading, setLoading] = useState(false);
   const [alert, setAlert] = useState({ open: false, message: "", severity: "" });
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   // Generate a unique referral number
-  //   const generateReferralNo = () => {
-  //     return 'REF' + Math.random().toString(36).substr(2, 9).toUpperCase();
-  //   };
-  //   setFormData((prevData) => ({ ...prevData, referralNo: generateReferralNo() }));
-  // }, []);
-
   // auto generate employee number
   useEffect(() => {
     const generateEmployeeNo = () => { 
-      return 'EMP' + Math.random().toString(36).substr(2, 9).toUpperCase();
+      return 'EMPU' + Math.floor(10000 + Math.random() * 90000);
     };
     setFormData((prevData) => ({ ...prevData, employeeNo: generateEmployeeNo() }));
   }, []);
@@ -147,23 +138,6 @@ const SignUpPage = () => {
               required
             />
           </div>
-
-          <div>
-            <label htmlFor="employeeNo" className="block text-sm font-medium text-gray-700">
-              Employee Number
-            </label>
-            <input
-              id="employeeNo"
-              name="employeeNo"
-              type="text"
-              value={formData.employeeNo}
-              onChange={handleChange}
-              className="block w-full px-3 py-2 mt-1 border border-gray-300 rounded-md"
-              required
-            />
-          </div>
-
-          
 
           <button
             type="submit"
