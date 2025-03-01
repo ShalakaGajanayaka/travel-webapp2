@@ -119,6 +119,7 @@ const SignUpPage = () => {
               type="tel"
               value={formData.phone}
               onChange={handleChange}
+              pattern="[0-9]*"
               className="block w-full px-3 py-2 mt-1 border border-gray-300 rounded-md"
               required
             />
