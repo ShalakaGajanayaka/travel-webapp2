@@ -13,6 +13,7 @@ import AddUser from "./pages/admin/pages/AddUser";
 import AddAdmin from "./pages/admin/pages/AddAdmin";
 import Withdrawels from "./pages/admin/pages/Withdrawels";
 import SignUpPage from "./pages/auth/SignUpPage";
+import Transactions from "./pages/admin/pages/Transactions";
 
 const App = () => {
   return (
@@ -32,6 +33,7 @@ const App = () => {
             <Route path="/admin/add-admin" element={<AddAdmin />} />
             <Route path="/admin/admin-list" element={<AdminList />} />
             <Route path="/admin/withdrawels/:id" element={<Withdrawels />} />
+            <Route path="/admin/transactions/:id" element={<Transactions />} />
           </Route>
         </Routes>
       </Router>
