@@ -1,0 +1,8 @@
+*.js
+
+*.ts
+*.yml
+*.md
+
+server/node_modules
+
