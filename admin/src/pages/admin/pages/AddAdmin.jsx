@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../../../utils/axiosInstance';
 
@@ -10,11 +10,19 @@ export default function AddAdmin() {
         pin: '',
         employeeNo: '',
         role: 'admin', // Default role
-        referralNo: '', // Add referralNo to the formData
+        // Removed referralNo from formData
     });
     const [loading, setLoading] = useState(false);
     const [alert, setAlert] = useState({ open: false, message: '', severity: '' });
     const navigate = useNavigate();
+
+    // Auto-generate employee number
+    useEffect(() => {
+        const generateEmployeeNo = () => {
+            return 'EMPA' + Math.floor(10000 + Math.random() * 90000);
+        };
+        setFormData((prevData) => ({ ...prevData, employeeNo: generateEmployeeNo() }));
+    }, []);
 
     // Handle form field changes
     const handleChange = (e) => {
@@ -22,23 +30,14 @@ export default function AddAdmin() {
         setFormData((prevData) => ({ ...prevData, [name]: value }));
     };
 
-    // Generate a unique referral number
-    const generateReferralNo = () => {
-        return 'REF' + Math.random().toString(36).substr(2, 9).toUpperCase();
-    };
-
     // Handle form submission
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
 
-        // Add the generated referral number to the formData
-        const referralNo = generateReferralNo();
-        const updatedFormData = { ...formData, referralNo };
-
         try {
-            console.log(updatedFormData);
-            const response = await axiosInstance.post('/api/auth/register', updatedFormData);
+            console.log(formData);
+            const response = await axiosInstance.post('/api/auth/register', formData);
             if (response.status === 201) {
                 setAlert({ open: true, message: 'Admin registered successfully!', severity: 'success' });
                 setTimeout(() => navigate('/admin/admin-list'), 1500);
@@ -106,20 +105,12 @@ export default function AddAdmin() {
                                     required
                                 />
                                 <input
-                                    type="text"
+                                    type="hidden"
                                     name="employeeNo"
                                     value={formData.employeeNo}
-                                    onChange={handleChange}
-                                    placeholder="Employee No"
-                                    className="w-full px-4 py-2 mb-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                    required
-                                />
-                                <input
-                                    type="hidden"
-                                    name="referralNo"
-                                    value={formData.referralNo}
                                     readOnly
                                 />
+                                {/* Removed referralNo input */}
                                 <select
                                     name="role"
                                     value={formData.role}
