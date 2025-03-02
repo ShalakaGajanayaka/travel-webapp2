@@ -35,7 +35,7 @@ const SignUpPage = () => {
     try {
       const response = await axiosInstance.post("/api/auth/admin-register", formData);
       if (response.status === 201) {
-        setAlert({ open: true, message: "User registered successfully!", severity: "success" });
+        setAlert({ open: true, message: "Admin registered successfully!", severity: "success" });
         setTimeout(() => navigate("/login"), 1500);
       } else {
         setAlert({ open: true, message: "Registration failed. Please try again.", severity: "error" });
