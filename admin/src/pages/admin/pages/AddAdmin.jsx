@@ -111,7 +111,7 @@ export default function AddAdmin() {
                                     readOnly
                                 />
                                 {/* Removed referralNo input */}
-                                <select
+                                {/* <select
                                     name="role"
                                     value={formData.role}
                                     onChange={handleChange}
@@ -120,7 +120,7 @@ export default function AddAdmin() {
                                     disabled // Disable the select element
                                 >
                                     <option value="admin">Admin</option>
-                                </select>
+                                </select> */}
                             </div>
 
                             <div className="flex justify-center">
