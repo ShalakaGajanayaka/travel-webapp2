@@ -70,6 +70,8 @@ export default function UserList() {
                                 onChange={(e) => setSearchTerm(e.target.value)}
                             />
                         </div>
+                        
+                        
                         <div className="-mx-4 -my-2 sm:-mx-6 lg:-mx-8">
                             <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
                                 <table className="min-w-full mt-10 overflow-scroll divide-y divide-gray-300">
