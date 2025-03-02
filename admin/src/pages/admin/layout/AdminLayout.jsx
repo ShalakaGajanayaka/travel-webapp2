@@ -2,7 +2,7 @@ import { Outlet, useNavigate } from "react-router-dom";
 import { useAuth } from "../../../context/AuthContext";
 import { useEffect } from "react";
 import Sidebar from "./Sidebar";
-import { checkAuth } from "../../../utils/auth";
+import { checkAuth } from "../../../utils/adminAuth";
 
 const AdminLayout = () => {
     const { user, setUser } = useAuth();

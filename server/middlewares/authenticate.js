@@ -16,6 +16,22 @@ const authenticate = async (req, res, next) => {
     next();
 };
 
+const adminAuthenticate = async (req, res, next) => {
+    const userId  = req.cookies.adminAuth;
+    
+    if (!userId) {
+        return res.status(401).json({ message: 'Not logged in' });
+    }
+    
+    const decodedUserId = Buffer.from(userId, 'base64').toString('utf-8');
+
+    const user = await User.findById(decodedUserId);
+    if (!user) return res.status(404).json({ error: 'User not found' });
+
+    req.user = user;
+    next();
+};
+
 // Middleware to restrict access based on roles
 const authorize = (roles) => {
     return (req, res, next) => {
@@ -31,4 +47,4 @@ const authorize = (roles) => {
     };
 };
 
-module.exports = { authenticate, authorize };
+module.exports = { authenticate, adminAuthenticate, authorize };

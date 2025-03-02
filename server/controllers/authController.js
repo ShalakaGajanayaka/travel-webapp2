@@ -84,11 +84,11 @@ const adminLogin = async (req, res) => {
             return res.status(401).json({ error: 'Invalid credentials or not authorized' });
         }
 
-        
+
 
         const encodedUserId = Buffer.from(String(user._id)).toString('base64');
         const oneDayInMilliseconds = 24 * 60 * 60 * 1000;
-        res.cookie('auth', encodedUserId, {
+        res.cookie('adminAuth', encodedUserId, {
             httpOnly: true,
             sameSite: true, // Adjust SameSite for environments
             secure: 'production',
@@ -109,7 +109,16 @@ const logout = (req, res) => {
     res.clearCookie('auth', {
         httpOnly: true,
         sameSite: 'None',
-        secure:  'production'
+        secure: 'production'
+    });
+    res.status(200).json({ message: 'Logged out successfully' });
+};
+
+const adminLogout = (req, res) => {
+    res.clearCookie('adminAuth', {
+        httpOnly: true,
+        sameSite: 'None',
+        secure: 'production'
     });
     res.status(200).json({ message: 'Logged out successfully' });
 };
@@ -161,4 +170,4 @@ const checkUserById = async (req, res) => {
     }
 };
 
-module.exports = { register, login, adminLogin, logout, getSession, getAllUsers, checkUserById, adminRegister };
+module.exports = { register, login, adminLogin, logout, adminLogout, getSession, getAllUsers, checkUserById, adminRegister };
