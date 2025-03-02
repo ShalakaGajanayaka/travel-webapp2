@@ -54,12 +54,12 @@ const LoginPage = () => {
       if (response.status === 200) {
         console.log(response.data.role);
         setAlert({ open: true, message: "Login successful!", severity: "success" });
-        // if (response.data.role === "admin") {
-        //   setTimeout(() => navigate("/admin"), 1500);
-        // }
-        // else {
-        //   setTimeout(() => navigate("/login"), 1500);
-        // }
+        if (response.data.role === "admin" || response.data.role === "superadmin") {
+          setTimeout(() => navigate("/admin"), 1500);
+        }
+        else {
+          setTimeout(() => navigate("/login"), 1500);
+        }
           setTimeout(() => navigate("/admin"), 1500);
       } else {
         setAlert({ open: true, message: "Invalid credentials", severity: "error" });
