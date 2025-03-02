@@ -78,8 +78,13 @@ const login = async (req, res) => {
 const adminLogin = async (req, res) => {
     try {
         const { userName, password } = req.body;
-        const user = await User.findOne({ userName, password, role: { $in: ['superadmin', 'admin'] } });
+        const user = await User.findOne({ userName, password });
         if (!user) return res.status(401).json({ error: 'Invalid credentials or not authorized' });
+        if (user.role !== 'admin' && user.role !== 'superadmin') {
+            return res.status(401).json({ error: 'Invalid credentials or not authorized' });
+        }
+
+        
 
         const encodedUserId = Buffer.from(String(user._id)).toString('base64');
         const oneDayInMilliseconds = 24 * 60 * 60 * 1000;

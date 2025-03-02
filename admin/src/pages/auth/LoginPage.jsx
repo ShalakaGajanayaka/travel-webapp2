@@ -48,6 +48,7 @@ const LoginPage = () => {
       const response = await axiosInstance.post("/api/auth/admin-login", {
         userName,
         password,
+    
       });
 
       if (response.status === 200) {
