@@ -126,7 +126,7 @@ export default function AddAdmin() {
                             <div className="flex justify-center">
                                 <button
                                     type="submit"
-                                    className="w-full px-6 py-2 text-white bg-blue-500 rounded-md sm:w-auto focus:outline-none disabled:bg-gray-400"
+                                    className="w-full px-6 py-2 text-white bg-blue-500 rounded-md focus:outline-none disabled:bg-gray-400"
                                     disabled={loading}
                                 >
                                     {loading ? (
