@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../../../utils/axiosInstance';
 
@@ -10,11 +10,18 @@ export default function AddUser() {
         pin: '',
         employeeNo: '',
         role: 'user', // Default role
-        referralNo : '', // Add referralNo to the formData
     });
     const [loading, setLoading] = useState(false);
     const [alert, setAlert] = useState({ open: false, message: '', severity: '' });
     const navigate = useNavigate();
+
+    // auto generate employee number
+    useEffect(() => {
+        const generateEmployeeNo = () => { 
+            return 'EMPU' + Math.floor(10000 + Math.random() * 90000);
+        };
+        setFormData((prevData) => ({ ...prevData, employeeNo: generateEmployeeNo() }));
+    }, []);
 
     // Handle form field changes
     const handleChange = (e) => {
@@ -94,23 +101,6 @@ export default function AddUser() {
                                     placeholder="PIN"
                                     className="w-full px-4 py-2 mb-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                                     required
-                                />
-                                <input
-                                    type="text"
-                                    name="employeeNo"
-                                    value={formData.employeeNo}
-                                    onChange={handleChange}
-                                    placeholder="Employee No"
-                                    className="w-full px-4 py-2 mb-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                    required
-                                />
-                                <input
-                                    type="hide"
-                                    name="referralNo"
-                                    value={formData.referralNo}
-                                    placeholder="Referral No"
-                                    className="w-full px-4 py-2 mb-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                    readOnly
                                 />
                                 <select
                                     name="role"
