@@ -14,7 +14,7 @@ export default function UserList() {
     const fetchUsers = async () => {
         try {
             const response = await axiosInstance.get(`/api/admin/users`);
-            const onlyUsers = response.data.filter(user => user.role !== 'admin');
+            const onlyUsers = response.data.filter(user => user.role == 'user');
             // Sort users by registration date in descending order
             onlyUsers.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
             setUsers(onlyUsers);
