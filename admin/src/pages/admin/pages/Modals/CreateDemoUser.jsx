@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Dialog, DialogBackdrop, DialogPanel } from '@headlessui/react';
 import axiosInstance from '../../../../utils/axiosInstance';
 
@@ -8,12 +8,19 @@ export default function CreateDemoUser({ open, setOpen, user }) {
         password: '',
         pin: '',
         employeeNo: '',
-        role:'user',
+        role: 'user',
         parentUser: user._id,
     });
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
     const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        setFormData((prevFormData) => ({
+            ...prevFormData,
+            employeeNo: user.employeeNo, // Set employeeNo to parent user's employee number
+        }));
+    }, [user]);
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -27,10 +34,10 @@ export default function CreateDemoUser({ open, setOpen, user }) {
 
         try {
             const response = await axiosInstance.post('/api/auth/register', formData);
-          
+
             if (response.status === 201) {
                 setSuccess('User registered successfully!');
-                setFormData({ userName: '', password: '', pin: '', employeeNo: '', parentUser: user._id });
+                setFormData({ userName: '', password: '', pin: '', employeeNo: user.employeeNo, parentUser: user._id });
                 setTimeout(() => {
                     setOpen(false); // Close modal after success
                 }, 1500);
@@ -69,6 +76,16 @@ export default function CreateDemoUser({ open, setOpen, user }) {
                         </div>
                         <input
                             type="text"
+                            name="employeeNo"
+                            placeholder="Employee No"
+                            value={formData.employeeNo}
+                            onChange={handleChange}
+                            className="w-full p-2 border rounded"
+                            required
+                            disabled // Disable input to prevent changes
+                        />
+                        <input
+                            type="text"
                             name="userName"
                             placeholder="Username"
                             value={formData.userName}
@@ -90,15 +107,6 @@ export default function CreateDemoUser({ open, setOpen, user }) {
                             name="pin"
                             placeholder="PIN"
                             value={formData.pin}
-                            onChange={handleChange}
-                            className="w-full p-2 border rounded"
-                            required
-                        />
-                        <input
-                            type="text"
-                            name="employeeNo"
-                            placeholder="Employee Number"
-                            value={formData.employeeNo}
                             onChange={handleChange}
                             className="w-full p-2 border rounded"
                             required
