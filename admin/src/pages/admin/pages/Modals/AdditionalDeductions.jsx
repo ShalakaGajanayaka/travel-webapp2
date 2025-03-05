@@ -53,6 +53,11 @@ export default function AdditionalDeductions({ open, setOpen, user2 }) {
                     setTimeout(() => {
                         setOpen(false); // Close modal after success
                     }, 1500);
+                    
+                    // load userlist table data again
+                    window.location.reload();
+
+                   
                 } else {
                     throw new Error(response2.data.error || 'Something went wrong');
                 }
