@@ -41,6 +41,9 @@ export default function CreateDemoUser({ open, setOpen, user }) {
                 setTimeout(() => {
                     setOpen(false); // Close modal after success
                 }, 1500);
+
+                // load the page
+                window.location.reload();
             } else {
                 throw new Error(response.data.error || 'Something went wrong');
             }
