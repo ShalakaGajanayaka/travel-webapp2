@@ -61,6 +61,11 @@ export default function AdminList() {
             </div>
             <div className="px-4 mt-6 sm:px-6 lg:px-8">
                 <div className="px-4 sm:px-6 lg:px-8">
+
+                    <div className="sm:flex sm:items-center mb-40">
+
+                    </div>
+
                     <div className="sm:flex sm:items-center">
                         <div className="sm:flex-auto">
                             <h1 className="text-base font-semibold text-gray-900">Admins</h1>
@@ -134,14 +139,14 @@ export default function AdminList() {
                                                 <td className="px-3 py-4 text-sm text-gray-500 whitespace-nowrap">{person.totalEarnings}</td>
                                                 <td className="px-3 py-4 text-sm text-gray-500 whitespace-nowrap">
                                                     {person?.permissions?.withdraw ? 'Yes' : 'No'}
-                                                </td> 
+                                                </td>
                                                 <td className="px-3 py-4 text-sm text-gray-500 whitespace-nowrap">
                                                     {person?.permissions?.doTasks ? 'Yes' : 'No'}
-                                                </td>                                     
-                                                <td className="px-3 py-4 text-sm text-gray-500 whitespace-nowrap">{person.parentUserName || 'N/A'}</td>       
+                                                </td>
+                                                <td className="px-3 py-4 text-sm text-gray-500 whitespace-nowrap">{person.parentUserName || 'N/A'}</td>
                                                 <td className="px-3 py-4 text-sm text-gray-500 whitespace-nowrap">
                                                     {person.referralNo}
-                                                </td>    
+                                                </td>
                                                 <td className="px-3 py-4 text-sm text-gray-500 whitespace-nowrap">{new Date(person.createdAt).toLocaleDateString("en-CA")}</td>
                                                 <td className="px-3 py-4 text-sm text-gray-500 whitespace-nowrap">
                                                     {person.lastLoggedInTime ? new Date(person.lastLoggedInTime).toLocaleDateString("en-CA") : "Not Logged in"}
@@ -150,7 +155,7 @@ export default function AdminList() {
                                                 <td className="px-3 py-4 text-sm text-gray-500 whitespace-nowrap">{person.currentTaskIndex}</td>
                                                 <td className="relative py-4 pl-3 pr-4 text-sm font-medium text-right whitespace-nowrap sm:pr-0">
                                                     {user.role !== 'superadmin' ? '' : person.userName === 'superadmin' ? 'admin' : <SettingsMenu user={person} />}
-                                                    
+
                                                 </td>
                                             </tr>
                                         ))}
