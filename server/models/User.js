@@ -12,7 +12,7 @@ const userSchema = new mongoose.Schema({
     },
     phone: {
         type: String,
-        required: true
+        // required: true
     },
     pin: {
         type: String,
@@ -72,8 +72,9 @@ totalProfit: {
         default: 0
     },
     parentUser: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
+        // type: mongoose.Schema.Types.ObjectId,
+        type: String,
+        // ref: "User",
         default: null
     },
     permissions: {

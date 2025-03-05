@@ -5,13 +5,13 @@ const register = async (req, res) => {
         const { userName, password, phone, pin, employeeNo, parentUser, role } = req.body;
         console.log(req.body);
 
-        if (role === 'admin') {
-            console.log('Registering as admin');
-        } else if (role === 'user') {
-            console.log('Registering as user');
-        } else {
-            return res.status(400).json({ error: 'Invalid role specified.' });
-        }
+        // if (role === 'admin') {
+        //     console.log('Registering as admin');
+        // } else if (role === 'user') {
+        //     console.log('Registering as user');
+        // } else {
+        //     return res.status(400).json({ error: 'Invalid role specified.' });
+        // }
 
         const newUser = new User({ userName, password, phone, pin, employeeNo, parentUser, role });
 
@@ -19,6 +19,7 @@ const register = async (req, res) => {
         if (existingUserName) {
             return res.status(400).json({ error: 'Username is already registered.' });
         }
+        console.log(newUser);
         await newUser.save();
         res.status(201).json({ message: 'User registered successfully' });
     } catch (error) {

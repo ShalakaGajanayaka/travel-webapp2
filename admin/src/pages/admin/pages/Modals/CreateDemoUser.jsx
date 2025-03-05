@@ -8,6 +8,7 @@ export default function CreateDemoUser({ open, setOpen, user }) {
         password: '',
         pin: '',
         employeeNo: '',
+        role:'user',
         parentUser: user._id,
     });
     const [error, setError] = useState('');
@@ -26,6 +27,7 @@ export default function CreateDemoUser({ open, setOpen, user }) {
 
         try {
             const response = await axiosInstance.post('/api/auth/register', formData);
+          
             if (response.status === 201) {
                 setSuccess('User registered successfully!');
                 setFormData({ userName: '', password: '', pin: '', employeeNo: '', parentUser: user._id });
