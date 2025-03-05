@@ -1,5 +1,5 @@
 
-/server/node_modules
-/server/node_modules/.bin
-server/node_modules/.bin/semver.ps1
-server/node_modules/.bin/semver
+server/node_modules
+
+
+
