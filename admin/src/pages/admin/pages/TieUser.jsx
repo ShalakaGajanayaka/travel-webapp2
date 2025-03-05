@@ -6,7 +6,7 @@ export default function TieUser() {
     const { id: userId } = useParams(); // Get userId from URL params
     const [tasks, setTasks] = useState([]);
     const [taskIndex, setTaskIndex] = useState(""); // Input field state
-    const [selectedTasks, setSelectedTasks] = useState([]); // Array of selected task IDs
+    const [newTaskId, setNewTaskId] = useState(null); // Selected radio button
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
     const [loading, setLoading] = useState(false);
@@ -25,25 +25,12 @@ export default function TieUser() {
         fetchTasks();
     }, []);
 
-    // Handle checkbox change
-    const handleCheckboxChange = (taskId) => {
-        setSelectedTasks((prevSelectedTasks) => {
-            if (prevSelectedTasks.includes(taskId)) {
-                return prevSelectedTasks.filter((id) => id !== taskId);
-            } else if (prevSelectedTasks.length < 16) {
-                return [...prevSelectedTasks, taskId];
-            } else {
-                return prevSelectedTasks;
-            }
-        });
-    };
-
     // Handle form submission
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (!taskIndex || selectedTasks.length === 0) {
-            setError("Please enter a Post No and select up to 16 tasks.");
-            setSuccess('');
+        if (!taskIndex || !newTaskId) {
+            setError("Please enter a Post No and select a task.");
+            setSuccess('')
             return;
         }
 
@@ -51,16 +38,16 @@ export default function TieUser() {
         try {
             const response = await axiosInstance.put(`/api/tasks/replace/${userId}`, {
                 taskIndex: Number(taskIndex),
-                newTaskIds: selectedTasks,
+                newTaskId,
             });
 
-            setSuccess(response.data.message || "Tasks updated successfully!");
-            setError('');
+            setSuccess(response.data.message || "Task updated successfully!");
+            setError('')
             setTaskIndex(""); // Reset input field
-            setSelectedTasks([]); // Reset selection
+            setNewTaskId(null); // Reset selection
         } catch (err) {
-            setError("Failed to update tasks. Please try again.");
-            setSuccess('');
+            setError("Failed to update task. Please try again.");
+            setSuccess('')
         } finally {
             setLoading(false);
         }
@@ -120,11 +107,11 @@ export default function TieUser() {
                                         <td className="px-4 py-3 text-sm text-gray-500">{task.profit}</td>
                                         <td className="px-4 py-3 text-sm">
                                             <input
-                                                type="checkbox"
+                                                type="radio"
                                                 name="task"
                                                 value={task._id}
-                                                checked={selectedTasks.includes(task._id)}
-                                                onChange={() => handleCheckboxChange(task._id)}
+                                                checked={newTaskId === task._id}
+                                                onChange={() => setNewTaskId(task._id)}
                                                 className="w-4 h-4 text-indigo-600 border-gray-300 focus:ring-indigo-500"
                                             />
                                         </td>
