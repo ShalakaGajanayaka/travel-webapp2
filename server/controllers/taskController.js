@@ -88,6 +88,7 @@ async function assignTasks(req, res) {
 // Replace a specific task (e.g., task 1 to 16)
 async function replaceTask(req, res) {
   try {
+    console.log(req.body);
     const { taskIndex, newTaskId } = req.body;
     const user = await User.findById(req.params.userId);
     if (!user || taskIndex < 0 || taskIndex >= 16)
