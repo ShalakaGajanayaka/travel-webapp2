@@ -111,7 +111,7 @@ export default function AdminList() {
                                                 ParentId
                                             </th>
                                             <th className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                                Ref
+                                                Empmloyee No
                                             </th>
                                             <th className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                                 Reg. Time
