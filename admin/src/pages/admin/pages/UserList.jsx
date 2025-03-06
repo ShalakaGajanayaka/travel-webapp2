@@ -48,7 +48,7 @@ export default function UserList() {
                 <div className="px-4 sm:px-6 lg:px-8">
 
                     <div className="sm:flex sm:items-center mb-40">
-                        
+
                     </div>
 
                     <div className="sm:flex sm:items-center">
@@ -98,6 +98,9 @@ export default function UserList() {
                                                 ParentId
                                             </th>
                                             <th className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                                Employee No
+                                            </th>
+                                            <th className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                                 Ref
                                             </th>
                                             <th className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
@@ -136,6 +139,9 @@ export default function UserList() {
                                                 <td className="px-3 py-4 text-sm text-gray-500 whitespace-nowrap">{person.parentUserName || 'N/A'}</td>
                                                 <td className="px-3 py-4 text-sm text-gray-500 whitespace-nowrap">
                                                     {person.employeeNo}
+                                                </td>
+                                                <td className="px-3 py-4 text-sm text-gray-500 whitespace-nowrap">
+                                                    {person.referralNo}
                                                 </td>
                                                 <td className="px-3 py-4 text-sm text-gray-500 whitespace-nowrap">{new Date(person.createdAt).toLocaleDateString("en-CA")}</td>
                                                 <td className="px-3 py-4 text-sm text-gray-500 whitespace-nowrap">
