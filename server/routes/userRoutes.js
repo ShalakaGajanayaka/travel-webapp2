@@ -8,7 +8,7 @@ userRouter.post('/create-wallet', authenticate, createWallet);
 userRouter.get('/get-wallet', authenticate, getUserWallet);
 userRouter.post('/update-ref', authenticate, updateReferralNumber);
 userRouter.put('/:userId', updateUser);
-userRouter.delete('/:userId', authenticate, deleteUser);
+userRouter.delete('/:userId', deleteUser);
 userRouter.post('/withdraw/:userId', createWithdrawal);
 userRouter.get('/withdrawals/:userId', authenticate, getWithdrawalsByUser);
 
