@@ -88,15 +88,35 @@ async function assignTasks(req, res) {
 // Replace a specific task (e.g., task 1 to 16)
 async function replaceTask(req, res) {
   try {
-    const { taskIndex, newTaskId } = req.body;
+    console.log(req.body);
+    const { taskIndex, newTaskIds } = req.body;
     const user = await User.findById(req.params.userId);
-    if (!user || taskIndex < 0 || taskIndex >= 16)
+    if (!user || taskIndex < 0 || taskIndex >= 16) {
       return res.status(400).json({ message: "Invalid request" });
+    }
 
-    user.tasks[taskIndex] = { taskId: newTaskId, completed: false };
+    if (newTaskIds.length === 0 || newTaskIds.length > 16) {
+      return res.status(400).json({ message: "Please select at least one task and select up to 16 tasks" });
+    }
+
+    const tasks = await Task.find({ _id: { $in: newTaskIds } });
+    console.log(tasks.length);
+    console.log(newTaskIds.length);
+    if (tasks.length !== newTaskIds.length) {
+      return res.status(400).json({ message: "Invalid task IDs" });
+    }
+
+
+    // taskIndexArray
+    const taskIndexArray = newTaskIds.map((taskId) => ({ taskId, completed: false }));
+    user.tasks.splice(taskIndex, 1, ...taskIndexArray);
     await user.save();
 
+    // user.tasks[taskIndex] = { taskId: newTaskId, completed: false };
+    // await user.save();
+
     res.json({ message: "Task replaced", tasks: user.tasks });
+ 
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -120,7 +140,7 @@ async function completeTask(req, res) {
 
     const taskValue = user.tasks[taskIndex].taskId.value;
     const taskProfit = user.tasks[taskIndex].taskId.profit;
-    
+
     user.totalEarnings = parseFloat((user.totalEarnings + taskValue + taskProfit).toFixed(2));
     user.totalProfit = parseFloat((user.totalProfit + taskProfit).toFixed(2));
 
