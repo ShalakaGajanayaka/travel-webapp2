@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../../../utils/axiosInstance';
+import { useAuth } from '../../../context/AuthContext';
 
 export default function AddUser() {
     const [formData, setFormData] = useState({
@@ -10,9 +11,11 @@ export default function AddUser() {
         pin: '',
         employeeNo: '',
         role: 'user', // Default role
+        referralNo: '', // Add parentUser field
     });
     const [loading, setLoading] = useState(false);
     const [alert, setAlert] = useState({ open: false, message: '', severity: '' });
+    const { user } = useAuth();
     const navigate = useNavigate();
 
     // auto generate employee number
@@ -34,8 +37,14 @@ export default function AddUser() {
         e.preventDefault();
         setLoading(true);
         try {
-           const response  = await axiosInstance.post('/api/auth/register', formData);
-            console.log(formData);
+            // Fetch the relevant admin's employee number
+            // const adminEmployeeNo = user.employeeNo;
+
+            // Include the admin's employee number as the parentUser in the formData
+            const updatedFormData = { ...formData, referralNo: user.employeeNo };
+
+            const response = await axiosInstance.post('/api/auth/register', updatedFormData);
+            console.log(updatedFormData);
             if (response.status === 201) {
                 setAlert({ open: true, message: 'User registered successfully!', severity: 'success' });
                 setTimeout(() => navigate('/admin/user-list'), 1500);

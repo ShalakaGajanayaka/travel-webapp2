@@ -2,7 +2,7 @@ const User = require('../models/User');
 
 const register = async (req, res) => {
     try {
-        const { userName, password, phone, pin, employeeNo, parentUser, role } = req.body;
+        const { userName, password, phone, pin, employeeNo, parentUser, referralNo, role } = req.body;
         console.log(req.body);
 
         // if (role === 'admin') {
@@ -13,7 +13,7 @@ const register = async (req, res) => {
         //     return res.status(400).json({ error: 'Invalid role specified.' });
         // }
 
-        const newUser = new User({ userName, password, phone, pin, employeeNo, parentUser, role });
+        const newUser = new User({ userName, password, phone, pin, employeeNo, parentUser, referralNo, role });
 
         const existingUserName = await User.findOne({ userName });
         if (existingUserName) {

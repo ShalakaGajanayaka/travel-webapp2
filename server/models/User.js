@@ -22,6 +22,10 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    referralNo:{
+        type: String,
+        default: null
+    },
     parentUser: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
