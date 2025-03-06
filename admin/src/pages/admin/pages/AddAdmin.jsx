@@ -37,7 +37,7 @@ export default function AddAdmin() {
 
         try {
             console.log(formData);
-            const response = await axiosInstance.post('/api/auth/register', formData);
+            const response = await axiosInstance.post('/api/auth/admin-register', formData);
             if (response.status === 201) {
                 setAlert({ open: true, message: 'Admin registered successfully!', severity: 'success' });
                 setTimeout(() => navigate('/admin/admin-list'), 1500);
