@@ -3,7 +3,7 @@ const User = require('../models/User');
 const register = async (req, res) => {
     try {
         const { userName, password, phone, pin, employeeNo, parentUser, referralNo, role } = req.body;
-        console.log(req.body);
+        // console.log(req.body);
 
         // if (role === 'admin') {
         //     console.log('Registering as admin');
@@ -19,7 +19,7 @@ const register = async (req, res) => {
         if (existingUserName) {
             return res.status(400).json({ error: 'Username is already registered.' });
         }
-        console.log(newUser);
+        // console.log(newUser);
         await newUser.save();
         res.status(201).json({ message: 'User registered successfully' });
     } catch (error) {

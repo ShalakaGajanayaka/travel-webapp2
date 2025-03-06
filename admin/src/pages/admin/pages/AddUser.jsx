@@ -44,7 +44,7 @@ export default function AddUser() {
             const updatedFormData = { ...formData, referralNo: user.employeeNo };
 
             const response = await axiosInstance.post('/api/auth/register', updatedFormData);
-            console.log(updatedFormData);
+            // console.log(updatedFormData);
             if (response.status === 201) {
                 setAlert({ open: true, message: 'User registered successfully!', severity: 'success' });
                 setTimeout(() => navigate('/admin/user-list'), 1500);
