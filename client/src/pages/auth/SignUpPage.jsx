@@ -9,6 +9,7 @@ const SignUpPage = () => {
     phone: "",
     pin: "",
     employeeNo: "",
+    referralNo: "", // Add referralNo field
     role: "user" // Set the default role to 'user'
   });
   const [loading, setLoading] = useState(false);
@@ -134,6 +135,21 @@ const SignUpPage = () => {
               name="pin"
               type="password"
               value={formData.pin}
+              onChange={handleChange}
+              className="block w-full px-3 py-2 mt-1 border border-gray-300 rounded-md"
+              required
+            />
+          </div>
+
+          <div>
+            <label htmlFor="referralNo" className="block text-sm font-medium text-gray-700">
+              Referral No
+            </label>
+            <input
+              id="referralNo"
+              name="referralNo"
+              type="text"
+              value={formData.referralNo}
               onChange={handleChange}
               className="block w-full px-3 py-2 mt-1 border border-gray-300 rounded-md"
               required
