@@ -1,10 +1,11 @@
 const express = require('express');
-const { register, login, adminLogin, logout,adminLogout, getSession, checkUserById, adminRegister } = require('../controllers/authController');
+const { register,demoRegister, login, adminLogin, logout,adminLogout, getSession, checkUserById, adminRegister } = require('../controllers/authController');
 const { authenticate, adminAuthenticate } = require('../middlewares/authenticate');
 
 const authRouter = express.Router();
 
 authRouter.post('/register', register);
+authRouter.post('/demo-register', demoRegister);
 authRouter.post('/login', login);
 authRouter.post('/admin-login', adminLogin);
 authRouter.post('/admin-register', adminRegister);

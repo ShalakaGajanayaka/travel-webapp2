@@ -33,7 +33,7 @@ export default function CreateDemoUser({ open, setOpen, user }) {
         setLoading(true);
 
         try {
-            const response = await axiosInstance.post('/api/auth/register', formData);
+            const response = await axiosInstance.post('/api/auth/demo-register', formData);
 
             if (response.status === 201) {
                 setSuccess('User registered successfully!');

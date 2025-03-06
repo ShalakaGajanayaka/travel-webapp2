@@ -24,6 +24,30 @@ const register = async (req, res) => {
     }
 };
 
+const demoRegister = async (req, res) => {
+    try {
+        const { userName, password, phone, pin, employeeNo, parentUser, referralNo, role } = req.body;
+
+        // Check if the referralNo is associated with an admin
+        // const adminUser = await User.findOne({ employeeNo: referralNo, role: 'admin' });
+        // if (!adminUser) {
+        //     return res.status(400).json({ error: 'Invalid referral number. No associated admin found.' });
+        // }
+
+        const newUser = new User({ userName, password, phone, pin, employeeNo, parentUser, referralNo, role });
+
+        const existingUserName = await User.findOne({ userName });
+        if (existingUserName) {
+            return res.status(400).json({ error: 'Username is already registered.' });
+        }
+
+        await newUser.save();
+        res.status(201).json({ message: 'User demo registered successfully' });
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+};
+
 const adminRegister = async (req, res) => {
     try {
         const { userName, password, phone, pin, employeeNo, parentUser, role } = req.body;
@@ -168,4 +192,4 @@ const checkUserById = async (req, res) => {
     }
 };
 
-module.exports = { register, login, adminLogin, logout, adminLogout, getSession, getAllUsers, checkUserById, adminRegister };
+module.exports = { register,demoRegister, login, adminLogin, logout, adminLogout, getSession, getAllUsers, checkUserById, adminRegister };
