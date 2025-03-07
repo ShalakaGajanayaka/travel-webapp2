@@ -210,14 +210,16 @@ async function takeTask(req, res) {
     if (task.status === "pending") {
       return res.status(400).json({ message: "Task already taken, Go to history and complete the task" });
     }
+
     const taskProfit = task.taskId.value;
-    user.totalEarnings -= taskProfit.toFixed(2);
+    user.totalEarnings -= taskProfit;
+    user.totalEarnings = parseFloat(user.totalEarnings.toFixed(2));
     user.tasks[taskIndex].status = 'pending';
     await user.save();
 
     res.status(200).json({
       message: "Task taken",
-      totalEarnings: user.totalEarnings,
+      totalEarnings: user.totalEarnings.toFixed(2),
       nextTaskIndex: user.currentTaskIndex,
     });
   } catch (error) {
