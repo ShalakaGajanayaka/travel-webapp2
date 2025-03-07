@@ -76,6 +76,7 @@ async function assignTasks(req, res) {
 
     user.tasks = tasks.map((task) => ({ taskId: task._id, completed: false }));
     user.currentTaskIndex = 0; // Reset task progress
+    user.totalProfit = 0; // Reset total profits
     await user.save();
 
     res.status(200).json({ message: "Tasks assigned", tasks: user.tasks });
