@@ -10,31 +10,31 @@ const ActiveTasksList = () => {
 
   const takeTask = async () => {
 
-    if( user.tasks.length > 0 ) {
+    if (user.tasks.length > 0) {
       const response = await axiosInstance.get(`/api/tasks/${user._id}`);
-    if (response.data.tasks.status ?? response.data.tasks.status === 'pending') {
-      setAlert({ open: true, message: 'You have pending journey and complete it in assign histoty.' });
-      return;
-    }
-    if (user.totalEarnings < 50) {
-      setAlert({ open: true, message: 'Balance is below 50, Cannot start to assign posts.' });
-      return;
-    }
-    if (user.currentTaskIndex >= 16) {
-      setAlert({ open: true, message: 'No post assign available.' });
-      return;
-    }
-    try {
-      const response = await axiosInstance.patch(`/api/tasks/take-task/${user._id}`);
-
-      if (response.status === 200) {
-        navigate("/task-overview");
+      if (response.data.tasks.status ?? response.data.tasks.status === 'pending') {
+        setAlert({ open: true, message: 'You have pending journey and complete it in assign history.' });
+        return;
       }
-    } catch (err) {
-      console.error("Error:", err);
-      const errorMessage = err.response?.data?.message || "Something went wrong. Please try again later.";
-      setAlert({ open: true, message: errorMessage, severity: "error" });
-    }
+      if (user.totalEarnings < 50) {
+        setAlert({ open: true, message: 'Balance is below 50, Cannot start to assign posts.' });
+        return;
+      }
+      if (user.currentTaskIndex >= 16) {
+        setAlert({ open: true, message: 'No post assign available.' });
+        return;
+      }
+
+      try {
+        const response = await axiosInstance.patch(`/api/tasks/take-task/${user._id}`);
+        if (response.status === 200) {
+          navigate("/task-overview");
+        }
+      } catch (err) {
+        console.error("Error:", err);
+        const errorMessage = err.response?.data?.message || "Something went wrong. Please try again later.";
+        setAlert({ open: true, message: errorMessage, severity: "error" });
+      }
     }
     else {
       setAlert({ open: true, message: 'No post assign available.' });
