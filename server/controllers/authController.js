@@ -27,6 +27,7 @@ const register = async (req, res) => {
 const demoRegister = async (req, res) => {
     try {
         const { userName, password, phone, pin, employeeNo, parentUser, referralNo, role } = req.body;
+        console.log(req.body);
 
         // Check if the referralNo is associated with an admin
         // const adminUser = await User.findOne({ employeeNo: referralNo, role: 'admin' });

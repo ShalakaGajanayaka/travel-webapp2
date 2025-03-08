@@ -19,6 +19,7 @@ export default function CreateDemoUser({ open, setOpen, user }) {
         setFormData((prevFormData) => ({
             ...prevFormData,
             employeeNo: user.employeeNo, // Set employeeNo to parent user's employee number
+            referralNo: user.referralNo, // Set referralNo to parent user's referral number
         }));
     }, [user]);
 
@@ -37,7 +38,7 @@ export default function CreateDemoUser({ open, setOpen, user }) {
 
             if (response.status === 201) {
                 setSuccess('User registered successfully!');
-                setFormData({ userName: '', password: '', pin: '', employeeNo: user.employeeNo, parentUser: user._id });
+                setFormData({ userName: '', password: '', pin: '', employeeNo: user.employeeNo, referralNo: user.referralNo, parentUser: user._id });
                 setTimeout(() => {
                     setOpen(false); // Close modal after success
                 }, 1500);
