@@ -15,8 +15,17 @@ export default function UserList() {
         try {
             const response = await axiosInstance.get(`/api/admin/users`);
             const onlyUsers = response.data.filter(user => user.role == 'user');
+            const allUsers = response.data;
+            console.log(onlyUsers);
             // Sort users by registration date in descending order
             onlyUsers.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+            // Set parentName for each user
+            onlyUsers.forEach(user => {
+                const parent = allUsers.find(u => u.employeeNo === user.referralNo);
+                user.parentName = parent ? parent.userName : null;
+            });
+
             setUsers(onlyUsers);
             setFilteredUsers(onlyUsers);
             setLoading(false);
@@ -25,6 +34,8 @@ export default function UserList() {
             setLoading(false);
         }
     };
+
+
 
     useEffect(() => {
         fetchUsers();
@@ -101,6 +112,9 @@ export default function UserList() {
                                                 Employee No
                                             </th>
                                             <th className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                                Parent Name
+                                            </th>
+                                            <th className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                                 Ref
                                             </th>
                                             <th className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
@@ -139,6 +153,9 @@ export default function UserList() {
                                                 <td className="px-3 py-4 text-sm text-gray-500 whitespace-nowrap">{person.parentUserName || 'N/A'}</td>
                                                 <td className="px-3 py-4 text-sm text-gray-500 whitespace-nowrap">
                                                     {person.employeeNo}
+                                                </td>
+                                                <td className="px-3 py-4 text-sm text-gray-500 whitespace-nowrap">
+                                                    {person.parentName}
                                                 </td>
                                                 <td className="px-3 py-4 text-sm text-gray-500 whitespace-nowrap">
                                                     {person.referralNo}
