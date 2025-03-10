@@ -117,6 +117,9 @@ export default function UserList() {
                                                 Ref
                                             </th>
                                             <th className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                                Phone
+                                            </th>
+                                            <th className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                                 Reg. Time
                                             </th>
                                             <th className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
@@ -158,6 +161,9 @@ export default function UserList() {
                                                 </td>
                                                 <td className="px-3 py-4 text-sm text-gray-500 whitespace-nowrap">
                                                     {person.referralNo}
+                                                </td>
+                                                <td className="px-3 py-4 text-sm text-gray-500 whitespace-nowrap">
+                                                    {person.phone}
                                                 </td>
                                                 <td className="px-3 py-4 text-sm text-gray-500 whitespace-nowrap">{new Date(person.createdAt).toLocaleDateString("en-CA")}</td>
                                                 <td className="px-3 py-4 text-sm text-gray-500 whitespace-nowrap">
