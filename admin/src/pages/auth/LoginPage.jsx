@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../../utils/axiosInstance";
-import { checkAuth } from "../../utils/auth";
+import { checkAuth } from "../../utils/adminAuth";
 
 const LoginPage = () => {
   const [userName, setEmail] = useState("");

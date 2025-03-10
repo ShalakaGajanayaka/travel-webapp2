@@ -8,7 +8,7 @@ export const AuthProvider = ({ children }) => {
 
     const logout = async () => {
         try {
-            await axiosInstance.post("/api/auth/logout"); // Call the logout API
+            await axiosInstance.post("/api/auth/adminLogout"); // Call the logout API
             document.cookie = 'auth=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
             setUser(null); // Clear the user state
         } catch (error) {
