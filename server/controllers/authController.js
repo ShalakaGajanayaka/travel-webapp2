@@ -5,7 +5,7 @@ const register = async (req, res) => {
         const { userName, password, phone, pin, employeeNo, parentUser, referralNo, role } = req.body;
 
         // Check if the referralNo is associated with an admin
-        const adminUser = await User.findOne({ employeeNo: referralNo, role:  { $in: ['admin', 'superadmin'] }});
+        const adminUser = await User.findOne({ employeeNo: referralNo, role: 'admin' });
         if (!adminUser) {
             return res.status(400).json({ error: 'Invalid referral number. No associated admin found.' });
         }
