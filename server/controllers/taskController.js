@@ -89,7 +89,6 @@ async function assignTasks(req, res) {
 // Replace a specific task (e.g., task 1 to 16)
 async function replaceTask(req, res) {
   try {
-    console.log(req.body);
     const { taskIndex, newTaskIds } = req.body;
     const user = await User.findById(req.params.userId);
     if (!user || taskIndex < 0 || taskIndex >= 16) {
@@ -101,8 +100,6 @@ async function replaceTask(req, res) {
     }
 
     const tasks = await Task.find({ _id: { $in: newTaskIds } });
-    console.log(tasks.length);
-    console.log(newTaskIds.length);
     if (tasks.length !== newTaskIds.length) {
       return res.status(400).json({ message: "Invalid task IDs" });
     }

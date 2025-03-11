@@ -10,8 +10,15 @@ const ActiveTasksList = () => {
 
   const takeTask = async () => {
 
+
     if (user.tasks.length > 0) {
       const response = await axiosInstance.get(`/api/tasks/${user._id}`);
+      console.log(response.data);
+      if (user.currentTaskIndex >= 16) {
+        
+        setAlert({ open: true, message: 'all tasks completed.' });
+        return;
+      }
       if (response.data.tasks.status ?? response.data.tasks.status === 'pending') {
         setAlert({ open: true, message: 'You have pending journey and complete it in assign history.' });
         return;
@@ -20,10 +27,10 @@ const ActiveTasksList = () => {
         setAlert({ open: true, message: 'Balance is below 50, Cannot start to assign posts.' });
         return;
       }
-      if (user.currentTaskIndex >= 16) {
-        setAlert({ open: true, message: 'No post assign available.' });
-        return;
-      }
+      
+
+
+
 
       try {
         const response = await axiosInstance.patch(`/api/tasks/take-task/${user._id}`);
