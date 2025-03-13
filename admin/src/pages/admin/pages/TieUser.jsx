@@ -79,26 +79,28 @@ export default function TieUser() {
                     {success && <p className="mb-2 text-sm text-green-500">{success}</p>}
 
                     {/* Post No Input */}
-                    <div className="mb-4">
-                        <label htmlFor="post-no" className="block text-sm font-medium text-gray-700">
-                            Post No
-                        </label>
-                        <input
-                            id="post-no"
-                            type="number"
-                            value={taskIndex}
-                            onChange={(e) => setTaskIndex(e.target.value)}
-                            className="w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                        />
-                    </div>
-                    <div className="flex justify-end mt-4 mb-6">
-                        <button
-                            onClick={handleSubmit}
-                            disabled={loading}
-                            className="px-4 py-2 text-sm font-semibold text-white bg-indigo-600 rounded-md shadow hover:bg-indigo-500 focus:ring-2 focus:ring-indigo-400 disabled:bg-gray-400"
-                        >
-                            {loading ? "Submitting..." : "Tie"}
-                        </button>
+                    <div className="flex items-center gap-4 mb-4" >
+                        <div className="flex-1" >
+                            <label htmlFor="post-no" className="block text-sm font-medium text-gray-700">
+                                Post No
+                            </label>
+                            <input
+                                id="post-no"
+                                type="number"
+                                value={taskIndex}
+                                onChange={(e) => setTaskIndex(e.target.value)}
+                                className="w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                            />
+                        </div>
+                        <div className="mt-6">
+                            <button
+                                onClick={handleSubmit} 
+                                disabled={loading}
+                                className="px-4 py-2 text-sm font-semibold text-white bg-indigo-600 rounded-md shadow hover:bg-indigo-500 focus:ring-2 focus:ring-indigo-400 disabled:bg-gray-400"
+                            >
+                                {loading ? "Submitting..." : "Tie"}
+                            </button>
+                        </div>
                     </div>
 
                     {/* Tasks Table */}
