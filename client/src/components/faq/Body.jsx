@@ -10,6 +10,7 @@ const faqs = [
   { question: "What are the consequences of inappropriate use of the account?", answer: "Any inappropriate use of the account will result in legal action." },
   { question: "Do I need to verify the deposit address before making a funds transfer?", answer: "Yes, it is advised to verify the deposit address with customer service before making any funds transfer." },
   { question: "Will Intrepid.Expert be responsible for errors in transferring funds to the wrong deposit address?", answer: "No, Intrepid.Expert will not be held responsible for any errors resulting from transferring funds to the wrong deposit address." },
+  { question: "Can I change or cancel a journey after accepting it?", answer: "No, once a journey has been accepted, changes, cancellation, or abandonment are strictly prohibited." },
   { question: "What is the time limit to complete an assigned journey deal?", answer: "Assigned journey deals must be completed within one day of acceptance. If unable to complete within one day, inform customer service immediately." },
   { question: "How many Ultimate Journeys can a Daily assign contain?", answer: "Daily assigns may contain 0-3 Ultimate Journeys." },
   { question: "How many posts can an Ultimate Journey contain?", answer: "Each Ultimate Journey may contain 1-3 posts." },
@@ -36,7 +37,7 @@ export default function Index() {
       <div className="max-w-4xl mx-auto">
         <h2 className="text-3xl font-bold text-center text-gray-900">Frequently Asked Questions</h2>
         <p className="mt-2 text-center text-gray-600">Find answers to common questions about our platform.</p>
-        
+
         <div className="mt-8 space-y-4">
           {faqs.map((faq, index) => (
             <Disclosure key={index} as="div" className="py-4 border-b border-gray-200">
