@@ -104,9 +104,9 @@ export default function UserList() {
                                             <th className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                                 Task Status
                                             </th>
-                                            <th className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                            {/* <th className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                                 ParentId
-                                            </th>
+                                            </th> */}
                                             <th className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                                 Employee No
                                             </th>
@@ -152,7 +152,7 @@ export default function UserList() {
                                                 <td className="px-3 py-4 text-sm text-gray-500 whitespace-nowrap">
                                                     {person?.permissions?.doTasks ? 'Yes' : 'No'}
                                                 </td>
-                                                <td className="px-3 py-4 text-sm text-gray-500 whitespace-nowrap">{person.parentUserName || 'N/A'}</td>
+                                                {/* <td className="px-3 py-4 text-sm text-gray-500 whitespace-nowrap">{person.parentUserName || 'N/A'}</td> */}
                                                 <td className="px-3 py-4 text-sm text-gray-500 whitespace-nowrap">
                                                     {person.employeeNo}
                                                 </td>
