@@ -91,34 +91,42 @@ async function replaceTask(req, res) {
   try {
     const { taskIndex, newTaskIds } = req.body;
     const user = await User.findById(req.params.userId);
+
+    // Validate user and taskIndex
     if (!user || taskIndex < 0 || taskIndex >= 16) {
       return res.status(400).json({ message: "Invalid request" });
     }
 
+    // Validate newTaskIds
     if (newTaskIds.length === 0 || newTaskIds.length > 16) {
       return res.status(400).json({ message: "Please select at least one task and select up to 16 tasks" });
     }
 
+    // user.tasks[taskIndex] = { taskId: newTaskId, completed: false };
+    // await user.save();
+
+    // Fetch tasks from the database
     const tasks = await Task.find({ _id: { $in: newTaskIds } });
     if (tasks.length !== newTaskIds.length) {
       return res.status(400).json({ message: "Invalid task IDs" });
     }
 
-
-    // taskIndexArray
+    // Create the new tasks array
     const taskIndexArray = newTaskIds.map((taskId) => ({ taskId, completed: false }));
-    user.tasks.splice(taskIndex, 1, ...taskIndexArray);
+
+    // Calculate how many existing tasks to remove
+    const tasksToRemove = newTaskIds.length;
+
+    // Replace the tasks starting from taskIndex
+    user.tasks.splice(taskIndex, tasksToRemove, ...taskIndexArray); // Remove `tasksToRemove` tasks and insert new tasks
     await user.save();
 
-    // user.tasks[taskIndex] = { taskId: newTaskId, completed: false };
-    // await user.save();
-
     res.json({ message: "Task replaced", tasks: user.tasks });
- 
+
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
-};
+}
 
 // Complete a task (only sequential)
 async function completeTask(req, res) {
