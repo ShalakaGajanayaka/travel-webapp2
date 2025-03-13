@@ -8,7 +8,7 @@ export default function EditUser({ open, setOpen, user }) {
         phone: user.phone || '',
         pin: user.pin || '',
         employeeNo: user.employeeNo || '',
-        referralNumber: user.referralNumber || '',
+        referralNumber: user.referralNo || '',
         password: user.password || '',
         totalEarnings: user.totalEarnings || 0,
     });
@@ -23,7 +23,7 @@ export default function EditUser({ open, setOpen, user }) {
                 phone: user.phone || '',
                 pin: user.pin || '',
                 employeeNo: user.employeeNo || '',
-                referralNumber: user.referralNumber || '',
+                referralNumber: user.referralNo || '',
                 password: user.password || '',
                 totalEarnings: user.totalEarnings || 0,
             });
