@@ -26,38 +26,38 @@ export default function AdditionalDeductions({ open, setOpen, user2 }) {
         setError('');
         setSuccess('');
         setLoading(true);
-    
+
         // Determine the new totalEarnings based on addOrSubtract
-        const newTotalEarnings = addOrSubtract === 'add'
+        const newTotalEarnings = (addOrSubtract === 'add'
             ? user2.totalEarnings + parseFloat(formData.deduction)
-            : user2.totalEarnings - parseFloat(formData.deduction);
-    
+            : user2.totalEarnings - parseFloat(formData.deduction)).toFixed(2);
+
         try {
             // Update the user's total earnings
             const response = await axiosInstance.put(`/api/users/${user2._id}`, { totalEarnings: newTotalEarnings });
-    
+
             if (response.status === 200) {
                 const transaction = {
                     userId: user2._id,
                     createdBy: user._id,
                     transaction: parseFloat(formData.deduction),
-                    type: addOrSubtract === 'add' ? '+' : '-' 
+                    type: addOrSubtract === 'add' ? '+' : '-'
                 };
-    
-                
+
+
                 const response2 = await axiosInstance.post(`/api/transactions`, transaction);
-    
+
                 if (response2.status === 201) {
                     setSuccess('User updated successfully!');
                     setFormData({ deduction: 0 });
                     setTimeout(() => {
                         setOpen(false); // Close modal after success
                     }, 1500);
-                    
+
                     // load userlist table data again
                     window.location.reload();
 
-                   
+
                 } else {
                     throw new Error(response2.data.error || 'Something went wrong');
                 }
@@ -70,7 +70,7 @@ export default function AdditionalDeductions({ open, setOpen, user2 }) {
             setLoading(false);
         }
     };
-    
+
 
     return (
         <Dialog open={open} onClose={() => setOpen(false)} className="relative z-50">

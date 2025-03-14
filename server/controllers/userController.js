@@ -13,7 +13,6 @@ const updateUser = async (req, res) => {
       return res.status(404).json({ error: 'User not found' });
     }
 
-    console.log(updates);
 
     // Update the user's totalEarnings if it exists in the updates object
     if (updates.totalEarnings !== undefined) {
