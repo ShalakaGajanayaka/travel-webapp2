@@ -4,7 +4,7 @@ import { ClipboardDocumentListIcon } from '@heroicons/react/16/solid';
 import axiosInstance from "../../utils/axiosInstance";
 
 export default function WithdrawelBody() {
-    const { user, setUser } = useAuth();
+    const { user } = useAuth();
     const [wallet, setWallet] = useState(null);
     const [loading, setLoading] = useState(true);
     const [value, setValue] = useState(0);
@@ -26,23 +26,6 @@ export default function WithdrawelBody() {
 
         fetchWallet();
     }, []);
-
-    // Fetch the latest user data
-    const fetchLatestUserData = async () => {
-        try {
-            const response = await axiosInstance.get(`/api/users/${user._id}`);
-            setUser(response.data); // Update the user context
-            return response.data.totalEarnings; // Return the latest totalEarnings
-        } catch (err) {
-            console.error("Error fetching user data:", err.response?.data?.message);
-            return user.totalEarnings; // Fallback to the current totalEarnings
-        }
-    };
-
-    const handleAllButtonClick = async () => {
-        const latestTotalEarnings = await fetchLatestUserData();
-        setValue(latestTotalEarnings); // Update the value state
-    };
 
     const withdraw = async (e) => {
         if (!wallet) {
@@ -78,11 +61,9 @@ export default function WithdrawelBody() {
             const response = await axiosInstance.post(`/api/users/withdraw/${user._id}`, {
                 amount: value,
             });
-            consoleq.log(response);
             if (response.status === 201) {
                 setAlert({ open: true, message: "Withdrawal successful!", severity: 'success' })
             }
-     
         } catch (err) {
             console.error("Error adding wallet:", err.response?.data?.message);
         }
@@ -130,8 +111,7 @@ export default function WithdrawelBody() {
                         />
                         <button
                             type="button"
-                            // onClick={() => setValue(user.totalEarnings)}
-                            onClick={handleAllButtonClick} // Updated here
+                            onClick={() => setValue(user.totalEarnings)}
                             className="flex shrink-0 items-center gap-x-1.5 rounded-r-md bg-white px-3 py-2 text-sm font-semibold text-[#3F72AF] outline outline-1 outline-[#DBE2EF] hover:bg-[#DBE2EF] hover:text-[#3F72AF] focus:outline-[#3F72AF]"
                         >
                             <ClipboardDocumentListIcon className="text-[#3F72AF] size-4" />
