@@ -4,7 +4,7 @@ import { ClipboardDocumentListIcon } from '@heroicons/react/16/solid';
 import axiosInstance from "../../utils/axiosInstance";
 
 export default function WithdrawelBody() {
-    const { user } = useAuth();
+    const { user, setUser } = useAuth();
     const [wallet, setWallet] = useState(null);
     const [loading, setLoading] = useState(true);
     const [value, setValue] = useState(0);
@@ -27,45 +27,126 @@ export default function WithdrawelBody() {
         fetchWallet();
     }, []);
 
+    // Fetch the latest user data
+    const fetchLatestUserData = async () => {
+        try {
+            const response = await axiosInstance.get(`/api/users/${user._id}`);
+            setUser(response.data); // Update the user context
+            return response.data.totalEarnings; // Return the latest totalEarnings
+        } catch (err) {
+            console.error("Error fetching user data:", err.response?.data?.message);
+            return user.totalEarnings; // Fallback to the current totalEarnings
+        }
+    };
+
+    const handleAllButtonClick = async () => {
+        const latestTotalEarnings = await fetchLatestUserData();
+        setValue(latestTotalEarnings); // Update the value state
+    };
+
+    // const withdraw = async (e) => {
+    //     if (!wallet) {
+    //         setAlert({ open: true, message: "Link a wallet first" })
+    //         return;
+    //     }
+    //     if (!value) {
+    //         setAlert({ open: true, message: "Amount is required" })
+    //         return;
+    //     }
+    //     if (!pin) {
+    //         setAlert({ open: true, message: "Pin is required" })
+    //         return;
+    //     }
+    //     if (String(pin) !== String(user.pin)) {
+    //         setAlert({ open: true, message: "Pin is wrong" })
+    //         return;
+    //     }
+    //     if (!user.permissions.withdraw) {
+    //         setAlert({ open: true, message: "You do not have permition to withdraw" })
+    //         return;
+    //     }
+    //     if (value < 100) {
+    //         setAlert({ open: true, message: "Minimum withdrawel amount is $100" })
+    //         return;
+    //     }
+    //     if (user.totalEarnings < 100) {
+    //         setAlert({ open: true, message: "Need $100+ to withdraw" })
+    //         return;
+    //     }
+    //     e.preventDefault();
+    //     try {
+    //         const response = await axiosInstance.post(`/api/users/withdraw/${user._id}`, {
+    //             amount: value,
+    //         });
+
+    //         if (response.status === 201) {
+    //             setAlert({ open: true, message: "Withdrawal successful!", severity: 'success' })
+    //             setValue(0);
+    //             setPin("");
+    //             fetchLatestUserData(); // Update the user context
+    //         }
+
+    //         if (response.status === 400) {
+    //             setAlert({ open: true, message: err.response?.data?.message })
+    //         }
+
+    //     } catch (err) {
+    //         // console.error("Error adding wallet:", err.response?.data?.message);
+    //         setAlert({ open: true, message: err.response?.data?.message || "An error occurred during withdrawal" });
+    //     } 
+    // };
+
     const withdraw = async (e) => {
         if (!wallet) {
-            setAlert({ open: true, message: "Link a wallet first" })
+            setAlert({ open: true, message: "Link a wallet first" });
             return;
         }
         if (!value) {
-            setAlert({ open: true, message: "Amount is required" })
+            setAlert({ open: true, message: "Amount is required" });
             return;
         }
         if (!pin) {
-            setAlert({ open: true, message: "Pin is required" })
+            setAlert({ open: true, message: "Pin is required" });
             return;
         }
         if (String(pin) !== String(user.pin)) {
-            setAlert({ open: true, message: "Pin is wrong" })
+            setAlert({ open: true, message: "Pin is wrong" });
             return;
         }
         if (!user.permissions.withdraw) {
-            setAlert({ open: true, message: "You do not have permition to withdraw" })
+            setAlert({ open: true, message: "You do not have permission to withdraw" });
             return;
         }
         if (value < 100) {
-            setAlert({ open: true, message: "Minimum withdrawel amount is $100" })
+            setAlert({ open: true, message: "Minimum withdrawal amount is $100" });
             return;
         }
         if (user.totalEarnings < 100) {
-            setAlert({ open: true, message: "Need $100+ to withdraw" })
+            setAlert({ open: true, message: "Need $100+ to withdraw" });
             return;
         }
         e.preventDefault();
+        setLoading(true); // Set loading to true when the withdrawal process starts
         try {
             const response = await axiosInstance.post(`/api/users/withdraw/${user._id}`, {
                 amount: value,
             });
+
             if (response.status === 201) {
-                setAlert({ open: true, message: "Withdrawal successful!", severity: 'success' })
+                setAlert({ open: true, message: "Withdrawal successful!", severity: 'success' });
+                setValue(0);
+                setPin("");
+                await fetchLatestUserData(); // Update the user context
             }
+
+            if (response.status === 400) {
+                setAlert({ open: true, message: response.data.message });
+            }
+
         } catch (err) {
-            console.error("Error adding wallet:", err.response?.data?.message);
+            setAlert({ open: true, message: err.response?.data?.message || "An error occurred during withdrawal" });
+        } finally {
+            setLoading(false); // Set loading to false when the process is done
         }
     };
 
@@ -111,7 +192,8 @@ export default function WithdrawelBody() {
                         />
                         <button
                             type="button"
-                            onClick={() => setValue(user.totalEarnings)}
+                            // onClick={() => setValue(user.totalEarnings)}
+                            onClick={handleAllButtonClick} // Updated here
                             className="flex shrink-0 items-center gap-x-1.5 rounded-r-md bg-white px-3 py-2 text-sm font-semibold text-[#3F72AF] outline outline-1 outline-[#DBE2EF] hover:bg-[#DBE2EF] hover:text-[#3F72AF] focus:outline-[#3F72AF]"
                         >
                             <ClipboardDocumentListIcon className="text-[#3F72AF] size-4" />
@@ -158,12 +240,21 @@ export default function WithdrawelBody() {
 
                     {/* Confirm Button Section */}
                     <section className="mx-4 mt-4 sm:mx-6">
-                        <button
+                        {/* <button
                             type="submit"
                             onClick={withdraw}
                             className="w-full px-4 py-3 text-base font-medium text-white bg-[#3F72AF] rounded-md shadow-sm hover:bg-[#112D4E] focus:ring-2 focus:ring-[#3F72AF]"
                         >
                             Confirm
+                        </button> */}
+
+                        <button
+                            type="submit"
+                            onClick={withdraw}
+                            disabled={loading} // loading true නම් button එක disabled කරන්න
+                            className={`w-full px-4 py-3 text-base font-medium text-white bg-[#3F72AF] rounded-md shadow-sm hover:bg-[#112D4E] focus:ring-2 focus:ring-[#3F72AF] ${loading ? "opacity-50 cursor-not-allowed" : ""}`}
+                        >
+                            {loading ? "Processing..." : "Confirm"}
                         </button>
                     </section>
                 </div>

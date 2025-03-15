@@ -2,6 +2,26 @@ const User = require('../models/User');
 const Wallet = require('../models/Wallet');
 const Withdrawal = require('../models/Withdrawal');
 
+// get a user
+const getUser = async (req, res) => {
+  try {
+    const { userId } = req.params;
+
+    const user = await
+      User
+        .findById
+        (userId);
+
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
 // Update user details
 const updateUser = async (req, res) => {
   try {
@@ -41,7 +61,7 @@ const deleteUser = async (req, res) => {
     if (!user) {
       return res.status(404).json({ error: 'User not found' });
     }
-   
+
 
     await user.deleteOne();
     res.status(200).json({ message: 'User deleted successfully' });
@@ -112,15 +132,30 @@ const createWithdrawal = async (req, res) => {
   const { userId } = req.params;
   const { amount } = req.body;
 
-  console.log(amount);
   try {
     // Create a new withdrawal
     const newWithdrawal = new Withdrawal({
       userId,
       amount,
     });
+
     // Save the withdrawal to the database
     const user = await User.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({
+        message: "User not found",
+      });
+    }
+
+    // Check if the withdrawal amount is greater than the user's totalEarnings
+    if (amount > user.totalEarnings) {
+      return res.status(400).json({
+        message: "Withdrawal amount exceeds total earnings",
+        withdrawal: 0,
+      });
+    }
+
     user.totalEarnings -= amount;
     await user.save();
     await newWithdrawal.save();
@@ -129,6 +164,8 @@ const createWithdrawal = async (req, res) => {
       message: "Withdrawal created successfully",
       withdrawal: newWithdrawal,
     });
+
+
   } catch (error) {
     res.status(500).json({
       message: "Error creating withdrawal",
@@ -169,6 +206,7 @@ module.exports = {
   createWithdrawal,
   getWithdrawalsByUser,
   createWallet,
+  getUser,
   updateUser,
   deleteUser,
   updateReferralNumber
