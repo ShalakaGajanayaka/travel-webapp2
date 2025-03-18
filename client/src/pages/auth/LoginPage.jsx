@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../../utils/axiosInstance";
 import { checkAuth } from "../../utils/auth";
+import logo from '../../assets/images/intrepid-logo.png';
 
 const LoginPage = () => {
   const [userName, setEmail] = useState("");
@@ -74,7 +75,10 @@ const LoginPage = () => {
             {isForgotPassword ? "Forgot Password" : "Login"}
           </h3>
           <img
-            src="https://bookings.intrepidtravel.com/bookings/intrepid/images/fresh-logo-auth.svg"
+            // src="https://bookings.intrepidtravel.com/bookings/intrepid/images/fresh-logo-auth.svg"
+            src={logo}
+            height="80"
+            width="166"
             alt="Intrepid Logo"
             className="mx-auto my-4"
           />

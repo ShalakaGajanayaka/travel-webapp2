@@ -11,6 +11,7 @@ import { HomeIcon, XMarkIcon, Bars3CenterLeftIcon, UserIcon } from '@heroicons/r
 import { useNavigate, useLocation } from 'react-router-dom'
 import UserMenu from './UserMenu'
 import UserMenuMobile from './UserMenuMobile'
+import logo from '../../../assets/images/intrepid-logo.png';
 
 const navigation = [
   { name: 'Users', href: '/admin/user-list', icon: HomeIcon },
@@ -60,7 +61,8 @@ export default function Sidebar() {
             </TransitionChild>
             <div className="flex items-center px-4 shrink-0">
               <img
-                src="https://bookings.intrepidtravel.com/bookings/intrepid/images/fresh-logo-auth.svg"
+                // src="https://bookings.intrepidtravel.com/bookings/intrepid/images/fresh-logo-auth.svg"
+                src={logo}
                 alt="Intrepid Logo"
                 className="w-auto h-8"
               />
@@ -104,7 +106,8 @@ export default function Sidebar() {
       <div className="hidden lg:fixed lg:inset-y-0 lg:flex lg:w-64 lg:flex-col lg:border-r lg:border-gray-200 lg:bg-gray-100 lg:pb-4 lg:pt-5">
         <div className="flex items-center px-6 shrink-0">
           <img
-            src="https://bookings.intrepidtravel.com/bookings/intrepid/images/fresh-logo-auth.svg"
+            // src="https://bookings.intrepidtravel.com/bookings/intrepid/images/fresh-logo-auth.svg"
+            src={logo}
             alt="Intrepid Logo"
             className="w-auto h-8"
           />
