@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import axiosInstance from "../../../utils/axiosInstance";
 
 export default function TieUser() {
     const { id: userId } = useParams(); // Get userId from URL params
+    const { state } = useLocation();
+    const user = state?.user || {};
     const [tasks, setTasks] = useState([]);
     const [taskIndex, setTaskIndex] = useState(""); // Input field state
     const [selectedTasks, setSelectedTasks] = useState([]); // Array of selected task IDs
@@ -76,17 +78,29 @@ export default function TieUser() {
             <div className="px-4 mt-6 sm:px-6 lg:px-8">
                 <div className="px-4 sm:px-6 lg:px-8">
 
-
                     {/* User Details */}
-                    <div className="flex items-center gap-4 mb-4">
-                        <div className="flex-1">
-                            <label htmlFor="userName" className="block text-sm font-medium text-gray-700">
-                                User Name
-                            </label>
-
-                        </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-8">
+                        {[
+                            { label: "User Name", value: user.userName },
+                            { label: "Balance", value: user.totalEarnings },
+                            { label: "Employee No", value: user.employeeNo },
+                            { label: "Parent", value: user.parentName },
+                            { label: "Referral No", value: user.referralNo },
+                            { label: "Phone", value: user.phone },
+                            { label: "Current Task", value: user.currentTaskIndex },
+                            { label: "Demo", value: user.parentUserName ? 'Yes' : 'No' },
+                        ].map((item, index) => (
+                            <div
+                                key={index}
+                                className="bg-gradient-to-br from-blue-500 to-purple-600 p-5 rounded-xl shadow-2xl transform transition-all hover:scale-105 hover:shadow-3xl"
+                            >
+                                <label htmlFor={item.label.toLowerCase()} className="block text-sm font-medium text-white/80">
+                                    {item.label}
+                                </label>
+                                <p className="mt-2 text-lg font-semibold text-white">{item.value}</p>
+                            </div>
+                        ))}
                     </div>
-
 
                     {error && <p className="mb-2 text-sm text-red-500">{error}</p>}
                     {success && <p className="mb-2 text-sm text-green-500">{success}</p>}
