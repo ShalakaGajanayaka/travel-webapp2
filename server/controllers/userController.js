@@ -181,10 +181,10 @@ const getWithdrawalsByUser = async (req, res) => {
   try {
     // Find withdrawals for the specific user
     const withdrawals = await Withdrawal.find({ userId }).populate("userId", "name email"); // You can populate more fields from the User model if necessary
-
     if (withdrawals.length === 0) {
-      return res.status(404).json({
+      return res.status(200).json({
         message: "No withdrawals found for this user",
+        withdrawals: [],
       });
     }
 
