@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
-import logo from '../../assets/images/intrepiid-logo-topnav.png';
-import logoSmall from '../../assets/images/intrepiid-logo-topnav.png';
+import logo from '../../assets/images/intrepid-logo.png';
+import logoSmall from '../../assets/images/intrepid-logo.png';
 
 export default function TopNav() {
   const navigate = useNavigate();
