@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
-import logo from '../../assets/images/intrepid-logo.png';
-import logoSmall from '../../assets/images/intrepid-logo.png';
+import logo from '../../assets/images/intrepid-logo.svg';
+import logoSmall from '../../assets/images/intrepid-logo-small.svg';
 
 export default function TopNav() {
   const navigate = useNavigate();
@@ -146,7 +146,7 @@ export default function TopNav() {
                       role="menubar"
                       aria-label="Menu"
                     >
-                      <li className="header-bar__navigation-item" role="menuitem">
+                      <li className="header-bar__navigation-item " role="menuitem">
                         <a
                           className="header-bar__bottom-home-link"
                           data-cy="header-bar-menu-item"
@@ -157,6 +157,7 @@ export default function TopNav() {
                             width="166"
                             alt="Home"
                             className="header-bar__bottom-logo-large"
+                            style={{ position: 'absolute', bottom: '0', left: '0' }} 
                           />
                         </a>
                       </li>
