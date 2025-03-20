@@ -11,6 +11,28 @@ export default function UserList() {
     const [searchTerm, setSearchTerm] = useState("");
     const navigate = useNavigate();
 
+
+    const [contextMenu, setContextMenu] = useState({ visible: false, x: 0, y: 0, user: null });
+
+    const handleRightClick = (e, user) => {
+        e.preventDefault(); // Prevent default right-click menu
+        setContextMenu({
+            visible: true,
+            x: e.clientX,
+            y: e.clientY,
+            user: user,
+        });
+    };
+
+    const handleCloseContextMenu = () => {
+        setContextMenu({ visible: false, x: 0, y: 0, user: null });
+    };
+
+    const handleOptionClick = (option) => {
+        alert(`Selected option: ${option} for user: ${contextMenu.user.userName}`);
+        handleCloseContextMenu();
+    };
+
     const fetchUsers = async () => {
         try {
             const response = await axiosInstance.get(`/api/admin/users`);
@@ -46,6 +68,19 @@ export default function UserList() {
         );
         setFilteredUsers(filtered);
     }, [searchTerm, users]);
+
+    useEffect(() => {
+        const handleClickOutside = (e) => {
+            if (contextMenu.visible) {
+                handleCloseContextMenu();
+            }
+        };
+
+        document.addEventListener('click', handleClickOutside);
+        return () => {
+            document.removeEventListener('click', handleClickOutside);
+        };
+    }, [contextMenu.visible]);
 
     return (
         <>
@@ -140,7 +175,8 @@ export default function UserList() {
                                     </thead>
                                     <tbody className="divide-y divide-gray-200">
                                         {filteredUsers.map((person) => (
-                                            <tr key={person._id}>
+                                            <tr key={person._id} onContextMenu={(e) => handleRightClick(e, person)}
+                                                className="hover:bg-gray-100/50 transition-colors">
                                                 <td className="py-4 pl-4 pr-3 text-sm font-medium text-gray-900 whitespace-nowrap sm:pl-0">
                                                     {person.userName}
                                                 </td>
@@ -183,6 +219,41 @@ export default function UserList() {
                     </div>
                 </div>
             </div>
+
+            {/* context menu */}
+            {contextMenu.visible && (
+                <div
+                    className="fixed bg-white border border-gray-300 rounded-lg shadow-lg z-50"
+                    style={{ top: contextMenu.y, left: contextMenu.x }}
+                >
+                    <ul className="py-2">
+                        <li
+                            className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                            onClick={() => handleOptionClick("Edit")}
+                        >
+                            Edit
+                        </li>
+                        <li
+                            className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                            onClick={() => handleOptionClick("Delete")}
+                        >
+                            Delete
+                        </li>
+                        <li
+                            className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                            onClick={() => handleOptionClick("View Details")}
+                        >
+                            View Details
+                        </li>
+                        <li
+                            className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                            onClick={() => handleOptionClick("Block")}
+                        >
+                            Block
+                        </li>
+                    </ul>
+                </div>
+            )}
         </>
     );
 }
