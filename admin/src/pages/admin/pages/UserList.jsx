@@ -58,7 +58,6 @@ export default function UserList() {
                 <div className="px-4 sm:px-6 lg:px-8">
 
                     <div className="sm:flex sm:items-center mb-40">
-
                     </div>
 
                     <div className="sm:flex sm:items-center">
@@ -69,7 +68,7 @@ export default function UserList() {
                             <button
                                 type="button"
                                 onClick={() => { navigate('/admin/add-user') }}
-                                className="block px-3 py-2 text-sm font-semibold text-center text-white bg-indigo-600 rounded-md shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                className="block px-4 py-2 text-sm font-semibold text-center text-white bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl shadow-2xl transform transition-all hover:scale-105 hover:shadow-3xl focus:outline-none focus:ring-2 focus:ring-purple-500"
                             >
                                 Add user
                             </button>
@@ -80,7 +79,7 @@ export default function UserList() {
                             <input
                                 type="text"
                                 placeholder="Search Users..."
-                                className="px-4 py-2 text-sm border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                className="px-4 py-2 text-sm bg-white/80 backdrop-blur-sm rounded-xl border border-gray-300 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
                                 value={searchTerm}
                                 onChange={(e) => setSearchTerm(e.target.value)}
                             />
