@@ -1,4 +1,6 @@
 import React from 'react'
+import bannerImage from '../../assets/images/landingPageImage1.jpg';
+
 
 export default function () {
     return (
@@ -11,8 +13,8 @@ export default function () {
                     <div className="banner__content" data-cy="banner__content">
                         <div className="banner__content-image" data-cy="banner__content-image">
                             <img
-                                src="https://www.intrepidtravel.com/v3/assets/blt0de87ff52d9c34a8/blt108429f27a1d5136/66d5498f103eb51389c4c65a/INT_homepage_1920x1285_OI-GLOBAL_02.jpg?branch=prd&width=1400&quality=75&format=pjpg&auto=webp"
-                                srcSet="https://www.intrepidtravel.com/v3/assets/blt0de87ff52d9c34a8/blt108429f27a1d5136/66d5498f103eb51389c4c65a/INT_homepage_1920x1285_OI-GLOBAL_02.jpg?branch=prd&width=1400&quality=75&format=pjpg&auto=webp"
+                                src={bannerImage}
+                                srcSet={bannerImage}
                                 style={{ backgroundColor: "#E9E9E9" }}
                                 className="imagery imagery--fluid imagery--cover-right"
                                 alt=""
@@ -24,7 +26,7 @@ export default function () {
                                 <div className="home-banner__content">
                                     <span className="u-text-decoration--none">
                                         <h1 className="home-banner__title" data-cy="home-banner-title">
-                                            Only Intrepid
+                                            {/* Only Intrepiid */}
                                         </h1>
                                     </span>
                                     <span></span>
