@@ -9,7 +9,7 @@ export default function IdCard() {
 
     const handleCopy = () => {
         if (navigator.clipboard) {
-            const invitationMessage = `Hey! Join me on Intrepid and get started with amazing features. Use my referral code: ${user.referralNumber} to sign up and enjoy exclusive benefits!`;
+            const invitationMessage = `Hey! Join me on Intrepid and get started with amazing features. Use my referral code: ${user.referralNo} to sign up and enjoy exclusive benefits!`;
 
             navigator.clipboard.writeText(invitationMessage)
                 .then(() => {
