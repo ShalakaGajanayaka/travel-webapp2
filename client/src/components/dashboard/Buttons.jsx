@@ -17,34 +17,34 @@ export default function FuturisticButtons() {
 
   return (
     <div className="max-w-7xl mx-auto px-4">
-      <dl className="grid grid-cols-2 gap-6 mb-6 sm:grid-cols-4 lg:gap-8">
+      <dl className="grid grid-cols-2 gap-5 mb-6 sm:grid-cols-4 lg:gap-6">
         {stats.map((item) => (
           <div
             onClick={() => navigate(item.nav)}
             key={item.id}
-            className="group relative flex flex-col items-center p-6 transition-all duration-300 bg-gray-900 rounded-xl cursor-pointer hover:bg-opacity-90 hover:shadow-2xl hover:-translate-y-1 border border-transparent hover:border-cyan-400/20 overflow-hidden"
+            className="group relative flex flex-col items-center p-6 transition-all duration-300 bg-gradient-to-br from-[#f0f4ff] to-[#e6f0ff] rounded-xl cursor-pointer hover:shadow-xl hover:-translate-y-1 border border-gray-200/80 hover:border-blue-300 overflow-hidden"
           >
-            {/* Holographic effect */}
-            <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            {/* Floating gradient orb background */}
+            <div className="absolute -bottom-10 -right-10 w-32 h-32 rounded-full bg-gradient-to-r from-blue-200/40 to-cyan-200/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl"></div>
             
-            {/* Glowing border effect */}
-            <div className="absolute inset-0 rounded-xl border border-cyan-400/0 group-hover:border-cyan-400/30 transition-all duration-500 pointer-events-none"></div>
+            {/* Glow effect */}
+            <div className="absolute inset-0 rounded-xl bg-blue-100/0 group-hover:bg-blue-100/20 transition-all duration-500 pointer-events-none"></div>
             
-            {/* Icon container with futuristic styling */}
-            <div className="relative z-10 p-4 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-full shadow-lg group-hover:shadow-cyan-500/20 transition-all duration-300">
+            {/* Icon container with futuristic gradient */}
+            <div className="relative z-10 p-4 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-full shadow-md group-hover:shadow-blue-400/30 transition-all duration-300">
               <item.icon aria-hidden="true" className="text-white w-7 h-7" />
-              {/* Subtle glow */}
-              <div className="absolute inset-0 rounded-full bg-cyan-400/20 blur-[12px] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              {/* Subtle reflection effect */}
+              <div className="absolute top-1 right-1 w-3 h-3 rounded-full bg-white/30"></div>
             </div>
             
-            {/* Text with futuristic styling */}
-            <p className="relative z-10 mt-4 text-base font-medium text-white group-hover:text-cyan-300 transition-colors duration-300 tracking-wider">
+            {/* Text with modern styling */}
+            <p className="relative z-10 mt-4 text-base font-semibold text-gray-700 group-hover:text-blue-600 transition-colors duration-300">
               {item.name}
             </p>
             
-            {/* Subtle particle effect */}
-            <div className="absolute bottom-2 left-4 w-2 h-2 rounded-full bg-cyan-400/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100"></div>
-            <div className="absolute top-4 right-4 w-1 h-1 rounded-full bg-purple-400/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-200"></div>
+            {/* Futuristic corner accents */}
+            <div className="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 border-blue-400/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <div className="absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 border-blue-400/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           </div>
         ))}
       </dl>
