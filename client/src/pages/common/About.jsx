@@ -3,7 +3,7 @@ import Index from '../../components/about/Index'
 
 export default function About() {
   return (
-    <div>
+    <div className='mb-6'>
         <Index />
     </div>
   )

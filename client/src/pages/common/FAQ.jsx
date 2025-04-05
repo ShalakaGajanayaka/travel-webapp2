@@ -3,7 +3,7 @@ import Index from '../../components/faq/Index'
 
 export default function FAQ() {
     return (
-        <div>
+        <div className='mb-6'>
             <Index />
         </div>
     )

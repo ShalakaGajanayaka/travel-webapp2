@@ -3,7 +3,7 @@ import Index from '../../components/tc/Index'
 
 export default function Terms() {
   return (
-    <div>
+    <div className='mb-6'>
         <Index />
     </div>
   )
