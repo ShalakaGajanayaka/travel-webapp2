@@ -12,12 +12,14 @@ import { useNavigate, useLocation } from 'react-router-dom'
 import UserMenu from './UserMenu'
 import UserMenuMobile from './UserMenuMobile'
 import logo from '../assets/images/intrepid-logo.svg';
+import { QuestionMarkCircleIcon } from '@heroicons/react/20/solid'
 
 const navigation = [
   { name: 'Home', href: '/dashboard', icon: HomeIcon },
   { name: 'Assign Post', href: '/tasks', icon: RectangleStackIcon },
   { name: 'Assign History', href: '/history', icon: ClockIcon },
-  { name: 'Earnings', href: '/earnings', icon: CurrencyDollarIcon },
+  { name: 'FAQ', href: '/faq', icon: QuestionMarkCircleIcon },
+  // { name: 'Earnings', href: '/earnings', icon: CurrencyDollarIcon },
   { name: 'Invites', href: '/invites', icon: UsersIcon },
 ]
 //bar
