@@ -21,7 +21,7 @@ export default function Index() {
             </h1>
             <p className="mt-4 text-lg leading-relaxed text-gray-700">
               Welcome to{" "}
-              <span className="font-semibold text-indigo-600">Intrepid.Expert</span>,
+              <span className="font-semibold text-indigo-600">Intrepiid</span>,
               your trusted platform for travel marketing and data entry solutions.
               We are committed to providing high-quality services that empower businesses
               and individuals to achieve their goals in the evolving digital landscape.
@@ -31,7 +31,7 @@ export default function Index() {
           <div className="max-w-5xl mx-auto mt-10 space-y-6 text-lg text-gray-700 animate-fadeIn">
             <p>
               At{" "}
-              <span className="font-semibold text-indigo-600">Intrepid.Expert</span>,
+              <span className="font-semibold text-indigo-600">Intrepiid</span>,
               we believe in seamless and user-friendly experiences. Whether you are looking to
               optimize your marketing strategies, enhance customer engagement, or streamline
               data entry tasks, our platform offers the tools and resources necessary for success.
@@ -50,13 +50,13 @@ export default function Index() {
 
             <p>
               Whether you are an individual freelancer or a large enterprise,{" "}
-              <span className="font-semibold text-indigo-600">Intrepid.Expert</span> is here to
+              <span className="font-semibold text-indigo-600">Intrepiid</span> is here to
               support your journey toward efficiency and growth.
             </p>
 
             <p className="mt-6 text-xl font-semibold text-center text-gray-900">
               Join us and explore new possibilities in travel marketing and data management with{" "}
-              <span className="text-indigo-600">Intrepid.Expert</span>.
+              <span className="text-indigo-600">Intrepiid</span>.
             </p>
           </div>
         </div>
