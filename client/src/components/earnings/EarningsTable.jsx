@@ -11,7 +11,7 @@ export default function EarningsTable() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const { user } = useAuth();
-    
+
     useEffect(() => {
         const fetchCompletedTasks = async () => {
             try {
@@ -36,12 +36,16 @@ export default function EarningsTable() {
     }
 
     return (
-        <div className="px-4 sm:px-6 lg:px-8">
-            <div className="sm:flex sm:items-center">
-                <div className="sm:flex-auto">
-                    <p className="mt-2 text-sm text-gray-700">All of your earnings will display here.</p>
-                </div>
+        <div className="px-4 mt-6 sm:px-6 lg:px-8">
+            <div className="text-left mb-4">
+                <h2 className="text-2xl font-bold text-[#112D4E]">
+                    Your Completed Tasks!
+                </h2>
+                <p className="mt-1 text-[#3F72AF]">
+                    All of your earnings will display here.
+                </p>
             </div>
+
             <div className="grid grid-cols-1 gap-6 mt-8 sm:grid-cols-2 lg:grid-cols-3">
                 {completedTasks.map((task) => (
                     <div key={task.taskId._id} className="col-span-1 bg-[#F9F7F7] divide-y divide-gray-200 rounded-lg shadow-lg hover:shadow-2xl transition duration-300">
