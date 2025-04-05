@@ -2,12 +2,12 @@ import { ArrowDownTrayIcon, ArrowUpTrayIcon, WalletIcon, UserIcon, ShieldExclama
 import { useNavigate } from 'react-router-dom';
 
 const stats = [
-  { id: 1, name: 'Deposit', icon: ArrowDownTrayIcon, nav: '/deposit' },
-  { id: 2, name: 'Withdrawal', icon: ArrowUpTrayIcon, nav: '/withdrawal' },
   { id: 3, name: 'Link Wallet', icon: WalletIcon, nav: '/linkWallet' },
   { id: 4, name: 'Employee ID', icon: IdentificationIcon, nav: '/empId' },
   { id: 5, name: 'Support', icon: UserIcon, nav: '/support' },
   { id: 6, name: 'About us', icon: ShieldExclamationIcon, nav: '/about' },
+  { id: 2, name: 'Withdrawal', icon: ArrowUpTrayIcon, nav: '/withdrawal' },
+  { id: 1, name: 'Deposit', icon: ArrowDownTrayIcon, nav: '/deposit' },
   { id: 7, name: 'FAQs', icon: QuestionMarkCircleIcon, nav: '/faq' },
   { id: 8, name: 'T&C', icon: DocumentTextIcon, nav: '/tc' },
 ];
@@ -16,7 +16,7 @@ export default function Buttons() {
   const navigate = useNavigate();
 
   return (
-<div>
+    <div>
       <dl className="grid grid-cols-2 gap-6 mb-6 sm:grid-cols-4">
         {stats.map((item) => (
           <div
