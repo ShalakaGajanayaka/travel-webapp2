@@ -39,68 +39,102 @@ connectDB();
 
 
 const travelDestinations = [
-  { name: "Paris", image: "https://media.istockphoto.com/id/2119799972/photo/spring-evening-view-of-the-eiffel-tower-in-paris.jpg?s=1024x1024&w=is&k=20&c=2K8nNcS9i5vXjGkLhFtJwITDi7UX4YOyxGh4UX6KoSI=" },
-  { name: "New York", image: "https://media.istockphoto.com/id/1406960186/photo/the-skyline-of-new-york-city-united-states.jpg?s=1024x1024&w=is&k=20&c=m5cYGPJsDS6nTsxYucy6jlCj7flGliYw6Lf4Ftg0jQs=" },
-  { name: "Tokyo", image: "https://media.istockphoto.com/id/598919748/photo/view-of-tokyo-skyline-at-sunset.jpg?s=1024x1024&w=is&k=20&c=KhNea-Cj5rBlAkdG7RSctzoJOBSBiOCXiWsRGn-e5rY=" },
-  { name: "London", image: "https://media.istockphoto.com/id/1347665170/photo/london-at-sunset.jpg?s=1024x1024&w=is&k=20&c=ogVKCS26t23fSvgCO77CC_6mhtxMDk2cmBOUQ9VamYo=" },
-  { name: "Sydney", image: "https://media.istockphoto.com/id/2157582170/photo/light-trail-cityscape-sydney-harbor-circular-quay-new-south-wales-australia.jpg?s=1024x1024&w=is&k=20&c=IFLHK1OoMYSUcogQLqOB_ME8LNtecuRc_vm8OsHkZYQ=" },
-  { name: "Rome", image: "https://media.istockphoto.com/id/539115110/photo/colosseum-in-rome-and-morning-sun-italy.jpg?s=1024x1024&w=is&k=20&c=VzsI_-yWmldqLzFoRpfRCGsx5RkIEytRIVEFZ5Am01E=" },
-  { name: "Berlin", image: "https://media.istockphoto.com/id/503874284/photo/berlin-skyline-with-spree-river-at-sunset-germany.jpg?s=1024x1024&w=is&k=20&c=tDWGKjtGWIqbO1d096rPS8A8DIhQfcpdQbTQgxPKZ-Q=" },
-  { name: "Dubai", image: "https://media.istockphoto.com/id/1572334424/photo/dubai.jpg?s=1024x1024&w=is&k=20&c=zeyO5dpuwsxyc922a3tu6DI2vCHr9QuzoGUuSSjxaYA=" },
-  { name: "Barcelona", image: "https://media.istockphoto.com/id/1301579230/photo/spanish-cities-the-sacred-barcelona-family.jpg?s=1024x1024&w=is&k=20&c=mXWYXPJT7DUM9K_RBetQHpC7M5ITcsLWRryxikTksGA=" },
-  { name: "Istanbul", image: "https://media.istockphoto.com/id/1327842864/photo/blue-mosque-of-istanbul-famous-place-of-visit-turkey.jpg?s=1024x1024&w=is&k=20&c=PnQahBSa5Rbd8-uHZAeq4vbQ4NOsQ6nTEPWd7dtuoTs=" },
-  { name: "Bangkok", image: "https://media.istockphoto.com/id/483816132/photo/bangkok-cityscape.jpg?s=1024x1024&w=is&k=20&c=gqDw9xwNMlqzUG-mTh5Sh7VY96ifTCq02HzFqNBZrC0=" },
-  { name: "Los Angeles", image: "https://media.istockphoto.com/id/1462206892/photo/downtown-los-angeles-skyline-view-from-echo-lake-park.jpg?s=1024x1024&w=is&k=20&c=zyvm8ZRXHTl1gXtEn8avOirY2XiWpf6SCKR865iwzEY=" },
-  { name: "Singapore", image: "https://media.istockphoto.com/id/590050726/photo/singapore-glowing-at-night.jpg?s=1024x1024&w=is&k=20&c=RDybwcdhLM1XH8OvFez6tyauD2dI08oq_ghDkPqTzEU=" },
-  { name: "Amsterdam", image: "https://media.istockphoto.com/id/1352073906/photo/amsterdam-downtown-amstel-river-old-houses-and-a-bridge-nice-view-of-the-famous-city-of.jpg?s=1024x1024&w=is&k=20&c=1vZ-KIn0RyM4lXgF_PJPI1Iaw3-flR5gGzbPXjjw0MI=" },
-  { name: "Madrid", image: "https://media.istockphoto.com/id/1303417572/photo/madrid-spain-sunrise-city-skyline-at-cibeles-fountain-town-square.jpg?s=1024x1024&w=is&k=20&c=e_r6AqEoemZa-aE-QJJDd_QEobfa3qwxL_sPYQeT39s=" },
-  { name: "Cape Town", image: "https://media.istockphoto.com/id/620737858/photo/cape-town-and-the-12-apostels-from-above.jpg?s=1024x1024&w=is&k=20&c=Gp-7siInfi5ZXVfysn6IEOdbSXI7x_0CPGkVls6iU_A=" },
-  { name: "Hong Kong", image: "https://media.istockphoto.com/id/579757046/photo/hong-kong-city-view-from-peak-at-sunrise.jpg?s=1024x1024&w=is&k=20&c=dWiOSmT5jv8AoPr0kzJEMQM2wk7eeq4dUq6Iy9o4GgA=" },
-  { name: "Seoul", image: "https://media.istockphoto.com/id/621371796/photo/sunset-at-seoul-city-skyline-south-korea.jpg?s=1024x1024&w=is&k=20&c=ibUBCv8Pn9k97XIa7NnQi1UuQkmy1dMUF0N_S8sq5sc=" },
-  { name: "Moscow", image: "https://media.istockphoto.com/id/614724736/photo/festive-day-of-november.jpg?s=1024x1024&w=is&k=20&c=1-4cZV2watL2gT6Y4JrPrQNwOxAh0qIFoqxYXndguLU=" },
-  { name: "Rio de Janeiro", image: "https://media.istockphoto.com/id/518230906/photo/christ-the-redeemer-in-rio-de-janeiro.jpg?s=1024x1024&w=is&k=20&c=zjtXz3bzlh5W3OP16aSRao9KdY9p_rk76KK4eFgubxA=" },
-  { name: "San Francisco", image: "https://media.istockphoto.com/id/1571494714/photo/view-of-golden-gate-bridge.jpg?s=1024x1024&w=is&k=20&c=CjGq7GX4096tSqcfS6JXoFUUHrujBcBr-XqDWa9PY8Q=" },
-  { name: "Cairo", image: "https://media.istockphoto.com/id/1180786967/photo/panorama-of-cairo.jpg?s=1024x1024&w=is&k=20&c=SP2xGBoagUCIgekBQP8oO2RrzBA5WZYxAIIm38NXvg0=" },
-  { name: "Venice", image: "https://media.istockphoto.com/id/1356797222/photo/venice-grand-canal-view-of-the-rialto-bridge-and-gondoliers-italy.jpg?s=1024x1024&w=is&k=20&c=gLVQvHeoJxnzYDSAJFkOfBPe7s_hfDXVeK5cXTxhbeI=" },
-  { name: "Florence", image: "https://media.istockphoto.com/id/483876975/photo/panorama-of-florence-and-saint-mary.jpg?s=1024x1024&w=is&k=20&c=t4W_F9862QocNu2FzzcO-dLnHDG332bXO7h6Kk0r9Nc=" },
-  { name: "Prague", image: "https://media.istockphoto.com/id/1179665824/photo/prague-czech-republic.jpg?s=1024x1024&w=is&k=20&c=5ifGAwAJYfYsN-Ci8ljiPIdgyPi_e8s9fmXzeiZKiHc=" },
-  { name: "Vienna", image: "https://media.istockphoto.com/id/1432923297/photo/aerial-drone-photo-st-charles-church-karlskirche-at-sunset-vienna-austria.jpg?s=1024x1024&w=is&k=20&c=RCFU4KBqFeoiQR6IiFRlv6p-Y92hs3SQRIbrAx5gUoI=" }
+  { name: "Paris", image: "https://cdn.pixabay.com/photo/2015/10/06/18/26/eiffel-tower-975004_1280.jpg" },
+  { name: "New York", image: "https://cdn.pixabay.com/photo/2019/07/21/07/12/new-york-4352072_1280.jpg" },
+  { name: "Tokyo", image: "https://cdn.pixabay.com/photo/2013/11/25/09/47/buildings-217878_1280.jpg" },
+  { name: "London", image: "https://cdn.pixabay.com/photo/2017/05/18/21/54/london-bridge-2324875_1280.jpg" },
+  { name: "Sydney", image: "https://cdn.pixabay.com/photo/2014/06/06/09/36/sydney-opera-house-363244_1280.jpg" },
+  { name: "Rome", image: "https://cdn.pixabay.com/photo/2020/05/17/12/56/rome-5181486_1280.jpg" },
+  { name: "Berlin", image: "https://cdn.pixabay.com/photo/2019/11/30/16/13/berlin-4663539_1280.jpg" },
+  { name: "Dubai", image: "https://cdn.pixabay.com/photo/2020/03/19/18/29/camel-4948299_1280.jpg" },
+  { name: "Barcelona", image: "https://cdn.pixabay.com/photo/2013/04/22/14/20/spain-106463_1280.jpg" },
+  { name: "Istanbul", image: "https://cdn.pixabay.com/photo/2015/08/31/07/30/istanbul-915076_1280.jpg" },
+  { name: "Bangkok", image: "https://cdn.pixabay.com/photo/2020/02/20/13/25/city-4864747_1280.jpg" },
+  { name: "Los Angeles", image: "https://cdn.pixabay.com/photo/2014/10/22/17/34/los-angeles-498285_1280.jpg" },
+  { name: "Singapore", image: "https://cdn.pixabay.com/photo/2016/01/10/19/49/singapore-1132358_1280.jpg" },
+  { name: "Amsterdam", image: "https://cdn.pixabay.com/photo/2021/11/08/11/19/buildings-6778915_1280.jpg" },
+  { name: "Madrid", image: "https://cdn.pixabay.com/photo/2017/09/03/00/19/spain-2708993_1280.jpg" },
+  { name: "Cape Town", image: "https://cdn.pixabay.com/photo/2017/04/28/09/02/south-africa-2267795_1280.jpg" },
+  { name: "Hong Kong", image: "https://cdn.pixabay.com/photo/2019/07/29/10/35/hong-kong-4370342_1280.jpg" },
+  { name: "Seoul", image: "https://cdn.pixabay.com/photo/2022/10/15/16/44/night-view-7523474_1280.jpg" },
+  { name: "Moscow", image: "https://cdn.pixabay.com/photo/2018/12/26/05/13/moscow-3895333_1280.jpg" },
+  { name: "Rio de Janeiro", image: "https://cdn.pixabay.com/photo/2021/06/22/15/20/rio-de-janeiro-6356462_1280.jpg" },
+  { name: "San Francisco", image: "https://cdn.pixabay.com/photo/2019/12/05/05/50/san-francisco-4674351_1280.jpg" },
+  { name: "Cairo", image: "https://cdn.pixabay.com/photo/2018/08/24/11/28/mosque-3627765_1280.jpg" },
+  { name: "Venice", image: "https://cdn.pixabay.com/photo/2019/12/18/16/34/venice-4704342_1280.jpg" },
+  { name: "Florence", image: "https://cdn.pixabay.com/photo/2019/06/06/13/36/italy-4256018_1280.jpg" },
+  { name: "Prague", image: "https://cdn.pixabay.com/photo/2021/01/20/21/32/prague-5935651_1280.jpg" },
+  { name: "Vienna", image: "https://cdn.pixabay.com/photo/2017/01/23/21/05/castle-2003867_1280.jpg" }
 ];
 
 // Generate 400 tasks dynamically
-const tasks = Array.from({ length: 400 }, (_, i) => {
-  const tie = Math.random() < 0.5;
-  const destination = travelDestinations[i % travelDestinations.length]; 
+// const tasks = Array.from({ length: 400 }, (_, i) => {
+//   const tie = Math.random() < 0.5;
+//   const destination = travelDestinations[i % travelDestinations.length]; 
 
-  let value, profit;
+//   let value, profit;
 
-  if (tie) {
-    value = (Math.random() * (10000 - 100) + 100).toFixed(2); 
-    profit = (value * 0.1).toFixed(2); 
-  } else {
-    value = (Math.random() * 50).toFixed(2); 
-    profit = (value * 0.01).toFixed(2);
-  }
+//   if (tie) {
+//     value = (Math.random() * (10000 - 100) + 100).toFixed(2); 
+//     profit = (value * 0.1).toFixed(2); 
+//   } else {
+//     value = (Math.random() * 50).toFixed(2); 
+//     profit = (value * 0.01).toFixed(2);
+//   }
 
-  return {
-    name: `${destination.name} Trip ${i + 1}`,
-    value: parseFloat(value),
-    profit: parseFloat(profit),
-    tie,
-    link: destination.image, 
-  };
-});
+//   return {
+//     name: `${destination.name} Trip ${i + 1}`,
+//     value: parseFloat(value),
+//     profit: parseFloat(profit),
+//     tie,
+//     link: destination.image, 
+//   };
+// });
 
-const seedDB = async () => {
+// const seedDB = async () => {
+//   try {
+//     await Task.deleteMany();
+//     await Task.insertMany(tasks); 
+//     console.log("✅ 400 Tasks Seeded Successfully!");
+//     process.exit();
+//   } catch (error) {
+//     console.error("❌ Error Seeding Tasks:", error);
+//     process.exit(1);
+//   }
+// };
+
+// seedDB();
+
+const updateTaskImages = async () => {
   try {
-    await Task.deleteMany();
-    await Task.insertMany(tasks); 
-    console.log("✅ 400 Tasks Seeded Successfully!");
+    // Get all existing tasks (400 of them)
+    const existingTasks = await Task.find({});
+    
+    if (existingTasks.length === 0) {
+      console.log("❌ No tasks found in database");
+      process.exit(1);
+    }
+
+    console.log(`🔍 Found ${existingTasks.length} tasks to update`);
+
+    // Update each task with new image based on its position in the original array
+    const updatePromises = existingTasks.map(async (task, index) => {
+      const destinationIndex = index % travelDestinations.length;
+      const newImage = travelDestinations[destinationIndex].image;
+      
+      return Task.updateOne(
+        { _id: task._id },
+        { $set: { link: newImage } }
+      );
+    });
+
+    await Promise.all(updatePromises);
+    console.log("✅ All task images updated successfully!");
     process.exit();
   } catch (error) {
-    console.error("❌ Error Seeding Tasks:", error);
+    console.error("❌ Error updating task images:", error);
     process.exit(1);
   }
 };
 
-seedDB();
+updateTaskImages();
