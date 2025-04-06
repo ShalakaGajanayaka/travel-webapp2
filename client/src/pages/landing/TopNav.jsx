@@ -18,7 +18,7 @@ export default function TopNav() {
                       src={logoSmall}
                       height="56"
                       width="100"
-                      alt="Home"
+                      alt="Home" 
                       className="header-bar__top-logo-small"
                     />
                   </a>
