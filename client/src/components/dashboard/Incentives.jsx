@@ -15,7 +15,7 @@ export default function Incentives() {
           <div key={perkIdx} className="flex items-center bg-[#DBE2EF] p-6 rounded-lg shadow-lg hover:shadow-xl transition">
             <div className="p-3 bg-gradient-to-r from-[#3F72AF] to-[#112D4E] rounded-full shadow-inner">
               <perk.icon aria-hidden="true" className="w-8 h-8 text-white" />
-            </div>
+            </div> 
             <div className="ml-4">
               <h3 className="text-lg font-medium text-[#112D4E]">{perk.name}</h3>
               <p className="text-sm text-[#3F72AF]">{perk.description}</p>
