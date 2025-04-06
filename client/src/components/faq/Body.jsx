@@ -9,7 +9,7 @@ const faqs = [
   { question: "Can changes or cancellations be made after accepting an assigned journey?", answer: "No. Once an assigned journey has been accepted, changes, cancellations, or abandonment are strictly prohibited." },
   { question: "What are the consequences of inappropriate use of the account?", answer: "Any inappropriate use of the account will result in legal action." },
   { question: "Do I need to verify the deposit address before making a funds transfer?", answer: "Yes, it is advised to verify the deposit address with customer service before making any funds transfer." },
-  { question: "Will Intrepid.Expert be responsible for errors in transferring funds to the wrong deposit address?", answer: "No, Intrepid.Expert will not be held responsible for any errors resulting from transferring funds to the wrong deposit address." },
+  { question: "Will Intrepiid be responsible for errors in transferring funds to the wrong deposit address?", answer: "No, Intrepiid will not be held responsible for any errors resulting from transferring funds to the wrong deposit address." },
   { question: "Can I change or cancel a journey after accepting it?", answer: "No, once a journey has been accepted, changes, cancellation, or abandonment are strictly prohibited." },
   { question: "What is the time limit to complete an assigned journey deal?", answer: "Assigned journey deals must be completed within one day of acceptance. If unable to complete within one day, inform customer service immediately." },
   { question: "How many Ultimate Journeys can a Daily assign contain?", answer: "Daily assigns may contain 0-3 Ultimate Journeys." },

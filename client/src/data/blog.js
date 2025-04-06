@@ -111,342 +111,342 @@ const blogData = [
         "Exploring historic pubs"
       ]
     },
-    // {
-    //   "id": 5,
-    //   "name": "Rome",
-    //   "country": "Italy",
-    //   "continent": "Europe",
-    //   "description": "Rome, the capital of Italy, is a city steeped in history and ancient architecture. Visit iconic landmarks like the Colosseum and Roman Forum, enjoy delicious Italian cuisine, and experience the charm of quaint neighborhoods.",
-    //   "image": "https://cdn.pixabay.com/photo/2017/01/01/17/39/rome-1945033_1280.jpg",
-    //   "population": "2.8 million",
-    //   "currency": "Euro (EUR)",
-    //   "language": "Italian",
-    //   "best_time_to_visit": "Spring and Fall",
-    //   "top_attractions": [
-    //     "Colosseum",
-    //     "Vatican City",
-    //     "Pantheon",
-    //     "Trevi Fountain"
-    //   ],
-    //   "local_dishes": [
-    //     "Pasta",
-    //     "Pizza",
-    //     "Gelato"
-    //   ],
-    //   "activities": [
-    //     "Exploring ancient ruins",
-    //     "Attending Papal Audience",
-    //     "Visiting art galleries"
-    //   ]
-    // },
-    // {
-    //   "id": 6,
-    //   "name": "Bangkok",
-    //   "country": "Thailand",
-    //   "continent": "Asia",
-    //   "description": "Bangkok, the capital of Thailand, is a vibrant city known for its bustling markets, ornate temples, and energetic nightlife. Explore the Grand Palace, take a boat ride along the Chao Phraya River, and savor Thai street food.",
-    //   "image": "https://cdn.pixabay.com/photo/2017/04/22/14/31/bangkok-2251490_1280.jpg",
-    //   "population": "8.3 million",
-    //   "currency": "Thai Baht (THB)",
-    //   "language": "Thai",
-    //   "best_time_to_visit": "November to February",
-    //   "top_attractions": [
-    //     "Wat Arun",
-    //     "Chatuchak Weekend Market",
-    //     "Floating Markets",
-    //     "Khao San Road"
-    //   ],
-    //   "local_dishes": [
-    //     "Pad Thai",
-    //     "Tom Yum Goong",
-    //     "Som Tum (Green Papaya Salad)"
-    //   ],
-    //   "activities": [
-    //     "Exploring temples",
-    //     "Tuk-tuk rides",
-    //     "Thai cooking classes"
-    //   ]
-    // },
-    // {
-    //   "id": 7,
-    //   "name": "Sydney",
-    //   "country": "Australia",
-    //   "continent": "Oceania",
-    //   "description": "Sydney is a vibrant city known for its stunning harbor, iconic Opera House, and beautiful beaches. Climb the Sydney Harbour Bridge, relax at Bondi Beach, and explore the historic Rocks district.",
-    //   "image": "https://cdn.pixabay.com/photo/2016/03/27/00/01/australia-1281935_1280.jpg",
-    //   "population": "5.3 million",
-    //   "currency": "Australian Dollar (AUD)",
-    //   "language": "English",
-    //   "best_time_to_visit": "September to November, March to May",
-    //   "top_attractions": [
-    //     "Sydney Opera House",
-    //     "Bondi Beach",
-    //     "Sydney Harbour Bridge",
-    //     "Taronga Zoo"
-    //   ],
-    //   "local_dishes": [
-    //     "Meat Pie",
-    //     "Vegemite on Toast",
-    //     "Pavlova"
-    //   ],
-    //   "activities": [
-    //     "Harbor cruises",
-    //     "Coastal walks",
-    //     "Surfing"
-    //   ]
-    // },
-    // {
-    //   "id": 8,
-    //   "name": "Dubai",
-    //   "country": "United Arab Emirates",
-    //   "continent": "Asia",
-    //   "description": "Dubai is a city known for its modern architecture, luxury shopping, and impressive skyscrapers. Visit the Burj Khalifa, explore the Dubai Mall, and experience the vibrant culture of the city.",
-    //   "image": "https://cdn.pixabay.com/photo/2019/03/09/21/30/downtown-4045035_1280.jpg",
-    //   "population": "3.3 million",
-    //   "currency": "United Arab Emirates Dirham (AED)",
-    //   "language": "Arabic",
-    //   "best_time_to_visit": "November to April",
-    //   "top_attractions": [
-    //     "Burj Khalifa",
-    //     "Palm Jumeirah",
-    //     "Dubai Creek",
-    //     "Dubai Desert Safari"
-    //   ],
-    //   "local_dishes": [
-    //     "Shawarma",
-    //     "Falafel",
-    //     "Dates"
-    //   ],
-    //   "activities": [
-    //     "Shopping in souks",
-    //     "Dune bashing",
-    //     "Visit to Dubai Frame"
-    //   ]
-    // },
-    // {
-    //   "id": 9,
-    //   "name": "Cape Town",
-    //   "country": "South Africa",
-    //   "continent": "Africa",
-    //   "description": "Cape Town is a coastal city known for its stunning landscapes, diverse culture, and historic sites. Visit Table Mountain, explore the Cape Peninsula, and enjoy the vibrant waterfront.",
-    //   "image": "https://cdn.pixabay.com/photo/2013/04/11/18/57/cape-town-102825_1280.jpg",
-    //   "population": "4.0 million",
-    //   "currency": "South African Rand (ZAR)",
-    //   "language": "English, Afrikaans",
-    //   "best_time_to_visit": "October to April",
-    //   "top_attractions": [
-    //     "Table Mountain",
-    //     "Robben Island",
-    //     "Cape of Good Hope",
-    //     "Victoria & Alfred Waterfront"
-    //   ],
-    //   "local_dishes": [
-    //     "Biltong",
-    //     "Bobotie",
-    //     "Malva Pudding"
-    //   ],
-    //   "activities": [
-    //     "Wine tasting in Stellenbosch",
-    //     "Hiking in nature reserves",
-    //     "Visit to Kirstenbosch Botanical Garden"
-    //   ]
-    // },
-    // {
-    //   "id": 10,
-    //   "name": "Rio de Janeiro",
-    //   "country": "Brazil",
-    //   "continent": "South America",
-    //   "description": "Rio de Janeiro is a vibrant city known for its lively Carnival, stunning beaches, and iconic Christ the Redeemer statue. Enjoy the vibrant Copacabana and Ipanema beaches, explore the historic Santa Teresa neighborhood, and hike up to Sugarloaf Mountain.",
-    //   "image": "https://cdn.pixabay.com/photo/2017/01/08/19/30/rio-de-janeiro-1963744_1280.jpg",
-    //   "population": "6.7 million",
-    //   "currency": "Brazilian Real (BRL)",
-    //   "language": "Portuguese",
-    //   "best_time_to_visit": "December to March",
-    //   "top_attractions": [
-    //     "Christ the Redeemer",
-    //     "Copacabana Beach",
-    //     "Sugarloaf Mountain",
-    //     "Lapa Arches"
-    //   ],
-    //   "local_dishes": [
-    //     "Feijoada",
-    //     "Caipirinha",
-    //     "Açaí Bowl"
-    //   ],
-    //   "activities": [
-    //     "Samba dance lessons",
-    //     "Cable car ride to Sugarloaf Mountain",
-    //     "Trekking in Tijuca National Park"
-    //   ]
-    // },
-    // {
-    //   "id": 11,
-    //   "name": "Buenos Aires",
-    //   "country": "Argentina",
-    //   "continent": "South America",
-    //   "description": "Buenos Aires is a city known for its vibrant culture, tango music and dance, and historic neighborhoods. Explore the colorful streets of La Boca, visit the iconic Teatro Colon, and enjoy the city's lively nightlife.",
-    //   "image": "https://cdn.pixabay.com/photo/2019/03/19/22/48/city-4067225_1280.jpg",
-    //   "population": "2.8 million",
-    //   "currency": "Argentine Peso (ARS)",
-    //   "language": "Spanish",
-    //   "best_time_to_visit": "October to April",
-    //   "top_attractions": [
-    //     "La Boca Neighborhood",
-    //     "Recoleta Cemetery",
-    //     "Plaza de Mayo",
-    //     "San Telmo Market"
-    //   ],
-    //   "local_dishes": [
-    //     "Asado (Grilled Meat)",
-    //     "Empanadas",
-    //     "Mate (Traditional Tea)"
-    //   ],
-    //   "activities": [
-    //     "Tango dancing",
-    //     "Visit to Palermo Soho",
-    //     "Explore MALBA (Museum of Latin American Art)"
-    //   ]
-    // },
-    // {
-    //   "id": 12,
-    //   "name": "Prague",
-    //   "country": "Czech Republic",
-    //   "continent": "Europe",
-    //   "description": "Prague, the capital of the Czech Republic, is known for its stunning architecture, historic Old Town, and charming atmosphere. Explore Prague Castle, stroll across Charles Bridge, and enjoy traditional Czech beer.",
-    //   "image": "https://cdn.pixabay.com/photo/2016/11/21/14/02/prague-1845560_1280.jpg",
-    //   "population": "1.3 million",
-    //   "currency": "Czech Koruna (CZK)",
-    //   "language": "Czech",
-    //   "best_time_to_visit": "April to October",
-    //   "top_attractions": [
-    //     "Prague Castle",
-    //     "Charles Bridge",
-    //     "Old Town Square",
-    //     "Astronomical Clock"
-    //   ],
-    //   "local_dishes": [
-    //     "Goulash",
-    //     "Trdelník (Chimney Cake)",
-    //     "Svíčková (Braised Beef with Cream Sauce)"
-    //   ],
-    //   "activities": [
-    //     "Boat cruise on the Vltava River",
-    //     "Visit to Prague Zoo",
-    //     "Exploring Jewish Quarter"
-    //   ]
-    // },
-    // {
-    //   "id": 13,
-    //   "name": "Singapore",
-    //   "country": "Singapore",
-    //   "continent": "Asia",
-    //   "description": "Singapore is a modern city-state known for its clean streets, diverse cuisine, and futuristic architecture. Explore the iconic Marina Bay Sands, visit Gardens by the Bay, and enjoy shopping on Orchard Road.",
-    //   "image": "https://cdn.pixabay.com/photo/2013/02/07/17/32/singapore-79116_1280.jpg",
-    //   "population": "5.8 million",
-    //   "currency": "Singapore Dollar (SGD)",
-    //   "language": "English, Malay, Tamil, Chinese",
-    //   "best_time_to_visit": "February to April",
-    //   "top_attractions": [
-    //     "Marina Bay Sands",
-    //     "Gardens by the Bay",
-    //     "Sentosa Island",
-    //     "Chinatown"
-    //   ],
-    //   "local_dishes": [
-    //     "Hainanese Chicken Rice",
-    //     "Chilli Crab",
-    //     "Laksa"
-    //   ],
-    //   "activities": [
-    //     "Night safari at Singapore Zoo",
-    //     "Visit to Universal Studios Singapore",
-    //     "Shopping in Chinatown"
-    //   ]
-    // },
-    // {
-    //   "id": 14,
-    //   "name": "Barcelona",
-    //   "country": "Spain",
-    //   "continent": "Europe",
-    //   "description": "Barcelona is a lively city known for its unique architecture, sandy beaches, and rich cultural scene. Explore the works of Antoni Gaudí, relax on Barceloneta Beach, and experience the vibrant atmosphere of La Rambla.",
-    //   "image": "https://cdn.pixabay.com/photo/2014/08/26/14/11/cathedral-427997_1280.jpg",
-    //   "population": "1.6 million",
-    //   "currency": "Euro (EUR)",
-    //   "language": "Catalan, Spanish",
-    //   "best_time_to_visit": "May to July, September to October",
-    //   "top_attractions": [
-    //     "Sagrada Familia",
-    //     "Park Güell",
-    //     "Casa Batlló",
-    //     "Barri Gòtic (Gothic Quarter)"
-    //   ],
-    //   "local_dishes": [
-    //     "Tapas",
-    //     "Paella",
-    //     "Crema Catalana (Catalan Custard)"
-    //   ],
-    //   "activities": [
-    //     "Gaudi architecture tour",
-    //     "Visit to Picasso Museum",
-    //     "Wine tasting in Penedès"
-    //   ]
-    // },
-    // {
-    //   "id": 15,
-    //   "name": "Seoul",
-    //   "country": "South Korea",
-    //   "continent": "Asia",
-    //   "description": "Seoul is a dynamic city known for its modern skyscrapers, historic palaces, and K-pop culture. Visit Gyeongbokgung Palace, explore vibrant neighborhoods like Myeongdong, and enjoy the bustling street food scene.",
-    //   "image": "https://cdn.pixabay.com/photo/2021/01/08/21/43/hyangwonjeong-pavilion-5900902_1280.jpg",
-    //   "population": "9.7 million",
-    //   "currency": "South Korean Won (KRW)",
-    //   "language": "Korean",
-    //   "best_time_to_visit": "April to June, September to November",
-    //   "top_attractions": [
-    //     "Gyeongbokgung Palace",
-    //     "Myeongdong Shopping Street",
-    //     "N Seoul Tower",
-    //     "Hongdae"
-    //   ],
-    //   "local_dishes": [
-    //     "Bibimbap",
-    //     "Kimchi",
-    //     "Korean BBQ"
-    //   ],
-    //   "activities": [
-    //     "K-pop dance class",
-    //     "Visit to DMZ (Demilitarized Zone)",
-    //     "Traditional tea ceremony"
-    //   ]
-    // },
-    // {
-    //   "id": 16,
-    //   "name": "Hong Kong",
-    //   "country": "Hong Kong",
-    //   "continent": "Asia",
-    //   "description": "Hong Kong is a bustling city known for its impressive skyline, vibrant markets, and rich culinary scene. Explore Victoria Harbour, visit bustling street markets, and take the Peak Tram for stunning city views.",
-    //   "image": "https://cdn.pixabay.com/photo/2016/05/26/14/04/skyline-1417229_1280.jpg",
-    //   "population": "7.5 million",
-    //   "currency": "Hong Kong Dollar (HKD)",
-    //   "language": "Chinese, English",
-    //   "best_time_to_visit": "October to December, March to April",
-    //   "top_attractions": [
-    //     "Victoria Peak",
-    //     "Lan Kwai Fong",
-    //     "Hong Kong Disneyland",
-    //     "Temple Street Night Market"
-    //   ],
-    //   "local_dishes": [
-    //     "Dim Sum",
-    //     "Roast Goose",
-    //     "Egg Waffles"
-    //   ],
-    //   "activities": [
-    //     "Star Ferry ride",
-    //     "Visit to Ocean Park",
-    //     "Shopping in Causeway Bay"
-    //   ]
-    // },
+    {
+      "id": 5,
+      "name": "Rome",
+      "country": "Italy",
+      "continent": "Europe",
+      "description": "Rome, the capital of Italy, is a city steeped in history and ancient architecture. Visit iconic landmarks like the Colosseum and Roman Forum, enjoy delicious Italian cuisine, and experience the charm of quaint neighborhoods.",
+      "image": "https://cdn.pixabay.com/photo/2017/01/01/17/39/rome-1945033_1280.jpg",
+      "population": "2.8 million",
+      "currency": "Euro (EUR)",
+      "language": "Italian",
+      "best_time_to_visit": "Spring and Fall",
+      "top_attractions": [
+        "Colosseum",
+        "Vatican City",
+        "Pantheon",
+        "Trevi Fountain"
+      ],
+      "local_dishes": [
+        "Pasta",
+        "Pizza",
+        "Gelato"
+      ],
+      "activities": [
+        "Exploring ancient ruins",
+        "Attending Papal Audience",
+        "Visiting art galleries"
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Bangkok",
+      "country": "Thailand",
+      "continent": "Asia",
+      "description": "Bangkok, the capital of Thailand, is a vibrant city known for its bustling markets, ornate temples, and energetic nightlife. Explore the Grand Palace, take a boat ride along the Chao Phraya River, and savor Thai street food.",
+      "image": "https://cdn.pixabay.com/photo/2017/04/22/14/31/bangkok-2251490_1280.jpg",
+      "population": "8.3 million",
+      "currency": "Thai Baht (THB)",
+      "language": "Thai",
+      "best_time_to_visit": "November to February",
+      "top_attractions": [
+        "Wat Arun",
+        "Chatuchak Weekend Market",
+        "Floating Markets",
+        "Khao San Road"
+      ],
+      "local_dishes": [
+        "Pad Thai",
+        "Tom Yum Goong",
+        "Som Tum (Green Papaya Salad)"
+      ],
+      "activities": [
+        "Exploring temples",
+        "Tuk-tuk rides",
+        "Thai cooking classes"
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Sydney",
+      "country": "Australia",
+      "continent": "Oceania",
+      "description": "Sydney is a vibrant city known for its stunning harbor, iconic Opera House, and beautiful beaches. Climb the Sydney Harbour Bridge, relax at Bondi Beach, and explore the historic Rocks district.",
+      "image": "https://cdn.pixabay.com/photo/2016/03/27/00/01/australia-1281935_1280.jpg",
+      "population": "5.3 million",
+      "currency": "Australian Dollar (AUD)",
+      "language": "English",
+      "best_time_to_visit": "September to November, March to May",
+      "top_attractions": [
+        "Sydney Opera House",
+        "Bondi Beach",
+        "Sydney Harbour Bridge",
+        "Taronga Zoo"
+      ],
+      "local_dishes": [
+        "Meat Pie",
+        "Vegemite on Toast",
+        "Pavlova"
+      ],
+      "activities": [
+        "Harbor cruises",
+        "Coastal walks",
+        "Surfing"
+      ]
+    },
+    {
+      "id": 8,
+      "name": "Dubai",
+      "country": "United Arab Emirates",
+      "continent": "Asia",
+      "description": "Dubai is a city known for its modern architecture, luxury shopping, and impressive skyscrapers. Visit the Burj Khalifa, explore the Dubai Mall, and experience the vibrant culture of the city.",
+      "image": "https://cdn.pixabay.com/photo/2019/03/09/21/30/downtown-4045035_1280.jpg",
+      "population": "3.3 million",
+      "currency": "United Arab Emirates Dirham (AED)",
+      "language": "Arabic",
+      "best_time_to_visit": "November to April",
+      "top_attractions": [
+        "Burj Khalifa",
+        "Palm Jumeirah",
+        "Dubai Creek",
+        "Dubai Desert Safari"
+      ],
+      "local_dishes": [
+        "Shawarma",
+        "Falafel",
+        "Dates"
+      ],
+      "activities": [
+        "Shopping in souks",
+        "Dune bashing",
+        "Visit to Dubai Frame"
+      ]
+    },
+    {
+      "id": 9,
+      "name": "Cape Town",
+      "country": "South Africa",
+      "continent": "Africa",
+      "description": "Cape Town is a coastal city known for its stunning landscapes, diverse culture, and historic sites. Visit Table Mountain, explore the Cape Peninsula, and enjoy the vibrant waterfront.",
+      "image": "https://cdn.pixabay.com/photo/2013/04/11/18/57/cape-town-102825_1280.jpg",
+      "population": "4.0 million",
+      "currency": "South African Rand (ZAR)",
+      "language": "English, Afrikaans",
+      "best_time_to_visit": "October to April",
+      "top_attractions": [
+        "Table Mountain",
+        "Robben Island",
+        "Cape of Good Hope",
+        "Victoria & Alfred Waterfront"
+      ],
+      "local_dishes": [
+        "Biltong",
+        "Bobotie",
+        "Malva Pudding"
+      ],
+      "activities": [
+        "Wine tasting in Stellenbosch",
+        "Hiking in nature reserves",
+        "Visit to Kirstenbosch Botanical Garden"
+      ]
+    },
+    {
+      "id": 10,
+      "name": "Rio de Janeiro",
+      "country": "Brazil",
+      "continent": "South America",
+      "description": "Rio de Janeiro is a vibrant city known for its lively Carnival, stunning beaches, and iconic Christ the Redeemer statue. Enjoy the vibrant Copacabana and Ipanema beaches, explore the historic Santa Teresa neighborhood, and hike up to Sugarloaf Mountain.",
+      "image": "https://cdn.pixabay.com/photo/2017/01/08/19/30/rio-de-janeiro-1963744_1280.jpg",
+      "population": "6.7 million",
+      "currency": "Brazilian Real (BRL)",
+      "language": "Portuguese",
+      "best_time_to_visit": "December to March",
+      "top_attractions": [
+        "Christ the Redeemer",
+        "Copacabana Beach",
+        "Sugarloaf Mountain",
+        "Lapa Arches"
+      ],
+      "local_dishes": [
+        "Feijoada",
+        "Caipirinha",
+        "Açaí Bowl"
+      ],
+      "activities": [
+        "Samba dance lessons",
+        "Cable car ride to Sugarloaf Mountain",
+        "Trekking in Tijuca National Park"
+      ]
+    },
+    {
+      "id": 11,
+      "name": "Buenos Aires",
+      "country": "Argentina",
+      "continent": "South America",
+      "description": "Buenos Aires is a city known for its vibrant culture, tango music and dance, and historic neighborhoods. Explore the colorful streets of La Boca, visit the iconic Teatro Colon, and enjoy the city's lively nightlife.",
+      "image": "https://cdn.pixabay.com/photo/2019/03/19/22/48/city-4067225_1280.jpg",
+      "population": "2.8 million",
+      "currency": "Argentine Peso (ARS)",
+      "language": "Spanish",
+      "best_time_to_visit": "October to April",
+      "top_attractions": [
+        "La Boca Neighborhood",
+        "Recoleta Cemetery",
+        "Plaza de Mayo",
+        "San Telmo Market"
+      ],
+      "local_dishes": [
+        "Asado (Grilled Meat)",
+        "Empanadas",
+        "Mate (Traditional Tea)"
+      ],
+      "activities": [
+        "Tango dancing",
+        "Visit to Palermo Soho",
+        "Explore MALBA (Museum of Latin American Art)"
+      ]
+    },
+    {
+      "id": 12,
+      "name": "Prague",
+      "country": "Czech Republic",
+      "continent": "Europe",
+      "description": "Prague, the capital of the Czech Republic, is known for its stunning architecture, historic Old Town, and charming atmosphere. Explore Prague Castle, stroll across Charles Bridge, and enjoy traditional Czech beer.",
+      "image": "https://cdn.pixabay.com/photo/2016/11/21/14/02/prague-1845560_1280.jpg",
+      "population": "1.3 million",
+      "currency": "Czech Koruna (CZK)",
+      "language": "Czech",
+      "best_time_to_visit": "April to October",
+      "top_attractions": [
+        "Prague Castle",
+        "Charles Bridge",
+        "Old Town Square",
+        "Astronomical Clock"
+      ],
+      "local_dishes": [
+        "Goulash",
+        "Trdelník (Chimney Cake)",
+        "Svíčková (Braised Beef with Cream Sauce)"
+      ],
+      "activities": [
+        "Boat cruise on the Vltava River",
+        "Visit to Prague Zoo",
+        "Exploring Jewish Quarter"
+      ]
+    },
+    {
+      "id": 13,
+      "name": "Singapore",
+      "country": "Singapore",
+      "continent": "Asia",
+      "description": "Singapore is a modern city-state known for its clean streets, diverse cuisine, and futuristic architecture. Explore the iconic Marina Bay Sands, visit Gardens by the Bay, and enjoy shopping on Orchard Road.",
+      "image": "https://cdn.pixabay.com/photo/2013/02/07/17/32/singapore-79116_1280.jpg",
+      "population": "5.8 million",
+      "currency": "Singapore Dollar (SGD)",
+      "language": "English, Malay, Tamil, Chinese",
+      "best_time_to_visit": "February to April",
+      "top_attractions": [
+        "Marina Bay Sands",
+        "Gardens by the Bay",
+        "Sentosa Island",
+        "Chinatown"
+      ],
+      "local_dishes": [
+        "Hainanese Chicken Rice",
+        "Chilli Crab",
+        "Laksa"
+      ],
+      "activities": [
+        "Night safari at Singapore Zoo",
+        "Visit to Universal Studios Singapore",
+        "Shopping in Chinatown"
+      ]
+    },
+    {
+      "id": 14,
+      "name": "Barcelona",
+      "country": "Spain",
+      "continent": "Europe",
+      "description": "Barcelona is a lively city known for its unique architecture, sandy beaches, and rich cultural scene. Explore the works of Antoni Gaudí, relax on Barceloneta Beach, and experience the vibrant atmosphere of La Rambla.",
+      "image": "https://cdn.pixabay.com/photo/2014/08/26/14/11/cathedral-427997_1280.jpg",
+      "population": "1.6 million",
+      "currency": "Euro (EUR)",
+      "language": "Catalan, Spanish",
+      "best_time_to_visit": "May to July, September to October",
+      "top_attractions": [
+        "Sagrada Familia",
+        "Park Güell",
+        "Casa Batlló",
+        "Barri Gòtic (Gothic Quarter)"
+      ],
+      "local_dishes": [
+        "Tapas",
+        "Paella",
+        "Crema Catalana (Catalan Custard)"
+      ],
+      "activities": [
+        "Gaudi architecture tour",
+        "Visit to Picasso Museum",
+        "Wine tasting in Penedès"
+      ]
+    },
+    {
+      "id": 15,
+      "name": "Seoul",
+      "country": "South Korea",
+      "continent": "Asia",
+      "description": "Seoul is a dynamic city known for its modern skyscrapers, historic palaces, and K-pop culture. Visit Gyeongbokgung Palace, explore vibrant neighborhoods like Myeongdong, and enjoy the bustling street food scene.",
+      "image": "https://cdn.pixabay.com/photo/2021/01/08/21/43/hyangwonjeong-pavilion-5900902_1280.jpg",
+      "population": "9.7 million",
+      "currency": "South Korean Won (KRW)",
+      "language": "Korean",
+      "best_time_to_visit": "April to June, September to November",
+      "top_attractions": [
+        "Gyeongbokgung Palace",
+        "Myeongdong Shopping Street",
+        "N Seoul Tower",
+        "Hongdae"
+      ],
+      "local_dishes": [
+        "Bibimbap",
+        "Kimchi",
+        "Korean BBQ"
+      ],
+      "activities": [
+        "K-pop dance class",
+        "Visit to DMZ (Demilitarized Zone)",
+        "Traditional tea ceremony"
+      ]
+    },
+    {
+      "id": 16,
+      "name": "Hong Kong",
+      "country": "Hong Kong",
+      "continent": "Asia",
+      "description": "Hong Kong is a bustling city known for its impressive skyline, vibrant markets, and rich culinary scene. Explore Victoria Harbour, visit bustling street markets, and take the Peak Tram for stunning city views.",
+      "image": "https://cdn.pixabay.com/photo/2016/05/26/14/04/skyline-1417229_1280.jpg",
+      "population": "7.5 million",
+      "currency": "Hong Kong Dollar (HKD)",
+      "language": "Chinese, English",
+      "best_time_to_visit": "October to December, March to April",
+      "top_attractions": [
+        "Victoria Peak",
+        "Lan Kwai Fong",
+        "Hong Kong Disneyland",
+        "Temple Street Night Market"
+      ],
+      "local_dishes": [
+        "Dim Sum",
+        "Roast Goose",
+        "Egg Waffles"
+      ],
+      "activities": [
+        "Star Ferry ride",
+        "Visit to Ocean Park",
+        "Shopping in Causeway Bay"
+      ]
+    },
     // {
     //   "id": 17,
     //   "name": "Vienna",

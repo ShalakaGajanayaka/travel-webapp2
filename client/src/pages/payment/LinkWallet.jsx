@@ -9,7 +9,7 @@ export default function LinkWallet() {
                 <h1 className="text-xl font-semibold text-white sm:truncate">Link Wallet</h1>
                 </div>
             </div>
-            <div className="px-4 mt-16 sm:px-6 lg:px-8">
+            <div className="px-4 py-8 sm:px-6 lg:px-8">
                 <LinkWalletBody />
             </div>
         </>

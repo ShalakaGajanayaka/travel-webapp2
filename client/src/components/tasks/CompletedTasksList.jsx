@@ -48,57 +48,70 @@ const CompletedTasksList = () => {
   }
 
   return (
-<>
-  {completedTasks ? (
-    <ul role="list" className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      <li
-        key={completedTasks._id}
-        className="col-span-1 bg-[#F9F7F7] divide-y divide-gray-200 rounded-lg shadow-lg hover:shadow-2xl transition duration-300"
-      >
-        <div className="flex flex-col items-center w-full p-6 space-y-4">
-          {/* Task Details */}
-          <div className="w-full text-center">
-            <h3 className="text-lg font-semibold text-[#112D4E] truncate">{completedTasks.name}</h3>
-            <div className="flex justify-center mt-2 space-x-3">
-              <span className="inline-flex items-center px-2 py-1 text-xs font-medium text-[#3F72AF] rounded-full bg-[#DBE2EF] ring-1 ring-inset ring-[#3F72AF]/20">
-                ${completedTasks.value}
-              </span>
-              <span className="inline-flex items-center px-2 py-1 text-xs font-medium text-[#3F72AF] rounded-full bg-[#DBE2EF] ring-1 ring-inset ring-[#3F72AF]/20">
-                ${completedTasks.profit}
-              </span>
-            </div>
+    <div className="px-4 mt-6 mb-6 sm:px-6 lg:px-8">
+      {completedTasks ? (
+        <>
+          <div className="text-left mb-4">
+            <h2 className="text-2xl font-bold text-[#112D4E]">
+              You have a Pending Task!
+            </h2>
+            <p className="mt-1 text-[#3F72AF]">
+              you need to complete this task to earn your profit.
+            </p>
           </div>
 
-          {/* Image Section */}
-          <div className="w-full">
-            <img
-              alt="Task Preview"
-              src={completedTasks.link}
-              className="object-cover w-full h-48 rounded-md shadow-md"
-            />
-          </div>
-        </div>
 
-        {/* Action Button */}
-        <div>
-          <div className="flex -mt-px divide-x divide-gray-200">
-            <div className="flex flex-1 w-0">
-              <a
-                onClick={() => navigate(`/task-overview`)}
-                className="relative inline-flex items-center justify-center flex-1 w-0 py-4 text-sm font-semibold text-[#112D4E] border border-transparent rounded-bl-lg cursor-pointer gap-x-3 hover:bg-[#DBE2EF] transition duration-300"
-              >
-                <EyeIcon aria-hidden="true" className="text-[#3F72AF] size-5" />
-                View Task
-              </a>
-            </div>
-          </div>
-        </div>
-      </li>
-    </ul>
-  ) : (
-    <ErrorPage errorMessage={'No data available.'} errorDesc="You have not completed any task yet." />
-  )}
-</>
+          <ul role="list" className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <li
+              key={completedTasks._id}
+              className="col-span-1 bg-[#F9F7F7] divide-y divide-gray-200 rounded-lg shadow-lg hover:shadow-2xl transition duration-300"
+            >
+              <div className="flex flex-col items-center w-full p-6 space-y-4">
+                {/* Task Details */}
+                <div className="w-full text-center">
+                  <h3 className="text-lg font-semibold text-[#112D4E] truncate">{completedTasks.name}</h3>
+                  <div className="flex justify-center mt-2 space-x-3">
+                    <span className="inline-flex items-center px-2 py-1 text-xs font-medium text-[#3F72AF] rounded-full bg-[#DBE2EF] ring-1 ring-inset ring-[#3F72AF]/20">
+                      ${completedTasks.value}
+                    </span>
+                    <span className="inline-flex items-center px-2 py-1 text-xs font-medium text-[#3F72AF] rounded-full bg-[#DBE2EF] ring-1 ring-inset ring-[#3F72AF]/20">
+                      ${completedTasks.profit}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Image Section */}
+                <div className="w-full">
+                  <img
+                    alt="Task Preview"
+                    src={completedTasks.link}
+                    className="object-cover w-full h-48 rounded-md shadow-md"
+                  />
+                </div>
+              </div>
+
+              {/* Action Button */}
+              <div>
+                <div className="flex -mt-px divide-x divide-gray-200">
+                  <div className="flex flex-1 w-0">
+                    <a
+                      onClick={() => navigate(`/task-overview`)}
+                      className="relative inline-flex items-center justify-center flex-1 w-0 py-4 text-sm font-semibold text-[#112D4E] border border-transparent rounded-bl-lg cursor-pointer gap-x-3 hover:bg-[#DBE2EF] transition duration-300"
+                    >
+                      <EyeIcon aria-hidden="true" className="text-[#3F72AF] size-5" />
+                      View Task
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </>
+      ) : (
+        // <ErrorPage errorMessage={'No data available.'} errorDesc="You have not completed any task yet." />
+        <></>
+      )}
+    </div>
   );
 };
 

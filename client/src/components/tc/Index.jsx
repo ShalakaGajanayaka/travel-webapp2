@@ -15,7 +15,7 @@ export default function Index() {
             <div className="max-w-4xl mx-auto text-center">
               <h1 className="text-3xl font-bold text-gray-900 sm:text-4xl">Terms & Conditions</h1>
               <p className="mt-4 text-lg leading-relaxed text-gray-700">
-                Welcome to <span className="font-semibold text-indigo-600">Intrepid.Expert</span>. These terms outline the rules and regulations for using our platform.
+                Welcome to <span className="font-semibold text-indigo-600">Intrepiid</span> These terms outline the rules and regulations for using our platform.
               </p>
             </div>
 
@@ -115,14 +115,14 @@ export default function Index() {
               <section>
                 <h2 className="text-2xl font-semibold text-gray-900">8. Governing Law and Jurisdiction</h2>
                 <ul className="pl-6 mt-2 space-y-2 list-disc">
-                  <li>This Agreement shall be governed by and construed in accordance with the laws of the jurisdiction where Intrepid.Expert is registered.</li>
-                  <li>Any disputes arising from this Agreement shall be resolved by the courts of the jurisdiction where Intrepid.Expert is registered.</li>
+                  <li>This Agreement shall be governed by and construed in accordance with the laws of the jurisdiction where Intrepiid is registered.</li>
+                  <li>Any disputes arising from this Agreement shall be resolved by the courts of the jurisdiction where Intrepiid is registered.</li>
                 </ul>
               </section>
 
               <footer className="mt-6 text-sm text-gray-600">
                 <p>Dear member, kindly read carefully for our Rules Description, thank you for your cooperation.</p>
-                <p className="mt-2">2025 Business IntrepidTravel Expert Ltd. All rights reserved.</p>
+                <p className="mt-2">2025 Business IntrepiidTravel Expert Ltd. All rights reserved.</p>
               </footer>
             </div>
           </div>
