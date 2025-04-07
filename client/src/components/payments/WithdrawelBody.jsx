@@ -133,6 +133,21 @@ export default function WithdrawelBody() {
             });
 
             if (response.status === 201) {
+                // Record the transaction
+                const transaction = {
+                    userId: user._id,
+                    createdBy: user._id, // User is creating their own transaction
+                    transaction: parseFloat(value),
+                    type: '-' // Withdrawal is a negative transaction
+                };
+
+                try {
+                    await axiosInstance.post(`/api/transactions`, transaction);
+                } catch (transactionErr) {
+                    console.error("Error recording transaction:", transactionErr.response?.data?.message);
+                    // Continue with the success flow even if transaction recording fails
+                }
+
                 setAlert({ open: true, message: "Withdrawal successful!", severity: 'success' });
                 setValue(0);
                 setPin("");
