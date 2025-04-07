@@ -6,12 +6,14 @@ import EditUser from './EditUser';
 import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../../../../utils/axiosInstance';
 import EditPermitions from './EditPermitions';
+import EditWallet from './EditWallet';
 
 export default function SettingsMenu({ user }) {
     const [isDemoCreateModalOpen, setIsDemoCreateModalOpen] = useState(false);
     const [isTieModalOpen, setIsTieModalOpen] = useState(false);
     const [isEditUserModalOpen, setIsEditUserModalOpen] = useState(false);
     const [isEditPermitionModalOpen, setIsEditPermitionModalOpen] = useState(false);
+    const [isEditWalletModalOpen, setIsEditWalletModalOpen] = useState(false);
     const navigate = useNavigate();
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
@@ -118,6 +120,19 @@ export default function SettingsMenu({ user }) {
                         <MenuItem>
                             {({ active }) => (
                                 <a
+                                    onClick={() => setIsEditWalletModalOpen(true)}
+                                    className={`block px-4 py-2 text-sm text-gray-700 ${active ? 'bg-gray-100' : ''}`}
+                                    href="#"
+                                >
+                                    Edit Wallet
+                                </a>
+                            )}
+                        </MenuItem>
+                    </div>
+                    <div className="py-1">
+                        <MenuItem>
+                            {({ active }) => (
+                                <a
                                     onClick={() => setIsEditPermitionModalOpen(true)}
                                     className={`block px-4 py-2 text-sm text-gray-700 ${active ? 'bg-gray-100' : ''}`}
                                     href="#"
@@ -198,6 +213,7 @@ export default function SettingsMenu({ user }) {
             <AdditionalDeductions open={isTieModalOpen} setOpen={setIsTieModalOpen} user2={user} />
             <EditUser open={isEditUserModalOpen} setOpen={setIsEditUserModalOpen} user={user} />
             <EditPermitions open={isEditPermitionModalOpen} setOpen={setIsEditPermitionModalOpen} user={user} />
+            <EditWallet open={isEditWalletModalOpen} setOpen={setIsEditWalletModalOpen} user={user} />
         </Menu>
     );
 }

@@ -112,7 +112,15 @@ const createWallet = async (req, res) => {
 
 const getUserWallet = async (req, res) => {
   try {
-    const userId = req.user._id; // Assuming authentication middleware sets req.user
+    let userId;
+    
+    // Check if userId is provided in params (admin route)
+    if (req.params.userId) {
+      userId = req.params.userId;
+    } else {
+      // Use the authenticated user's ID (user route)
+      userId = req.user._id;
+    }
 
     // Fetch the user's wallet
     const wallet = await Wallet.findOne({ userId });
@@ -200,6 +208,33 @@ const getWithdrawalsByUser = async (req, res) => {
   }
 };
 
+const updateWallet = async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const { firstName, phone, walletAddress, network, cryptoType } = req.body;
+
+    // Find the wallet by userId
+    const wallet = await Wallet.findOne({ userId });
+
+    if (!wallet) {
+      return res.status(404).json({ message: "Wallet not found" });
+    }
+
+    // Update wallet fields
+    wallet.firstName = firstName || wallet.firstName;
+    wallet.phone = phone || wallet.phone;
+    wallet.walletAddress = walletAddress || wallet.walletAddress;
+    wallet.network = network || wallet.network;
+    wallet.cryptoType = cryptoType || wallet.cryptoType;
+
+    // Save the updated wallet
+    await wallet.save();
+
+    res.status(200).json({ message: "Wallet updated successfully", wallet });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
 
 module.exports = {
   getUserWallet,
@@ -209,5 +244,6 @@ module.exports = {
   getUser,
   updateUser,
   deleteUser,
-  updateReferralNumber
+  updateReferralNumber,
+  updateWallet
 };
