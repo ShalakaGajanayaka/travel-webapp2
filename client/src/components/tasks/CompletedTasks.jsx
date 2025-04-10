@@ -12,7 +12,7 @@ const CompletedTasks = () => {
         </div>
       </div>
         <CompletedTasksList />
-        <EarningsTable />
+        {/* <EarningsTable /> */}
     </div>
   );
 };
