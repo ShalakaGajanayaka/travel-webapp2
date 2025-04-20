@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../../utils/axiosInstance";
 import { checkAuth } from "../../utils/auth";
-import logo from '../../../public/images/intrepid-logo.svg';
+import logo from '../../assets/images/intrepid-logo.svg';
 
 const LoginPage = () => {
   const [userName, setEmail] = useState("");

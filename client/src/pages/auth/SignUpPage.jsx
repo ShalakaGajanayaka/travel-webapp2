@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../../utils/axiosInstance";
-import logo from '../../../public/images/intrepid-logo.svg';
 
 const SignUpPage = () => {
   const [formData, setFormData] = useState({
@@ -19,7 +18,7 @@ const SignUpPage = () => {
 
   // auto generate employee number
   useEffect(() => {
-    const generateEmployeeNo = () => {
+    const generateEmployeeNo = () => { 
       return 'EMPU' + Math.floor(10000 + Math.random() * 90000);
     };
     setFormData((prevData) => ({ ...prevData, employeeNo: generateEmployeeNo() }));
@@ -65,9 +64,7 @@ const SignUpPage = () => {
         <div className="text-center">
           <h3 className="text-sm font-semibold text-gray-500 uppercase">Create an Account</h3>
           <img
-            src={logo}
-            height="80"
-            width="166"
+            src="https://bookings.intrepidtravel.com/bookings/intrepid/images/fresh-logo-auth.svg"
             alt="Intrepid Logo"
             className="mx-auto my-4"
           />
