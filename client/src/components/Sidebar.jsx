@@ -11,7 +11,7 @@ import { RectangleStackIcon, ClockIcon, HomeIcon, XMarkIcon, CurrencyDollarIcon,
 import { useNavigate, useLocation } from 'react-router-dom'
 import UserMenu from './UserMenu'
 import UserMenuMobile from './UserMenuMobile'
-import logo from '../assets/images/intrepid-logo.svg';
+import logo from '../../public/images/intrepid-logo.svg';
 import { QuestionMarkCircleIcon } from '@heroicons/react/20/solid'
 
 const navigation = [
