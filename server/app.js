@@ -11,10 +11,30 @@ const app = express();
 
 // Environment Variables
 const PORT = parseInt(process.env.PORT, 10) || 3000;
-const FRONTEND_URL = [
-    process.env.FRONTEND_URL || "http://localhost:5173",
-    process.env.FRONTEND_URL_ALT || "http://localhost:5174",
+//const FRONTEND_URL = [
+  //  process.env.FRONTEND_URL || "http://localhost:5173",
+   // process.env.FRONTEND_URL_ALT || "http://localhost:5174",
+//];
+
+const allowedOrigins = [
+  process.env.FRONTEND_URL || "http://localhost:5173",
+  process.env.FRONTEND_URL_ALT || "http://localhost:5174"
 ];
+
+
+console.log("sample text : " + process.env.FRONTEND_URL)
+
+console.log(
+"done"
+);
+
+console.log(
+process.env.FRONTEND_URL
+);
+
+console.log(
+process.env.FRONTEND_URL_ALT
+);
 
 // Connect to MongoDB
 connectDB();
@@ -25,10 +45,30 @@ app.use((req, res, next) => {
     next();
 });
 
+
 app.use(cors({
-    origin: FRONTEND_URL,
-    credentials: true,
+  origin: function (origin, callback) {
+    console.log(origin);
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true
 }));
+
+//app.use(cors({
+//    origin: "*",
+//    credentials: false,
+//}));
+
+//app.use(cors({
+//  origin: (origin, callback) => {
+  //  callback(null, origin); // Reflect the origin back
+ // },
+ // credentials: true
+//}));
 
 app.use(bodyParser.json());
 app.use(cookieParser());
