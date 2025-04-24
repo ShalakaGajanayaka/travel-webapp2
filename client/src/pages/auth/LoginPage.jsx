@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axiosInstance from "../../utils/axiosInstance";
 import { checkAuth } from "../../utils/auth";
 import logo from '../../assets/images/intrepid-logo.svg';
+import bgImage from '../../assets/images/bg-image.jpg';
 
 const LoginPage = () => {
   const [userName, setEmail] = useState("");
@@ -65,8 +66,12 @@ const LoginPage = () => {
   };
 
   return (
+    // <div className="flex items-center justify-center min-h-screen bg-gray-200 bg-center bg-cover"
+    //   style={{ backgroundImage: "url('https://bookings.intrepidtravel.com/bookings/img/intrepid/intrepid-background.jpg')" }}>
+
     <div className="flex items-center justify-center min-h-screen bg-gray-200 bg-center bg-cover"
-      style={{ backgroundImage: "url('https://bookings.intrepidtravel.com/bookings/img/intrepid/intrepid-background.jpg')" }}>
+      style={{ backgroundImage: `url(${bgImage})` }}>
+
 
       <div className="w-full max-w-md p-6 mx-4 bg-white rounded-md shadow-md sm:mx-auto">
 
@@ -135,7 +140,7 @@ const LoginPage = () => {
             )}
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-              Username
+                Username
               </label>
               <input
                 id="email"
