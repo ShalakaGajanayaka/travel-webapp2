@@ -83,7 +83,7 @@ const LoginPage = () => {
             src={logo}
             height="80"
             width="166"
-            alt="Intrepid Logo"
+            alt="Intrepiid Logo"
             className="mx-auto my-2"
           />
         </div>
