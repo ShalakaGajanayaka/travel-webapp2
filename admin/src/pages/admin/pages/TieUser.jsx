@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useLocation } from "react-router-dom";
 import axiosInstance from "../../../utils/axiosInstance";
+import CreateTaskModal from "./Modals/CreateTaskModal";
 
 export default function TieUser() {
     const { id: userId } = useParams(); // Get userId from URL params
@@ -12,6 +13,7 @@ export default function TieUser() {
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
     const [loading, setLoading] = useState(false);
+    const [isCreateTaskModalOpen, setIsCreateTaskModalOpen] = useState(false);
 
     // Fetch tasks where tie is true
     const fetchTasks = async () => {
@@ -68,11 +70,24 @@ export default function TieUser() {
         }
     };
 
+    const handleTaskCreated = (newTask) => {
+        setTasks(prevTasks => [...prevTasks, newTask]);
+        setSuccess("Task created successfully!");
+    };
+
     return (
         <>
             <div className="px-4 py-4 border-b border-gray-200 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8">
                 <div className="flex-1 min-w-0">
                     <h1 className="font-medium text-gray-900 text-lg/6 sm:truncate">Tie User</h1>
+                </div>
+                <div className="mt-4 flex sm:mt-0 sm:ml-4">
+                    <button
+                        onClick={() => setIsCreateTaskModalOpen(true)}
+                        className="px-4 py-2 text-sm font-medium text-white bg-gradient-to-br from-blue-500 to-purple-600 rounded-md hover:from-blue-600 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
+                    >
+                        Create Task
+                    </button>
                 </div>
             </div>
             <div className="px-4 mt-6 sm:px-6 lg:px-8">
@@ -189,6 +204,12 @@ export default function TieUser() {
 
                 </div>
             </div>
+
+            <CreateTaskModal
+                isOpen={isCreateTaskModalOpen}
+                onClose={() => setIsCreateTaskModalOpen(false)}
+                onTaskCreated={handleTaskCreated}
+            />
         </>
     );
 }

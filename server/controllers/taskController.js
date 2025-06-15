@@ -3,20 +3,21 @@ const User = require('../models/User');
 
 // Add a new task
 async function addTask(req, res) {
-  const { title, description, points, link } = req.body;
+  const { name, value, profit, link, tie } = req.body;
 
   try {
     const newTask = new Task({
-      title,
+      name,
+      value,
+      profit,
       link,
-      description,
-      points,
+      tie
     });
 
     await newTask.save();
     res.status(201).json({ message: 'Task added successfully', task: newTask });
   } catch (error) {
-    res.status(500).json({ message: 'Error adding task', error });
+    res.status(500).json({ message: 'Error adding task', error: error.message });
   }
 }
 
