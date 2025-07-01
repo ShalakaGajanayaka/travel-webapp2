@@ -1,241 +1,229 @@
+import React, { useState } from 'react';
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  Button,
+  Box,
+  IconButton,
+  Menu,
+  MenuItem,
+  useTheme,
+  useMediaQuery,
+  Badge,
+  Avatar
+} from '@mui/material';
+import {
+  Menu as MenuIcon,
+  Search as SearchIcon,
+  FavoriteBorder,
+  PersonOutline,
+  Close
+} from '@mui/icons-material';
+import { styled } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
-import logo from '../../assets/images/intrepid-logo.svg';
-import logoSmall from '../../assets/images/intrepid-logo-small.svg';
+
+const ModernNavbar = styled(AppBar)(({ theme }) => ({
+  background: 'rgba(255,255,255,0.95)',
+  backdropFilter: 'blur(20px)',
+  borderBottom: '1px solid rgba(0,0,0,0.08)',
+  boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
+  color: theme.palette.text.primary,
+}));
+
+const NavButton = styled(Button)(({ theme }) => ({
+  color: theme.palette.text.primary,
+  fontWeight: 500,
+  borderRadius: '20px',
+  padding: '8px 16px',
+  textTransform: 'none',
+  '&:hover': {
+    backgroundColor: theme.palette.primary.main,
+    color: 'white',
+    transform: 'translateY(-1px)',
+  },
+  transition: 'all 0.3s ease',
+}));
+
+const ModernButton = styled(Button)(({ theme }) => ({
+  borderRadius: '25px',
+  padding: '10px 24px',
+  fontWeight: 600,
+  textTransform: 'none',
+  background: `linear-gradient(45deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
+  color: 'white',
+  '&:hover': {
+    transform: 'translateY(-2px)',
+    boxShadow: '0 8px 25px rgba(0,0,0,0.15)',
+  },
+  transition: 'all 0.3s ease',
+}));
+
+const UtilityButton = styled(IconButton)(({ theme }) => ({
+  borderRadius: '12px',
+  padding: '8px',
+  margin: '0 4px',
+  '&:hover': {
+    backgroundColor: theme.palette.primary.main + '10',
+    transform: 'scale(1.05)',
+  },
+  transition: 'all 0.3s ease',
+}));
 
 export default function TopNav() {
   const navigate = useNavigate();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  const [menuAnchorEl, setMenuAnchorEl] = useState(null);
+
+  const navItems = [
+    { label: 'Destinations', id: 'top' },
+    { label: 'Ways to travel', id: 'waystotravel' },
+    { label: 'Deals', id: 'deals' },
+    { label: 'About', id: 'footer' }
+  ];
+
+  // Smooth scroll handler
+  const handleNavClick = (id) => (e) => {
+    e.preventDefault();
+    if (id === 'top') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else if (id === 'footer') {
+      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    } else {
+      const section = document.getElementById(id);
+      if (section) {
+        section.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
 
   return (
-    <>
-      <header>
-        <div className="header">
-          <div data-cy="header-bar">
-            <div id="header-bar" className="header-bar">
-              <div className="header-bar__top">
-                <div className="header-bar__container">
-                  <a className="header-bar__top-logo">
-                    <img
-                      src={logoSmall}
-                      height="56"
-                      width="100"
-                      alt="Home" 
-                      className="header-bar__top-logo-small"
-                    />
-                  </a>
-                  <div className="header-bar__utilities">
-                    <div
-                      className="header-bar-mobile-drop-down-utility"
-                      data-cy="header-bar-mobile-drop-down-utility"
-                    >
-                      <button
-                        aria-label="magnify"
-                        className="header-bar-mobile-drop-down-utility__icon-button"
-                        data-cy="header-bar-mobile-drop-down-utility__icon-button"
-                      >
-                        <svg
-                          version="1.1"
-                          className="icon"
-                          role="presentation"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 24 24"
-                        >
-                          <path d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z"></path>
-                        </svg>
-                      </button>
-                    </div>
-                    <a
-                      className="header-bar-utility u-hidden-xs"
-                      aria-label="My Wishlist"
-                      data-cy="header-bar-utility__wishlist"
-                    >
-                      <div className="header-bar-utility__icon">
-                        <svg
-                          version="1.1"
-                          className="icon"
-                          role="presentation"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 24 24"
-                        >
-                          <path d="M12.1,18.55L12,18.65L11.89,18.55C7.14,14.24 4,11.39 4,8.5C4,6.5 5.5,5 7.5,5C9.04,5 10.54,6 11.07,7.36H12.93C13.46,6 14.96,5 16.5,5C18.5,5 20,6.5 20,8.5C20,11.39 16.86,14.24 12.1,18.55M16.5,3C14.76,3 13.09,3.81 12,5.08C10.91,3.81 9.24,3 7.5,3C4.42,3 2,5.41 2,8.5C2,12.27 5.4,15.36 10.55,20.03L12,21.35L13.45,20.03C18.6,15.36 22,12.27 22,8.5C22,5.41 19.58,3 16.5,3Z"></path>
-                        </svg>
-                      </div>
-                      <div className="header-bar-utility__title" data-cy="title">
-                        My Wishlist <span></span>
-                      </div>
-                    </a>
-                    <a
-                      className="header-bar-utility u-hidden-xs"
-                      aria-label="My Booking"
-                      data-cy="header-bar-utility"
-                      rel="nofollow"
-                    >
-                      <div className="header-bar-utility__icon">
-                        <svg
-                          version="1.1"
-                          className="icon"
-                          role="presentation"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 24 24"
-                        >
-                          <path d="M17.6,14.5c-0.7-0.6-1.5-1.1-2.6-1.4c-0.9,0.6-1.9,0.9-3,0.9c-1.2,0-2.2-0.3-3.1-0.9c-1,0.3-1.8,0.8-2.5,1.5C4.1,16.6,4,20,4,20h16C20,20,19.9,16.6,17.6,14.5z M12,4c2.4,0,4.3,1.9,4.3,4.3s-1.9,4.3-4.3,4.3s-4.3-1.9-4.3-4.3S9.6,4,12,4z"></path>
-                        </svg>
-                      </div>
-                      <div className="header-bar-utility__title" data-cy="title">
-                        My Booking <span></span>
-                      </div>
-                    </a>
+    <ModernNavbar position="fixed" elevation={0}>
+      <Toolbar sx={{ px: { xs: 2, md: 4 }, justifyContent: 'space-between' }}>
+        {/* Logo */}
+        <Typography
+          variant="h5"
+          sx={{
+            fontWeight: 'bold',
+            background: 'linear-gradient(45deg, #1976d2, #9c27b0)',
+            backgroundClip: 'text',
+            WebkitBackgroundClip: 'text',
+            color: 'transparent',
+            fontSize: { xs: '1.5rem', md: '2rem' },
+            cursor: 'pointer',
+          }}
+          onClick={() => navigate('/')}
+        >
+          🌍 Intrepid
+        </Typography>
 
-                    {/* <a
-                      className="header-bar-utility u-hidden-xs"
-                      aria-label="My Booking"
-                      data-cy="header-bar-utility"
-                      rel="nofollow"
-                    >
-                      <div className="header-bar-utility__icon">
-                        <svg
-                          version="1.1"
-                          className="icon"
-                          role="presentation"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 24 24"
-                        >
-                          <path d="M6.62,10.79C8.06,13.62 10.38,15.94 13.21,17.38L15.41,15.18C15.69,14.9 16.08,14.82 16.43,14.93C17.55,15.3 18.75,15.5 20,15.5C20.55,15.5 21,15.95 21,16.5V20C21,20.55 20.55,21 20,21C10.61,21 3,13.39 3,4C3,3.45 3.45,3 4,3H7.5C8.05,3 8.5,3.45 8.5,4C8.5,5.25 8.7,6.45 9.07,7.57C9.18,7.92 9.1,8.31 8.82,8.59L6.62,10.79Z"></path>
-                        </svg>
-                      </div>
-                      <div className="header-bar-utility__title" data-cy="title">
-                        fdf <span></span>
-                      </div>
-                    </a> */}
+        {/* Desktop Navigation */}
+        {!isMobile && (
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+            {navItems.map((item) => (
+              <NavButton
+                key={item.id}
+                onClick={handleNavClick(item.id)}
+              >
+                {item.label}
+              </NavButton>
+            ))}
+          </Box>
+        )}
 
-                    <button
-                      aria-label="menu"
-                      className="header-bar__toggle-menu"
-                      data-cy="header-bar-menu-toggle"
-                      style={{
-                        backgroundColor: "#ff0000",
-                        fontSize: "15px",
-                        padding: "5px",
-                        marginRight: "15px",
-                        borderRadius: "3px",
-                        fontWeight: "normal",
-                        color: "white",
-                        marginBottom: "15px",
-                        hoverBackgroundColor: "#c80000"
+        {/* Right Side Utilities */}
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+          {/* Search */}
+          <UtilityButton size="small">
+            <SearchIcon />
+          </UtilityButton>
 
-                      }}
-                      onClick={() => { navigate('/login') }}
-                    >
-                      Login
-                    </button>
-                  </div>
-                </div>
-              </div>
-              <div className="header-bar__bottom u-display--none md:u-display--block">
-                <div className="header-bar__container header-bar__container--flex">
-                  <nav
-                    className="header-bar__bottom-left"
-                    role="navigation"
-                    aria-label="Navigation"
-                  >
-                    <ul
-                      className="header-bar__navigation"
-                      role="menubar"
-                      aria-label="Menu"
-                    >
-                      <li className="header-bar__navigation-item " role="menuitem">
-                        <a
-                          className="header-bar__bottom-home-link"
-                          data-cy="header-bar-menu-item"
-                        >
-                          <img
-                            src={logo}
-                            height="80"
-                            width="166"
-                            alt="Home"
-                            className="header-bar__bottom-logo-large"
-                            style={{ position: 'absolute', bottom: '0', left: '0' }} 
-                          />
-                        </a>
-                      </li>
-                      <li className="header-bar__navigation-item" role="menuitem">
-                        <a
-                          className="header-bar__navigation-link"
-                          id="header-bar__navigation-link-1"
-                          data-cy="header-bar-menu-item"
-                          href='#trips'
-                        >
-                          Destinations
-                        </a>
-                      </li>
-                      <li className="header-bar__navigation-item" role="menuitem">
-                        <a
-                          className="header-bar__navigation-link"
-                          id="header-bar__navigation-link-2"
-                          data-cy="header-bar-menu-item"
-                          href='#waystotravel'
-                        >
-                          Ways to travel
-                        </a>
-                      </li>
-                      <li className="header-bar__navigation-item" role="menuitem">
-                        <a
-                          className="header-bar__navigation-link"
-                          id="header-bar__navigation-link-3"
-                          data-cy="header-bar-menu-item"
-                          href='#deals'
-                        >
-                          Deals
-                        </a>
-                      </li>
-                      <li className="header-bar__navigation-item" role="menuitem">
-                        <a
-                          className="header-bar__navigation-link"
-                          id="header-bar__navigation-link-4"
-                          data-cy="header-bar-menu-item"
-                          href='#introduction'
-                        >
-                          About
-                        </a>
-                      </li>
-                    </ul>
-                    <div>
-                      <span></span>
-                    </div>
-                  </nav>
-                  <div
-                    className="header-bar__bottom-right"
-                    data-cy="header-bar__bottom-right"
-                  >
-                    <div className="header-bar__bottom-right" data-cy="header-bar__bottom-right">
-                      <div className="find-trip find-trip--compact" data-cy="find-trip--compact">
-                        <button
-                          onClick={() => { navigate('/login') }} router-link="false" className="button find-trip__button button--special" data-cy="autocomplete-button" aria-label="search">
-                          Login
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="drawer drawer--right" data-cy="header-bar-drawer">
-                <div
-                  className="drawer__panel"
-                  style={{}}
-                  tabIndex="-1"
-                  data-cy="drawer-panel"
-                >
-                  <span></span>
-                </div>
-              </div>
-            </div>
-            <div className="header-bar-offset"></div>
-          </div>
-        </div>
-      </header>
-    </>
+          {/* Wishlist */}
+          {!isMobile && (
+            <Button
+              startIcon={<FavoriteBorder />}
+              sx={{
+                color: 'text.primary',
+                borderRadius: '20px',
+                textTransform: 'none',
+                '&:hover': { backgroundColor: 'primary.main', color: 'white' }
+              }}
+            >
+              My Wishlist
+              <Badge badgeContent={0} color="primary" sx={{ ml: 1 }} />
+            </Button>
+          )}
+
+          {/* Profile/Login */}
+          {!isMobile && (
+            <Button
+              startIcon={<PersonOutline />}
+              sx={{
+                color: 'text.primary',
+                borderRadius: '20px',
+                textTransform: 'none',
+                '&:hover': { backgroundColor: 'primary.main', color: 'white' }
+              }}
+            >
+              My Booking
+            </Button>
+          )}
+
+          {/* Login Button */}
+          <ModernButton
+            size={isMobile ? 'small' : 'medium'}
+            onClick={() => navigate('/login')}
+          >
+            Login
+          </ModernButton>
+
+          {/* Mobile Menu */}
+          {isMobile && (
+            <UtilityButton
+              onClick={(e) => setMenuAnchorEl(e.currentTarget)}
+            >
+              <MenuIcon />
+            </UtilityButton>
+          )}
+        </Box>
+
+        {/* Mobile Menu Dropdown */}
+        <Menu
+          anchorEl={menuAnchorEl}
+          open={Boolean(menuAnchorEl)}
+          onClose={() => setMenuAnchorEl(null)}
+          PaperProps={{
+            sx: {
+              borderRadius: 3,
+              mt: 1,
+              minWidth: 200,
+              boxShadow: '0 10px 40px rgba(0,0,0,0.1)',
+            }
+          }}
+        >
+          {navItems.map((item) => (
+            <MenuItem
+              key={item.id}
+              onClick={(e) => {
+                handleNavClick(item.id)(e);
+                setMenuAnchorEl(null);
+              }}
+              sx={{
+                py: 1.5,
+                '&:hover': {
+                  backgroundColor: 'primary.main',
+                  color: 'white',
+                }
+              }}
+            >
+              {item.label}
+            </MenuItem>
+          ))}
+          <MenuItem onClick={() => setMenuAnchorEl(null)}>My Wishlist</MenuItem>
+          <MenuItem onClick={() => setMenuAnchorEl(null)}>My Booking</MenuItem>
+        </Menu>
+      </Toolbar>
+    </ModernNavbar>
   );
 }
