@@ -196,7 +196,7 @@ export default function Trips() {
                
                <PriceChip
                  label={`From ${trip.newPrice}`}
-                 color="primary"
+                //  color="primary"
                />
                
                <IconButton
