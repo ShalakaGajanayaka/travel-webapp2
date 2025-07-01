@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Container, Typography, Chip } from '@mui/material';
+import { Box, Container, Typography } from '@mui/material';
 import { TrendingUp, Public, Groups } from '@mui/icons-material';
 import { styled } from '@mui/material/styles';
 
@@ -16,10 +16,27 @@ const StatsContainer = styled(Box)(({ theme }) => ({
 const StatItem = styled(Box)(({ theme }) => ({
   textAlign: 'center',
   padding: theme.spacing(2),
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
   '&:hover': {
     transform: 'translateY(-5px)',
     transition: 'transform 0.3s ease',
   }
+}));
+
+const IconContainer = styled(Box)(({ theme, bgcolor }) => ({
+  width: 60,
+  height: 60,
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  borderRadius: '16px',
+  backgroundColor: bgcolor,
+  color: 'white',
+  fontSize: '2rem',
+  marginBottom: theme.spacing(2),
+  mx: 'auto',
 }));
 
 export default function Introduction() {
@@ -85,20 +102,17 @@ export default function Introduction() {
         >
           {stats.map((stat, index) => (
             <StatItem key={index}>
-              <Chip
-                icon={stat.icon}
-                label=""
-                color={stat.color}
-                sx={{
-                  width: 60,
-                  height: 60,
-                  mb: 2,
-                  '& .MuiChip-icon': {
-                    fontSize: '2rem',
-                    margin: 0,
-                  }
-                }}
-              />
+              <IconContainer
+                bgcolor={(theme) =>
+                  stat.color === 'primary'
+                    ? theme.palette.primary.main
+                    : stat.color === 'secondary'
+                    ? theme.palette.secondary.main
+                    : theme.palette.success.main
+                }
+              >
+                {stat.icon}
+              </IconContainer>
               <Typography
                 variant="h3"
                 sx={{
