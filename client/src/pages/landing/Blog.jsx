@@ -67,7 +67,7 @@ export default function Blog() {
       imageUrl: 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=500',
       link: 'javascript:void(0)',
       excerpt: 'Capture stunning memories with these expert photography techniques.',
-      readTime: '6 min read',
+      readTime: '6 min read',      readTime: '6 min read',
       category: 'Tips & Guides'
     }
   ];
@@ -117,7 +117,12 @@ export default function Blog() {
                   image={post.imageUrl}
                   alt={post.title}
                   className="blog-media"
-                  sx={{ transition: 'transform 0.3s ease' }}
+                  sx={{
+                    width: '100%',
+                    height: 250,
+                    objectFit: 'cover',
+                    transition: 'transform 0.3s ease'
+                  }}
                 />
                 <DateChip
                   icon={<AccessTime />}
