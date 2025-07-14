@@ -1,8 +1,10 @@
 import React, { useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
+import { ThemeProvider, CssBaseline, Box } from '@mui/material';
 import Sidebar from "../components/Sidebar";
 import { useAuth } from "../context/AuthContext";
 import { checkAuth } from "../utils/auth";
+import { theme } from "../theme/theme"; // Import the shared theme
 
 const MainLayout = () => {
     const { user, setUser } = useAuth();
@@ -21,14 +23,28 @@ const MainLayout = () => {
     }, [navigate, setUser]);
 
     return (
-        user && (
-            <div className="flex flex-col min-h-screen bg-[#DBE2EF] ">
-                <Sidebar />
-                <div className="flex flex-col flex-1 lg:pl-64">
-                    <Outlet />
-                </div>
-            </div>
-        )
+        <ThemeProvider theme={theme}>
+            <CssBaseline />
+            {user && (
+                <Box sx={{ 
+                    display: 'flex', 
+                    flexDirection: 'column', 
+                    minHeight: '100vh',
+                    bgcolor: 'background.default'
+                }}>
+                    <Sidebar />
+                    <Box sx={{ 
+                        display: 'flex', 
+                        flexDirection: 'column', 
+                        flex: 1, 
+                        lg: { pl: '256px' } // Adjust based on sidebar width
+                    }}>
+                           <div className="flex flex-col flex-1 lg:pl-64">    
+                        <Outlet />    </div>
+                    </Box>
+                </Box>
+            )}
+        </ThemeProvider>
     );
 };
 

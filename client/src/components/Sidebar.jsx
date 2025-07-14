@@ -2,162 +2,227 @@
 
 import { useState } from 'react'
 import {
-  Dialog,
-  DialogBackdrop,
-  DialogPanel,
-  TransitionChild,
-} from '@headlessui/react'
-import { RectangleStackIcon, ClockIcon, HomeIcon, XMarkIcon, CurrencyDollarIcon, UsersIcon, Bars3CenterLeftIcon } from '@heroicons/react/24/outline'
-import { useNavigate, useLocation } from 'react-router-dom'
-import UserMenu from './UserMenu'
-import UserMenuMobile from './UserMenuMobile'
+  Drawer,
+  Box,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  IconButton,
+  Paper,
+  Typography,
+  Divider,
+  useTheme,
+  useMediaQuery
+} from '@mui/material';
+import {
+  Home,
+  Assignment,
+  History,
+  HelpOutline,
+  People,
+  Menu as MenuIcon,
+  Close as CloseIcon
+} from '@mui/icons-material';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { styled } from '@mui/material/styles';
+import UserMenu from './UserMenu';
+import UserMenuMobile from './UserMenuMobile';
 import logo from '../assets/images/intrepid-logo.svg';
-import { QuestionMarkCircleIcon } from '@heroicons/react/20/solid'
 
 const navigation = [
-  { name: 'Home', href: '/dashboard', icon: HomeIcon },
-  { name: 'Assign Post', href: '/tasks', icon: RectangleStackIcon },
-  { name: 'Assign History', href: '/history', icon: ClockIcon },
-  { name: 'FAQ', href: '/faq', icon: QuestionMarkCircleIcon },
-  // { name: 'Earnings', href: '/earnings', icon: CurrencyDollarIcon },
-  { name: 'Invites', href: '/invites', icon: UsersIcon },
-]
-//bar
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
-}
+  { name: 'Home', href: '/dashboard', icon: Home },
+  { name: 'Assign Post', href: '/tasks', icon: Assignment },
+  { name: 'Assign History', href: '/history', icon: History },
+  { name: 'FAQ', href: '/faq', icon: HelpOutline },
+  { name: 'Invites', href: '/invites', icon: People },
+];
+
+const SidebarContainer = styled(Paper)(({ theme }) => ({
+  background: 'linear-gradient(135deg, #1976d2 0%, #1565c0 100%)',
+  backdropFilter: 'blur(20px)',
+  border: 'none',
+  boxShadow: '0 25px 50px rgba(0,0,0,0.15)',
+  height: '100vh',
+  position: 'fixed',
+  width: 256,
+  zIndex: theme.zIndex.drawer,
+}));
+
+const LogoContainer = styled(Box)(({ theme }) => ({
+  padding: theme.spacing(3, 2),
+  textAlign: 'center',
+  borderBottom: '1px solid rgba(255,255,255,0.1)',
+}));
+
+const NavItem = styled(ListItemButton)(({ theme, active }) => ({
+  borderRadius: '12px',
+  margin: theme.spacing(0.5, 1),
+  padding: theme.spacing(1.5, 2),
+  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+  color: active ? '#ffffff' : 'rgba(255,255,255,0.8)',
+  backgroundColor: active ? 'rgba(255,255,255,0.15)' : 'transparent',
+  backdropFilter: active ? 'blur(10px)' : 'none',
+  border: active ? '1px solid rgba(255,255,255,0.2)' : '1px solid transparent',
+  '&:hover': {
+    backgroundColor: 'rgba(255,255,255,0.1)',
+    borderColor: 'rgba(255,255,255,0.2)',
+    transform: 'translateX(4px)',
+    color: '#ffffff',
+  }
+}));
+
+const MobileHeader = styled(Box)(({ theme }) => ({
+  position: 'sticky',
+  top: 0,
+  zIndex: 10,
+  display: 'flex',
+  height: 64,
+  background: 'rgba(255,255,255,0.95)',
+  backdropFilter: 'blur(20px)',
+  borderBottom: '1px solid rgba(0,0,0,0.08)',
+  alignItems: 'center',
+  justifyContent: 'space-between',
+  padding: theme.spacing(0, 2),
+  [theme.breakpoints.up('lg')]: {
+    display: 'none',
+  }
+}));
 
 export default function Sidebar() {
-  const [sidebarOpen, setSidebarOpen] = useState(false)
-  const navigate = useNavigate()
-  const location = useLocation()
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('lg'));
 
-  // Dynamically update the current navigation item based on the location
   const updatedNavigation = navigation.map(item => ({
     ...item,
     current: location.pathname === item.href,
-  }))
+  }));
+
+  const SidebarContent = () => (
+    <SidebarContainer elevation={0}>
+      <LogoContainer>
+        <Box
+          component="img"
+          src={logo}
+          alt="Intrepid Logo"
+          sx={{
+            height: 48,
+            width: 'auto',
+            filter: 'brightness(0) invert(1)',
+            mb: 1
+          }}
+        />
+        <Typography
+          variant="h6"
+          sx={{
+            color: 'white',
+            fontWeight: 600,
+            fontSize: '1.1rem'
+          }}
+        >
+          {/* Dashboard */}
+        </Typography>
+      </LogoContainer>
+
+      <Box sx={{ width: '100%' }}>
+        <UserMenu />
+      </Box>
+
+      <Divider sx={{ borderColor: 'rgba(255,255,255,0.1)', mx: 2 }} />
+
+      <List sx={{ px: 1, py: 2 }}>
+        {updatedNavigation.map((item) => (
+          <ListItem key={item.name} disablePadding>
+            <NavItem
+              active={item.current}
+              onClick={() => {
+                navigate(item.href);
+                if (isMobile) setSidebarOpen(false);
+              }}
+            >
+              <ListItemIcon>
+                <item.icon 
+                  sx={{ 
+                    color: item.current ? '#ffffff' : 'rgba(255,255,255,0.8)',
+                    fontSize: 22
+                  }} 
+                />
+              </ListItemIcon>
+              <ListItemText 
+                primary={item.name}
+                primaryTypographyProps={{
+                  fontSize: '0.95rem',
+                  fontWeight: item.current ? 600 : 500
+                }}
+              />
+            </NavItem>
+          </ListItem>
+        ))}
+      </List>
+    </SidebarContainer>
+  );
 
   return (
     <>
-      <Dialog open={sidebarOpen} onClose={setSidebarOpen} className="relative z-40 lg:hidden">
-        <DialogBackdrop
-          transition
-          className="fixed inset-0 bg-[#3F72AF]/75 transition-opacity duration-300 ease-linear data-[closed]:opacity-0"
-        />
+      {/* Mobile Header */}
+      <MobileHeader>
+        <IconButton
+          onClick={() => setSidebarOpen(true)}
+          sx={{
+            color: '#1976d2',
+            '&:hover': {
+              backgroundColor: 'rgba(25,118,210,0.1)',
+            }
+          }}
+        >
+          <MenuIcon />
+        </IconButton>
+        <UserMenuMobile />
+      </MobileHeader>
 
-        <div className="fixed inset-0 z-40 flex">
-          <DialogPanel
-            transition
-            className="relative flex w-full max-w-xs flex-1 transform flex-col bg-[#112D4E] pb-4 pt-5 transition duration-300 ease-in-out data-[closed]:-translate-x-full shadow-2xl"
+      {/* Desktop Sidebar */}
+      {!isMobile && <SidebarContent />}
+
+      {/* Mobile Drawer */}
+      <Drawer
+        anchor="left"
+        open={sidebarOpen}
+        onClose={() => setSidebarOpen(false)}
+        PaperProps={{
+          sx: {
+            width: 256,
+            background: 'transparent',
+            boxShadow: 'none',
+          }
+        }}
+        ModalProps={{
+          keepMounted: true,
+        }}
+      >
+        <Box sx={{ position: 'relative' }}>
+          <IconButton
+            onClick={() => setSidebarOpen(false)}
+            sx={{
+              position: 'absolute',
+              top: 16,
+              right: 16,
+              zIndex: 1001,
+              color: 'white',
+              backgroundColor: 'rgba(255,255,255,0.1)',
+              '&:hover': {
+                backgroundColor: 'rgba(255,255,255,0.2)',
+              }
+            }}
           >
-            <TransitionChild>
-              <div className="absolute right-0 top-0 -mr-12 pt-2 duration-300 ease-in-out data-[closed]:opacity-0">
-                <button
-                  type="button"
-                  onClick={() => setSidebarOpen(false)}
-                  className="relative flex items-center justify-center ml-1 rounded-full size-10 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
-                >
-                  <span className="absolute -inset-0.5" />
-                  <span className="sr-only">Close sidebar</span>
-                  <XMarkIcon aria-hidden="true" className="text-white size-6" />
-                </button>
-              </div>
-            </TransitionChild>
-            <div className="flex items-center px-4 shrink-0">
-              <img
-                src={logo}
-                alt="Intrepid Logo"
-                className="w-auto h-12"
-              />
-            </div>
-            <div className="flex-1 h-0 mt-5 overflow-y-auto">
-              <nav className="px-2">
-                <div className="space-y-1">
-                  {updatedNavigation.map((item) => (
-                    <a
-                      key={item.name}
-                      onClick={() => { navigate(item.href) }}
-                      aria-current={item.current ? 'page' : undefined}
-                      className={classNames(
-                        item.current
-                          ? 'bg-[#3F72AF] text-[#F9F7F7] cursor-pointer'
-                          : 'text-[#F9F7F7] hover:bg-[#DBE2EF] hover:text-[#112D4E] cursor-pointer',
-                        'group flex items-center rounded-md px-2 py-2 text-base/5 font-medium cursor-pointer',
-                      )}
-                    >
-                      <item.icon
-                        aria-hidden="true"
-                        className={classNames(
-                          item.current ? 'text-[#F9F7F7]' : 'text-[#DBE2EF] group-hover:text-[#3F72AF]',
-                          'mr-3 size-6 shrink-0',
-                        )}
-                      />
-                      {item.name}
-                    </a>
-                  ))}
-                </div>
-              </nav>
-            </div>
-          </DialogPanel>
-          <div aria-hidden="true" className="w-14 shrink-0">
-          </div>
-        </div>
-      </Dialog>
-
-      {/* Static sidebar for desktop */}
-      <div className="hidden lg:fixed lg:inset-y-0 lg:flex lg:w-64 lg:flex-col lg:border-r lg:border-[#3F72AF] lg:bg-[#112D4E] lg:pb-4 lg:pt-5 shadow-2xl">
-        <div className="flex items-center px-6 shrink-0">
-          <img
-            src={logo}
-            alt="Intrepid Logo"
-            className="w-auto h-12"
-          />
-        </div>
-        <div className="flex flex-col flex-1 h-0 p-1 mt-5 overflow-y-auto">
-          <UserMenu />
-          <nav className="px-3 mt-6">
-            <div className="space-y-1">
-              {updatedNavigation.map((item) => (
-                <a
-                  key={item.name}
-                  onClick={() => { navigate(item.href) }}
-                  aria-current={item.current ? 'page' : undefined}
-                  className={classNames(
-                    item.current
-                      ? 'bg-[#3F72AF] text-[#F9F7F7] cursor-pointer'
-                      : 'text-[#F9F7F7] hover:bg-[#DBE2EF] hover:text-[#112D4E] cursor-pointer',
-                    'group flex items-center rounded-md px-2 py-2 text-sm font-medium cursor-pointer',
-                  )}
-                >
-                  <item.icon
-                    aria-hidden="true"
-                    className={classNames(
-                      item.current ? 'text-[#F9F7F7]' : 'text-[#DBE2EF] group-hover:text-[#3F72AF]',
-                      'mr-3 size-6 shrink-0',
-                    )}
-                  />
-                  {item.name}
-                </a>
-              ))}
-            </div>
-          </nav>
-        </div>
-      </div>
-      
-      <div className="sticky top-0 z-10 flex h-16 bg-[#F9F7F7] border-b border-[#3F72AF] shrink-0 lg:hidden">
-            <button
-                type="button"
-                onClick={() => setSidebarOpen(true)}
-                className="px-4 text-[#3F72AF] border-r border-[#3F72AF] focus:outline-none focus:ring-2 focus:ring-inset focus:ring-[#DBE2EF] lg:hidden"
-            >
-                <span className="sr-only">Open sidebar</span>
-                <Bars3CenterLeftIcon aria-hidden="true" className="size-6" />
-            </button>
-            <div className="flex justify-between flex-1 px-4 sm:px-6 lg:px-8">
-                <UserMenuMobile />
-            </div>
-        </div>
+            <CloseIcon />
+          </IconButton>
+          <SidebarContent />
+        </Box>
+      </Drawer>
     </>
-  )
+  );
 }

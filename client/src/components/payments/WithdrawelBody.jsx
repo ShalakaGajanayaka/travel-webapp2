@@ -1,13 +1,140 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import {
+  Box,
+  Typography,
+  TextField,
+  Button,
+  Card,
+  CardContent,
+  Alert,
+  Chip,
+  Divider,
+  Grid,
+  InputAdornment,
+  CircularProgress,
+  List,
+  ListItem,
+  ListItemText
+} from '@mui/material';
+import {
+  AccountBalanceWallet,
+  AttachMoney,
+  Security,
+  SelectAll,
+  Person,
+  CreditCard
+} from '@mui/icons-material';
+import { styled } from '@mui/material/styles';
 import { useAuth } from "../../context/AuthContext";
-import { ClipboardDocumentListIcon } from '@heroicons/react/16/solid';
 import axiosInstance from "../../utils/axiosInstance";
+
+const WithdrawalCard = styled(Card)(({ theme }) => ({
+  maxWidth: 700,
+  margin: '0 auto',
+  borderRadius: '24px',
+  background: 'rgba(255,255,255,0.95)',
+  backdropFilter: 'blur(20px)',
+  border: '1px solid rgba(255,255,255,0.3)',
+  boxShadow: '0 12px 40px rgba(0,0,0,0.1)',
+  overflow: 'hidden',
+}));
+
+const BalanceCard = styled(Box)(({ theme }) => ({
+  background: 'linear-gradient(135deg, #3F72AF 0%, #112D4E 100%)',
+  borderRadius: '20px',
+  padding: theme.spacing(3),
+  color: 'white',
+  textAlign: 'center',
+  marginBottom: theme.spacing(3),
+  position: 'relative',
+  overflow: 'hidden',
+  '&::before': {
+    content: '""',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    background: 'linear-gradient(45deg, rgba(255,255,255,0.1), transparent)',
+    transform: 'translateX(-100%)',
+    animation: 'shimmer 2s infinite',
+    '@keyframes shimmer': {
+      '0%': { transform: 'translateX(-100%)' },
+      '100%': { transform: 'translateX(100%)' },
+    }
+  }
+}));
+
+const StyledTextField = styled(TextField)(({ theme }) => ({
+  '& .MuiOutlinedInput-root': {
+    borderRadius: '12px',
+    backgroundColor: 'rgba(255,255,255,0.8)',
+    backdropFilter: 'blur(10px)',
+    transition: 'all 0.3s ease',
+    '&:hover': {
+      backgroundColor: 'rgba(255,255,255,0.9)',
+      transform: 'translateY(-1px)',
+    },
+    '&.Mui-focused': {
+      backgroundColor: 'white',
+      transform: 'translateY(-2px)',
+      boxShadow: '0 8px 25px rgba(63, 114, 175, 0.15)',
+    }
+  },
+  '& .MuiInputLabel-root': {
+    color: '#3F72AF',
+    fontWeight: 500,
+  }
+}));
+
+const AllButton = styled(Button)(({ theme }) => ({
+  borderRadius: '0 12px 12px 0',
+  background: 'linear-gradient(45deg, #3F72AF, #112D4E)',
+  color: 'white',
+  fontWeight: 600,
+  textTransform: 'none',
+  minWidth: 80,
+  height: '56px',
+  '&:hover': {
+    background: 'linear-gradient(45deg, #112D4E, #3F72AF)',
+    transform: 'scale(1.05)',
+  }
+}));
+
+const ConfirmButton = styled(Button)(({ theme }) => ({
+  borderRadius: '12px',
+  padding: '14px 24px',
+  fontSize: '1rem',
+  fontWeight: 600,
+  textTransform: 'none',
+  background: 'linear-gradient(45deg, #3F72AF, #112D4E)',
+  boxShadow: '0 4px 15px rgba(63, 114, 175, 0.4)',
+  transition: 'all 0.3s ease',
+  '&:hover': {
+    background: 'linear-gradient(45deg, #112D4E, #3F72AF)',
+    transform: 'translateY(-2px)',
+    boxShadow: '0 8px 25px rgba(63, 114, 175, 0.6)',
+  },
+  '&:disabled': {
+    background: 'linear-gradient(45deg, #ccc, #999)',
+    transform: 'none',
+    boxShadow: 'none',
+  }
+}));
+
+const WalletInfoCard = styled(Box)(({ theme }) => ({
+  background: 'rgba(219, 226, 239, 0.5)',
+  borderRadius: '16px',
+  padding: theme.spacing(2),
+  border: '1px solid rgba(63, 114, 175, 0.2)',
+  marginTop: theme.spacing(2),
+}));
 
 export default function WithdrawelBody() {
     const { user, setUser } = useAuth();
     const [wallet, setWallet] = useState(null);
     const [loading, setLoading] = useState(true);
-    const [value, setValue] = useState(0);
+    const [value, setValue] = useState("");
     const [pin, setPin] = useState("");
     const [alert, setAlert] = useState(null);
 
@@ -18,7 +145,7 @@ export default function WithdrawelBody() {
                 const response = await axiosInstance.get("/api/users/get-wallet");
                 setWallet(response.data);
             } catch (err) {
-                setWallet(null); // No wallet exists
+                setWallet(null);
             } finally {
                 setLoading(false);
             }
@@ -27,106 +154,66 @@ export default function WithdrawelBody() {
         fetchWallet();
     }, []);
 
+    // Auto hide alert after 5 seconds
+    useEffect(() => {
+        if (alert?.open) {
+            const timer = setTimeout(() => {
+                setAlert(null);
+            }, 5000);
+            return () => clearTimeout(timer);
+        }
+    }, [alert]);
+
     // Fetch the latest user data
     const fetchLatestUserData = async () => {
         try {
             const response = await axiosInstance.get(`/api/users/${user._id}`);
-            setUser(response.data); // Update the user context
-            return response.data.totalEarnings; // Return the latest totalEarnings
+            setUser(response.data);
+            return response.data.totalEarnings;
         } catch (err) {
             console.error("Error fetching user data:", err.response?.data?.message);
-            return user.totalEarnings; // Fallback to the current totalEarnings
+            return user.totalEarnings;
         }
     };
 
     const handleAllButtonClick = async () => {
         const latestTotalEarnings = await fetchLatestUserData();
-        setValue(latestTotalEarnings); // Update the value state
+        setValue(latestTotalEarnings.toString());
     };
 
-    // const withdraw = async (e) => {
-    //     if (!wallet) {
-    //         setAlert({ open: true, message: "Link a wallet first" })
-    //         return;
-    //     }
-    //     if (!value) {
-    //         setAlert({ open: true, message: "Amount is required" })
-    //         return;
-    //     }
-    //     if (!pin) {
-    //         setAlert({ open: true, message: "Pin is required" })
-    //         return;
-    //     }
-    //     if (String(pin) !== String(user.pin)) {
-    //         setAlert({ open: true, message: "Pin is wrong" })
-    //         return;
-    //     }
-    //     if (!user.permissions.withdraw) {
-    //         setAlert({ open: true, message: "You do not have permition to withdraw" })
-    //         return;
-    //     }
-    //     if (value < 100) {
-    //         setAlert({ open: true, message: "Minimum withdrawel amount is $100" })
-    //         return;
-    //     }
-    //     if (user.totalEarnings < 100) {
-    //         setAlert({ open: true, message: "Need $100+ to withdraw" })
-    //         return;
-    //     }
-    //     e.preventDefault();
-    //     try {
-    //         const response = await axiosInstance.post(`/api/users/withdraw/${user._id}`, {
-    //             amount: value,
-    //         });
-
-    //         if (response.status === 201) {
-    //             setAlert({ open: true, message: "Withdrawal successful!", severity: 'success' })
-    //             setValue(0);
-    //             setPin("");
-    //             fetchLatestUserData(); // Update the user context
-    //         }
-
-    //         if (response.status === 400) {
-    //             setAlert({ open: true, message: err.response?.data?.message })
-    //         }
-
-    //     } catch (err) {
-    //         // console.error("Error adding wallet:", err.response?.data?.message);
-    //         setAlert({ open: true, message: err.response?.data?.message || "An error occurred during withdrawal" });
-    //     } 
-    // };
-
     const withdraw = async (e) => {
+        e.preventDefault();
+        
         if (!wallet) {
-            setAlert({ open: true, message: "Link a wallet first" });
+            setAlert({ open: true, message: "Link a wallet first", severity: "error" });
             return;
         }
         if (!value) {
-            setAlert({ open: true, message: "Amount is required" });
+            setAlert({ open: true, message: "Amount is required", severity: "error" });
             return;
         }
         if (!pin) {
-            setAlert({ open: true, message: "Pin is required" });
+            setAlert({ open: true, message: "PIN is required", severity: "error" });
             return;
         }
         if (String(pin) !== String(user.pin)) {
-            setAlert({ open: true, message: "Pin is wrong" });
+            setAlert({ open: true, message: "PIN is incorrect", severity: "error" });
             return;
         }
         if (!user.permissions.withdraw) {
-            setAlert({ open: true, message: "You do not have permission to withdraw" });
+            setAlert({ open: true, message: "You do not have permission to withdraw", severity: "error" });
             return;
         }
-        if (value < 100) {
-            setAlert({ open: true, message: "Minimum withdrawal amount is $100" });
+        if (parseFloat(value) < 100) {
+            setAlert({ open: true, message: "Minimum withdrawal amount is $100", severity: "error" });
             return;
         }
         if (user.totalEarnings < 100) {
-            setAlert({ open: true, message: "Need $100+ to withdraw" });
+            setAlert({ open: true, message: "Need $100+ to withdraw", severity: "error" });
             return;
         }
-        e.preventDefault();
-        setLoading(true); // Set loading to true when the withdrawal process starts
+
+        setLoading(true);
         try {
             const response = await axiosInstance.post(`/api/users/withdraw/${user._id}`, {
                 amount: value,
@@ -136,145 +223,223 @@ export default function WithdrawelBody() {
                 // Record the transaction
                 const transaction = {
                     userId: user._id,
-                    createdBy: user._id, // User is creating their own transaction
+                    createdBy: user._id,
                     transaction: parseFloat(value),
-                    type: '-' // Withdrawal is a negative transaction
+                    type: '-'
                 };
 
                 try {
                     await axiosInstance.post(`/api/transactions`, transaction);
                 } catch (transactionErr) {
                     console.error("Error recording transaction:", transactionErr.response?.data?.message);
-                    // Continue with the success flow even if transaction recording fails
                 }
 
-                setAlert({ open: true, message: "Withdrawal successful!", severity: 'success' });
-                setValue(0);
+                setAlert({ open: true, message: "Withdrawal successful! 🎉", severity: "success" });
+                setValue("");
                 setPin("");
-                await fetchLatestUserData(); // Update the user context
-            }
-
-            if (response.status === 400) {
-                setAlert({ open: true, message: response.data.message });
+                await fetchLatestUserData();
             }
 
         } catch (err) {
-            setAlert({ open: true, message: err.response?.data?.message || "An error occurred during withdrawal" });
+            setAlert({ 
+                open: true, 
+                message: err.response?.data?.message || "An error occurred during withdrawal", 
+                severity: "error" 
+            });
         } finally {
-            setLoading(false); // Set loading to false when the process is done
+            setLoading(false);
         }
     };
 
     return (
-        <div className="max-w-xl p-6 mx-auto bg-[#F9F7F7] rounded-lg shadow-lg">
-            <div className="max-w-2xl px-6 py-10 mx-auto sm:px-8 sm:py-16 lg:px-0">
-                <div className="mx-4ç sm:mx-6 ">
-                    <dl className="space-y-4">
-                        <div className="flex items-center justify-between">
-                            <dt className="text-lg font-semibold text-[#112D4E]">Total Balance</dt>
-                            <dd className="ml-4 text-base font-semibold text-[#3F72AF]">${user.totalEarnings}</dd>
-                        </div>
-                    </dl>
-                </div>
-                {/* Available for Withdrawal Section */}
-                <div className="py-4 sm:mx-6">
-                    {alert && alert.open && (
-                        <div
-                            className={`p-4 rounded-lg text-sm ${alert.severity === "success" ? "bg-[#3F72AF] text-white" : "bg-[#DBE2EF] text-[#112D4E]"}`}
-                            role="alert"
-                        >
-                            {alert.message}
-                        </div>
-                    )}
-                </div>
+        <WithdrawalCard>
+            <CardContent sx={{ p: 4 }}>
+                {/* Header */}
+                <Typography
+                    variant="h4"
+                    sx={{
+                        mb: 3,
+                        fontWeight: 600,
+                        color: '#112D4E',
+                        textAlign: 'center',
+                        background: 'linear-gradient(45deg, #3F72AF, #112D4E)',
+                        backgroundClip: 'text',
+                        WebkitBackgroundClip: 'text',
+                        color: 'transparent',
+                    }}
+                >
+                    💰 Withdraw Funds
+                </Typography>
 
-                {/* Amount Input Section */}
-                <div className="mx-4 sm:mx-6">
-                    <label htmlFor="price" className="block text-sm font-medium text-[#112D4E]">
-                        Amount
-                    </label>
-                    <div className="mt-2 flex items-center rounded-md bg-white pl-3 outline outline-1 outline-[#DBE2EF] focus-within:outline-2 focus-within:outline-[#3F72AF]">
-                        <div className="text-base text-[#3F72AF] select-none sm:text-sm">$</div>
-                        <input
-                            required
-                            id="price"
+                {/* Balance Card */}
+                <BalanceCard>
+                    <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', mb: 1 }}>
+                        <AccountBalanceWallet sx={{ mr: 1 }} />
+                        <Typography variant="h6" fontWeight={500}>
+                            Total Balance
+                        </Typography>
+                    </Box>
+                    <Typography variant="h3" fontWeight="bold" sx={{ position: 'relative', zIndex: 1 }}>
+                        ${user?.totalEarnings || '0.00'}
+                    </Typography>
+                    <Chip 
+                        label="Available for withdrawal" 
+                        sx={{ 
+                            mt: 1, 
+                            background: 'rgba(255,255,255,0.2)', 
+                            color: 'white',
+                            fontWeight: 500
+                        }} 
+                    />
+                </BalanceCard>
+
+                {/* Alert */}
+                {alert?.open && (
+                    <Alert 
+                        severity={alert.severity || "info"}
+                        onClose={() => setAlert(null)}
+                        sx={{ 
+                            mb: 3, 
+                            borderRadius: '12px',
+                            '& .MuiAlert-message': {
+                                fontWeight: 500
+                            }
+                        }}
+                    >
+                        {alert.message}
+                    </Alert>
+                )}
+
+                {/* Amount Input */}
+                <Box sx={{ mb: 3 }}>
+                    <Typography variant="h6" sx={{ mb: 2, color: '#3F72AF', fontWeight: 600 }}>
+                        Withdrawal Amount
+                    </Typography>
+                    <Box sx={{ display: 'flex', alignItems: 'stretch' }}>
+                        <StyledTextField
+                            fullWidth
+                            label="Amount"
                             value={value}
                             onChange={(e) => setValue(e.target.value)}
-                            name="price"
-                            type="text"
                             placeholder="0.00"
-                            className="block w-full py-1.5 pl-1 pr-3 text-base text-[#112D4E] placeholder-[#DBE2EF] focus:outline-none sm:text-sm"
+                            type="number"
+                            InputProps={{
+                                startAdornment: (
+                                    <InputAdornment position="start">
+                                        <AttachMoney sx={{ color: '#3F72AF' }} />
+                                    </InputAdornment>
+                                ),
+                            }}
+                            sx={{
+                                '& .MuiOutlinedInput-root': {
+                                    borderRadius: '12px 0 0 12px',
+                                }
+                            }}
                         />
-                        <button
-                            type="button"
-                            // onClick={() => setValue(user.totalEarnings)}
-                            onClick={handleAllButtonClick} // Updated here
-                            className="flex shrink-0 items-center gap-x-1.5 rounded-r-md bg-white px-3 py-2 text-sm font-semibold text-[#3F72AF] outline outline-1 outline-[#DBE2EF] hover:bg-[#DBE2EF] hover:text-[#3F72AF] focus:outline-[#3F72AF]"
+                        <AllButton
+                            onClick={handleAllButtonClick}
+                            startIcon={<SelectAll />}
                         >
-                            <ClipboardDocumentListIcon className="text-[#3F72AF] size-4" />
                             All
-                        </button>
-                    </div>
-                </div>
+                        </AllButton>
+                    </Box>
+                    <Typography variant="caption" color="text.secondary" sx={{ mt: 1, display: 'block' }}>
+                        Minimum withdrawal amount: $100
+                    </Typography>
+                </Box>
 
-                {/* Withdrawal PIN Input Section */}
-                <div className="mx-4 mt-4 sm:mx-6">
-                    <label htmlFor="pin" className="block text-sm font-medium text-[#112D4E]">
-                        Withdrawal PIN
-                    </label>
-                    <input
-                        required
-                        id="pin"
-                        name="pin"
+                {/* PIN Input */}
+                <Box sx={{ mb: 4 }}>
+                    <StyledTextField
+                        fullWidth
+                        label="Withdrawal PIN"
+                        type="password"
                         value={pin}
                         onChange={(e) => setPin(e.target.value)}
-                        type="password"
-                        placeholder="Enter Withdrawal PIN"
-                        className="block w-full mt-2 rounded-md bg-white px-3 py-1.5 text-base text-[#112D4E] outline outline-1 outline-[#DBE2EF] placeholder-[#DBE2EF] focus:outline-[#3F72AF] sm:text-sm"
+                        placeholder="Enter your withdrawal PIN"
+                        InputProps={{
+                            startAdornment: (
+                                <InputAdornment position="start">
+                                    <Security sx={{ color: '#3F72AF' }} />
+                                </InputAdornment>
+                            ),
+                        }}
                     />
-                </div>
+                </Box>
 
-                {/* Wallet Information Section */}
-                <div className="mt-8">
-                    <section aria-labelledby="cart-heading">
-                        <ul role="list" className="border-t border-b border-[#DBE2EF] divide-y divide-[#DBE2EF]">
-                            <li key={user.name} className="flex py-2">
-                                <div className="flex flex-col flex-1">
-                                    <div className="flex justify-between mx-8">
-                                        <p className="mt-1 text-[#3F72AF]">Account holder</p>
-                                        <p className="mt-1 ml-4 text-[#112D4E]">{wallet ? wallet.firstName : "N/A"}</p>
-                                    </div>
-                                    <div className="flex justify-between mx-8">
-                                        <p className="mt-1 text-[#3F72AF]">Wallet address</p>
-                                        <p className="mt-1 ml-4 text-[#112D4E]">{wallet ? wallet.walletAddress : "N/A"}</p>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </section>
+                {/* Wallet Information */}
+                <Box sx={{ mb: 4 }}>
+                    <Typography variant="h6" sx={{ mb: 2, color: '#3F72AF', fontWeight: 600 }}>
+                        Wallet Information
+                    </Typography>
+                    <WalletInfoCard>
+                        <List disablePadding>
+                            <ListItem disablePadding sx={{ py: 1 }}>
+                                <ListItemText 
+                                    primary={
+                                        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                                            <Person sx={{ mr: 1, color: '#3F72AF' }} />
+                                            <Typography variant="body2" color="#3F72AF" fontWeight={600}>
+                                                Account Holder
+                                            </Typography>
+                                        </Box>
+                                    }
+                                    secondary={
+                                        <Typography variant="body1" color="#112D4E" fontWeight={500}>
+                                            {wallet?.firstName || "Not linked"}
+                                        </Typography>
+                                    }
+                                />
+                            </ListItem>
+                            <Divider sx={{ my: 1 }} />
+                            <ListItem disablePadding sx={{ py: 1 }}>
+                                <ListItemText 
+                                    primary={
+                                        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                                            <CreditCard sx={{ mr: 1, color: '#3F72AF' }} />
+                                            <Typography variant="body2" color="#3F72AF" fontWeight={600}>
+                                                Wallet Address
+                                            </Typography>
+                                        </Box>
+                                    }
+                                    secondary={
+                                        <Typography 
+                                            variant="body2" 
+                                            color="#112D4E" 
+                                            fontWeight={500}
+                                            sx={{ 
+                                                wordBreak: 'break-all',
+                                                fontFamily: 'monospace',
+                                                fontSize: '0.8rem'
+                                            }}
+                                        >
+                                            {wallet?.walletAddress || "Not linked"}
+                                        </Typography>
+                                    }
+                                />
+                            </ListItem>
+                        </List>
+                    </WalletInfoCard>
+                </Box>
 
-                    {/* Confirm Button Section */}
-                    <section className="mx-4 mt-4 sm:mx-6">
-                        {/* <button
-                            type="submit"
-                            onClick={withdraw}
-                            className="w-full px-4 py-3 text-base font-medium text-white bg-[#3F72AF] rounded-md shadow-sm hover:bg-[#112D4E] focus:ring-2 focus:ring-[#3F72AF]"
-                        >
-                            Confirm
-                        </button> */}
+                {/* Confirm Button */}
+                <ConfirmButton
+                    fullWidth
+                    variant="contained"
+                    onClick={withdraw}
+                    disabled={loading}
+                    startIcon={loading ? <CircularProgress size={20} color="inherit" /> : <AccountBalanceWallet />}
+                >
+                    {loading ? "Processing Withdrawal..." : "Confirm Withdrawal"}
+                </ConfirmButton>
 
-                        <button
-                            type="submit"
-                            onClick={withdraw}
-                            disabled={loading} // loading true නම් button එක disabled කරන්න
-                            className={`w-full px-4 py-3 text-base font-medium text-white bg-[#3F72AF] rounded-md shadow-sm hover:bg-[#112D4E] focus:ring-2 focus:ring-[#3F72AF] ${loading ? "opacity-50 cursor-not-allowed" : ""}`}
-                        >
-                            {loading ? "Processing..." : "Confirm"}
-                        </button>
-                    </section>
-                </div>
-            </div>
-        </div>
-
+                {/* Help Text */}
+                <Box sx={{ mt: 3, textAlign: 'center' }}>
+                    <Typography variant="caption" color="text.secondary">
+                        💡 Withdrawals are processed within 24-48 hours
+                    </Typography>
+                </Box>
+            </CardContent>
+        </WithdrawalCard>
     );
 }

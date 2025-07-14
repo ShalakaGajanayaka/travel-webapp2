@@ -55,7 +55,6 @@ const App = () => {
             <Route path="/withdrawal" element={<Withdrawal />} />
             <Route path="/deposit" element={<Deposit />} />
             <Route path="/linkWallet" element={<LinkWallet />} />
-
           </Route>
         </Routes>
       </Router>
